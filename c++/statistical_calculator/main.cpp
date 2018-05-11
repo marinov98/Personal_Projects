@@ -20,9 +20,9 @@ int main()
   cin>>response;
   if (response=="basics")
   {
-    cout<<"how many terms are there?"<<'\n';
+    cout<<"How many terms are there?"<<'\n';
     cin>>terms;
-    cout<<"you may now type the numbers in your data set"<<'\n';
+    cout<<"You may now type the numbers in your data set"<<'\n';
     while (trials!=terms)
     {
       cin>>inputnumber;
@@ -35,6 +35,7 @@ int main()
     cout<<calculateMedian(dataset)<<'\n';
     cout<<calculateMode(dataset)<<" (returns first number by default if all numbers repeated equally!)"<<'\n';
     cout<<calculateRange(dataset)<<'\n';
+    cout<<'\n';
     sd_printSampleAndPop(calculateStandardDeviation(dataset,terms));
     cout<<'\n';
     //erase terms once finished showing numbers to user

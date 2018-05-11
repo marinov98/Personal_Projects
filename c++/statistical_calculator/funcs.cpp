@@ -51,7 +51,7 @@ void sortDataset(std::vector<double> &dataset)
 void displayDataset(std::vector<double> dataset)
 {
   sortDataset(dataset);
-  cout<<"the dataset you input is: "<<'\n';
+  cout<<"The dataset you input is: "<<'\n';
   for (int index=0;index<dataset.size();index++)
   {
     cout<<" "<<dataset[index];
@@ -61,7 +61,9 @@ void displayDataset(std::vector<double> dataset)
 void sd_printSampleAndPop(dataType sd)
 {
   cout<<"The SAMPLE STANDARD DEVIATION (Sx) is: "<<sd.sample<<'\n';
+  cout<<"The SAMPLE VARIANCE (Sx^2) is: "<<pow(sd.sample,2)<<'\n';
   cout<<"The POPULATION STANDARD DEVIATION (σ) is: "<<sd.population<<'\n';
+  cout<<"The POPULATION VARIANCE (σ^2) is: "<<pow(sd.population,2)<<'\n';
 }
 //finds the mean of the amount of terms inputed by the user
 double calculateMean(std::vector <double> dataset,int terms)
