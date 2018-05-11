@@ -4,120 +4,145 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 using std::cout;
 using std::string;
-using std::cin;
-using std::vector;
 
-void sortVector(vector <double> &v);
-double calculateMean();
-double calculateRange();
-double calculateMedian();
+
+
+struct dataType
+{
+  double population;
+  double sample;
+};
+
+//prototypes:
+void sortDataset(std::vector <double> &dataset);
+void displayDataset(std::vector<double> dataset);
+void sd_printSampleAndPop(dataType func);
+double calculateMean(std::vector <double> dataset,int terms);
+double calculateRange(std::vector <double> dataset);
+double calculateMedian(std::vector <double> dataset);
+double calculateMode(std::vector <double> dataset);
+dataType calculateStandardDeviation(std::vector <double> dataset,int terms);
+
+
 
 //sorts the vector
-void sortVector(vector<double> &v)
+void sortDataset(std::vector<double> &dataset)
 {
   double hold;
-  for (int x=0;x<v.size();x++)
+  for (int x=0;x<dataset.size();x++)
   {
-    for (int y=0;y<v.size()-1;y++)
+    for (int y=0;y<dataset.size()-1;y++)
     {
-      if (v[y]>v[y+1])
+      if (dataset[y] > dataset[y+1])
       {
-        hold=v[y];
-        v[y]=v[y+1];
-        v[y+1]=hold;
+        hold=dataset[y];
+        dataset[y]=dataset[y+1];
+        dataset[y+1]=hold;
       }
     }
   }
 }
+
+//displays all the elements in the vector
+void displayDataset(std::vector<double> dataset)
+{
+  sortDataset(dataset);
+  cout<<"the dataset you input is: "<<'\n';
+  for (int index=0;index<dataset.size();index++)
+  {
+    cout<<" "<<dataset[index];
+  }
+}
+
+void sd_printSampleAndPop(dataType sd)
+{
+  cout<<"The SAMPLE STANDARD DEVIATION (Sx) is: "<<sd.sample<<'\n';
+  cout<<"The POPULATION STANDARD DEVIATION (σ) is: "<<sd.population<<'\n';
+}
 //finds the mean of the amount of terms inputed by the user
-double calculateMean()
+double calculateMean(std::vector <double> dataset,int terms)
 {
   double mean;
-  double inputnum;
-
-  int trials=0;
   double sum=0;
-  int terms;
-
-  cout<<"how many terms do you want?"<<'\n';
-  cin>>terms;
-  cout<<"you can input your terms now"<<'\n';
-//read user's input and add it to the sum
-  do
+  for (int i=0;i<dataset.size();i++)
   {
-    cin>>inputnum;
-    sum+=inputnum;
-    trials++;
+    sum+=dataset[i];
   }
-  while(trials!=terms);
-
-  cout<<"your mean is: ";
   return double(sum/terms);
 }
 
-double calculateRange()
+double calculateRange(std::vector <double> dataset)
 {
-  vector<double> numbers;
-  int trials=0;
-  int terms;
-  double range;
-  double inputnum;
-
-  cout<<"how many terms?"<<'\n';
-  cin>>terms;
-  cout<<"you may input your numbers now"<<'\n';
-  do
-  {
-    cin>>inputnum;
-    numbers.push_back(inputnum);
-    trials++;
-  }
-  while(trials!=terms);
-  sortVector(numbers);
-  range=numbers[numbers.size()-1]-numbers[0];
-  cout<<" your range is : ";
+  sortDataset(dataset);
+  double range=dataset[dataset.size()-1]-dataset[0];
+  cout<<"The RANGE of the dataset is: ";
   return range;
 }
 
 
-double calculateMedian()
+double calculateMedian(std::vector <double> dataset)
 {
-  vector<double> numbers;
-  int trials=0;
-  int terms;
   double median;
-  double inputnum;
 
-  cout<<"how many terms?"<<'\n';
-  cin>>terms;
-  cout<<"you may input your numbers now"<<'\n';
-  do
+  sortDataset(dataset);
+  if (dataset.size() % 2 == 1 )
   {
-    cin>>inputnum;
-    numbers.push_back(inputnum);
-    trials++;
-  }
-  while(trials!=terms);
-  sortVector(numbers);
-  if (numbers.size() % 2 == 1 )
-  {
-    median=numbers[(numbers.size()-1)/2];
-    cout<<"your median is: ";
+    median=dataset[(dataset.size()-1)/2];
+    cout<<"The MEDIAN of your dataset is: ";
     return median;
   }
   else
   {
-    median=((numbers[numbers.size()/2]+numbers[numbers.size()/2-1])/2);
-    cout<<"your median is: ";
+    median=((dataset[dataset.size()/2]+dataset[dataset.size()/2-1])/2);
+    cout<<"The MEDIAN of your dataset is: ";
     return median;
   }
 }
 
 
-double calculateMode()
+double calculateMode(std::vector <double> dataset)
 {
-  
+  sortDataset(dataset);
+  double mode = dataset[0];
+  int count=1;
+  int maxCount=0;
+
+  for (int i=1;i<dataset.size();i++)
+  {
+    if (dataset[i] == dataset[i+1])
+    {
+      count++;
+      if (count > maxCount)
+      {
+        maxCount=count;
+        mode=dataset[i];
+      }
+    }
+    else
+    {
+      count=1;
+    }
+  }
+  cout<<"The MODE of your dataset is: ";
+  return mode;
+}
+
+dataType calculateStandardDeviation(std::vector <double> dataset,int terms)
+{
+  double mean=calculateMean(dataset,terms);
+  dataType sd;
+  sd.population=0;
+  sd.sample=0;
+  for (int i=0;i<dataset.size();i++)
+  {
+    sd.sample+=pow(dataset[i]-mean,2);
+    sd.population+=pow(dataset[i]-mean,2);
+  }
+  sd.sample=sqrt(sd.sample/(terms-1));
+  sd.population=sqrt(sd.population/(terms));
+  return sd;
 }
