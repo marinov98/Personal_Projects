@@ -1,11 +1,8 @@
 #include <iostream>
-#include <string>
 #include <vector>
-#include "funcs.h"
+#include "basics.h"
 
-using std::cout;
-using std::cin;
-using std::string;
+
 
 int main()
 {
@@ -13,35 +10,36 @@ int main()
   int terms;
   int trials=0;
   double inputnumber;
-  string response;
-  cout<<"~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~ :D"<<'\n';
-  cout<<"What would you like the calculator to do?"<<'\n';
-  cout<<"type 'basics'{mean,median,mode,range,standard deviation} or 'other' view more functions"<<'\n';
-  cin>>response;
+  std::string response;
+  std::cout<<"~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~"<<'\n';
+  std::cout<<"What would you like the calculator to do?"<<'\n';
+  std::cout<<"type 'basics'{mean,median,mode,range,standard deviation} or 'other' view more functions"<<'\n';
+  std::cin>>response;
   if (response=="basics")
   {
-    cout<<"How many terms are there?"<<'\n';
-    cin>>terms;
-    cout<<"You may now type the numbers in your data set"<<'\n';
+    Basics basics;
+    std::cout<<"How many terms are there?"<<'\n';
+    std::cin>>terms;
+    std::cout<<"You may now type the numbers in your data set"<<'\n';
     while (trials!=terms)
     {
-      cin>>inputnumber;
+      std::cin>>inputnumber;
       dataset.push_back(inputnumber);
       trials++;
     }
-    displayDataset(dataset);
-    cout<<"The MEAN of the dataset is: "<<calculateMean(dataset,terms)<<'\n';
-    cout<<"The MODE of your dataset is: "<<calculateMode(dataset)<<'\n';
-    cout<<"The RANGE of the dataset is: "<<calculateRange(dataset)<<'\n';
-    displayMinMax(dataset);
-    cout<<'\n'<<"Percentiles: "<<'\n';
-    displayPercentiles(dataset);
-    cout<<"The INTERQUARTILE RANGE of the dataset is: "<<calculateInterquartileRange(dataset)<<'\n';
-    findOutliers(dataset);
-    cout<<'\n';
-    cout<<"Standard deviation and Variance: "<<'\n';
-    displayStandardDeviation(dataset,terms);
-    cout<<'\n';
+    basics.displayDataset(dataset);
+    std::cout<<"The MEAN of the dataset is: "<<basics.calculateMean(dataset,terms)<<'\n';
+    std::cout<<"The MODE of your dataset is: "<<basics.calculateMode(dataset)<<'\n';
+    std::cout<<"The RANGE of the dataset is: "<<basics.calculateRange(dataset)<<'\n';
+    basics.displayMinMax(dataset);
+    std::cout<<'\n'<<"Percentiles: "<<'\n';
+    basics.displayPercentiles(dataset);
+    std::cout<<"The INTERQUARTILE RANGE of the dataset is: "<<basics.calculateInterquartileRange(dataset)<<'\n';
+    basics.findOutliers(dataset);
+    std::cout<<'\n';
+    std::cout<<"Standard deviation and Variance: "<<'\n';
+    basics.displayStandardDeviation(dataset,terms);
+    std::cout<<'\n';
     //erase terms once finished showing numbers to user
     dataset.erase(dataset.begin(),dataset.end());
     //reset the trials
@@ -49,11 +47,11 @@ int main()
   }
   else if (response=="other")
   {
-    cout<<"sorry I have not made those functions work yet!"<<'\n';
+    std::cout<<"sorry I have not made those functions work yet!"<<'\n';
   }
   else
   {
-    cout<<"Thank you for using this statistical calculator! Come again!"<<'\n';
+    std::cout<<"Thank you for using this statistical calculator! Come again!"<<'\n';
   }
 
 }

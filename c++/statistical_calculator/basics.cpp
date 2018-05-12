@@ -2,45 +2,23 @@
 //aim: create a statistical calculator that provides basic functions for beginner statistics
 //project will become more advanced as I learn new concepts in statistics
 #include <iostream>
-#include <string>
 #include <vector>
 #include <cmath>
-
-using std::cout;
-using std::string;
+#include "basics.h"
 
 
 
-struct dataType
+Basics::Basics()
 {
-  double population;
-  double sample;
-};
+  sum=0;
+  mean=0;
+  mode=0;
+  range=0;
+  iqr=0;
 
-struct Percentile
-{
-  double q1;
-  double q2;
-  double q3;
-};
-
-//prototypes:
-void sortDataset(std::vector <double> &dataset);
-void displayDataset(std::vector<double> dataset);
-void sd_printSampleAndPop(dataType func);
-void displayMinMax(std::vector<double> dataset);
-double calculateMean(std::vector <double> dataset,int terms);
-double calculateRange(std::vector <double> dataset);
-Percentile calculatePercentiles(std::vector <double> dataset);
-double calculateMode(std::vector <double> dataset);
-dataType calculateStandardDeviation(std::vector <double> dataset,int terms);
-double calculateInterquartileRange(std::vector<double> dataset);
-void findOutliers(std::vector<double> dataset);
-
-
-
+}
 //sorts the vector
-void sortDataset(std::vector<double> &dataset)
+void Basics::sortDataset(std::vector<double> &dataset)
 {
   double hold;
   for (int x=0;x<dataset.size();x++)
@@ -58,69 +36,68 @@ void sortDataset(std::vector<double> &dataset)
 }
 
 //displays all the elements in the vector
-void displayDataset(std::vector<double> dataset)
+void Basics::displayDataset(std::vector<double> dataset)
 {
   sortDataset(dataset);
-  cout<<"The dataset you input is: "<<'\n';
+  std::cout<<"The dataset you input is: "<<'\n';
   for (int index=0;index<dataset.size();index++)
   {
-    cout<<" "<<dataset[index];
+    std::cout<<" "<<dataset[index];
   }
-  cout<<'\n';
+  std::cout<<'\n';
 }
 
-void displayMinMax(std::vector<double> dataset)
+void Basics::displayMinMax(std::vector<double> dataset)
 {
   sortDataset(dataset);
-  cout<<"The minimum value of the dataset is: "<<dataset[0]<<'\n';
-  cout<<"The maximum value of the dataset is: "<<dataset[dataset.size()-1]<<'\n';
+  std::cout<<"The minimum value of the dataset is: "<<dataset[0]<<'\n';
+  std::cout<<"The maximum value of the dataset is: "<<dataset[dataset.size()-1]<<'\n';
 }
 
-void displayPercentiles(std::vector<double> dataset)
+void Basics::displayPercentiles(std::vector<double> dataset)
 {
   Percentile percentile=calculatePercentiles(dataset);
   if (dataset.size()<=3)
   {
-    cout<<"The 50th percentile(MEDIAN) of the dataset is: "<<percentile.q2<<'\n';
+    std::cout<<"The 50th percentile(MEDIAN) of the dataset is: "<<percentile.q2<<'\n';
   }
   else if(dataset.size()>=4)
   {
-    cout<<"The 25th percentile of the dataset is: "<<percentile.q1<<'\n';
-    cout<<"The 50th percentile(MEDIAN) of the dataset is: "<<percentile.q2<<'\n';
-    cout<<"The 75th percentile of the dataset is: "<<percentile.q3<<'\n';
+    std::cout<<"The 25th percentile of the dataset is: "<<percentile.q1<<'\n';
+    std::cout<<"The 50th percentile(MEDIAN) of the dataset is: "<<percentile.q2<<'\n';
+    std::cout<<"The 75th percentile of the dataset is: "<<percentile.q3<<'\n';
   }
 }
 
 
-void displayStandardDeviation(std::vector <double> dataset,int terms)
+void Basics::displayStandardDeviation(std::vector <double> dataset,int terms)
 {
   dataType sd=calculateStandardDeviation(dataset,terms);
-  cout<<"The SAMPLE STANDARD DEVIATION (Sx) is: "<<sd.sample<<'\n';
-  cout<<"The SAMPLE VARIANCE (Sx^2) is: "<<pow(sd.sample,2)<<'\n';
-  cout<<"The POPULATION STANDARD DEVIATION (σ) is: "<<sd.population<<'\n';
-  cout<<"The POPULATION VARIANCE (σ^2) is: "<<pow(sd.population,2)<<'\n';
+  std::cout<<"The SAMPLE STANDARD DEVIATION (Sx) is: "<<sd.sample<<'\n';
+  std::cout<<"The SAMPLE VARIANCE (Sx^2) is: "<<pow(sd.sample,2)<<'\n';
+  std::cout<<"The POPULATION STANDARD DEVIATION (σ) is: "<<sd.population<<'\n';
+  std::cout<<"The POPULATION VARIANCE (σ^2) is: "<<pow(sd.population,2)<<'\n';
 }
 //finds the mean of the amount of terms inputed by the user
-double calculateMean(std::vector <double> dataset,int terms)
+double Basics::calculateMean(std::vector <double> dataset,int terms)
 {
-  double mean;
-  double sum=0;
   for (int i=0;i<dataset.size();i++)
   {
     sum+=dataset[i];
   }
-  return double(sum/terms);
+  mean=(sum/terms);
+  return mean;
 }
 
-double calculateRange(std::vector <double> dataset)
+double Basics::calculateRange(std::vector <double> dataset)
 {
   sortDataset(dataset);
-  double range=dataset[dataset.size()-1]-dataset[0];
+  range=dataset[dataset.size()-1]-dataset[0];
   return range;
 }
 
-
-Percentile calculatePercentiles(std::vector <double> dataset)
+//calculates 25th,50th, and 75th percentile of the data set
+Percentile Basics::calculatePercentiles(std::vector <double> dataset)
 {
   Percentile percentile;
   sortDataset(dataset);
@@ -159,10 +136,10 @@ Percentile calculatePercentiles(std::vector <double> dataset)
 }
 
 
-double calculateMode(std::vector <double> dataset)
+double Basics::calculateMode(std::vector <double> dataset)
 {
   sortDataset(dataset);
-  double mode = dataset[0];
+  mode = dataset[0];
   int count=1;
   int maxCount=0;
 
@@ -188,15 +165,15 @@ double calculateMode(std::vector <double> dataset)
   }
   else
   {
-    cout<<"all numbers repeat equally,returning first term: ";
+    std::cout<<"all numbers repeat equally,returning first term: ";
     return mode;
   }
 
 }
 
-dataType calculateStandardDeviation(std::vector <double> dataset,int terms)
+dataType Basics::calculateStandardDeviation(std::vector <double> dataset,int terms)
 {
-  double mean=calculateMean(dataset,terms);
+  mean=calculateMean(dataset,terms);
   dataType sd;
   sd.population=0;
   sd.sample=0;
@@ -210,17 +187,16 @@ dataType calculateStandardDeviation(std::vector <double> dataset,int terms)
   return sd;
 }
 
-double calculateInterquartileRange(std::vector<double> dataset)
+double Basics::calculateInterquartileRange(std::vector<double> dataset)
 {
-  Percentile percentile=calculatePercentiles(dataset);
-  double iqr=percentile.q3-percentile.q1;
+  percentile=calculatePercentiles(dataset);
+  iqr=percentile.q3-percentile.q1;
   return iqr;
 }
 
 
-void findOutliers(std::vector<double> dataset)
+void Basics::findOutliers(std::vector<double> dataset)
 {
-  std::vector<double>outliers;
   Percentile percentile=calculatePercentiles(dataset);
   double iqr=calculateInterquartileRange(dataset);
   double lower=percentile.q1-(iqr*1.5);
@@ -234,16 +210,16 @@ void findOutliers(std::vector<double> dataset)
   }
   if (outliers.size()>0)
   {
-    cout<<"The OUTLIER(S) of this dataset is(are): ";
+    std::cout<<"The OUTLIER(S) of this dataset is(are): ";
     for (int j=0;j<outliers.size();j++)
     {
-      cout<<outliers[j]<<" ";
+      std::cout<<outliers[j]<<" ";
     }
   }
   else
   {
-    cout<<" No outliers found in the data set";
+    std::cout<<"No outliers found in the data set";
   }
 
-  cout<<'\n';
+  std::cout<<'\n';
 }
