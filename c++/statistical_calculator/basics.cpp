@@ -6,8 +6,6 @@
 #include <cmath>
 #include "basics.h"
 
-
-
 Basics::Basics()
 {
   sum=0;

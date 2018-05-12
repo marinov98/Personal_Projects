@@ -2,8 +2,6 @@
 #include <vector>
 #include "basics.h"
 
-
-
 int main()
 {
   std::vector <double> dataset;

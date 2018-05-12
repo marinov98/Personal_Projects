@@ -32,7 +32,7 @@ class Basics
     std::vector<double>outliers;
   public:
     Basics();
-    //sorting printing functions
+    //sorting/printing functions
     void sortDataset(std::vector <double> &dataset);
     void displayDataset(std::vector<double> dataset);
     void displayStandardDeviation(std::vector <double> dataset,int terms);
