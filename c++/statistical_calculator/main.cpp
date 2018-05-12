@@ -30,16 +30,20 @@ int main()
       trials++;
     }
     displayDataset(dataset);
-    cout<<'\n';
     cout<<"The MEAN of the dataset is: "<<calculateMean(dataset,terms)<<'\n';
-    cout<<calculateMedian(dataset)<<'\n';
-    cout<<calculateMode(dataset)<<" (returns first number by default if all numbers repeated equally!)"<<'\n';
-    cout<<calculateRange(dataset)<<'\n';
+    cout<<"The MODE of your dataset is: "<<calculateMode(dataset)<<'\n';
+    cout<<"The RANGE of the dataset is: "<<calculateRange(dataset)<<'\n';
+    displayMinMax(dataset);
+    cout<<'\n'<<"Percentiles: "<<'\n';
+    displayPercentiles(dataset);
+    cout<<"The INTERQUARTILE RANGE of the dataset is: "<<calculateInterquartileRange(dataset)<<'\n';
+    findOutliers(dataset);
     cout<<'\n';
-    sd_printSampleAndPop(calculateStandardDeviation(dataset,terms));
+    cout<<"Standard deviation and Variance: "<<'\n';
+    displayStandardDeviation(dataset,terms);
     cout<<'\n';
     //erase terms once finished showing numbers to user
-    dataset.erase(dataset.begin(),dataset.begin()+terms);
+    dataset.erase(dataset.begin(),dataset.end());
     //reset the trials
     trials=0;
   }
