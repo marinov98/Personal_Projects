@@ -13,7 +13,8 @@ int main()
 
   std::cout<<"~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~"<<'\n';
   std::cout<<"What would you like the calculator to do?"<<'\n';
-  std::cout<<"type 'basics'{mean,median,mode,range,standard deviation} or 'other' view more functions"<<'\n';
+  std::cout<<"type 'basics' for {min,max,mean,median,mode,range,standard deviation,percentiles}"<<'\n';
+  std::cout<<"type 'other' view more functions(have not been made yet)"<<'\n';
   std::cin>>response;
   if (response=="basics")
   {
