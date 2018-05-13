@@ -2,6 +2,16 @@
 #include <vector>
 #include "basics.h"
 
+void readFormulaSheet(std::string textfile)
+{
+  std::string s;
+  std::ifstream formula(textfile);
+  while (getline(formula,s))
+  {
+    std::cout<<s<<'\n';
+  }
+}
+
 int main()
 {
   std::vector <double> dataset;
@@ -14,7 +24,8 @@ int main()
   std::cout<<"~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~"<<'\n';
   std::cout<<"What would you like the calculator to do?"<<'\n';
   std::cout<<"type 'basics' for {min,max,mean,median,mode,range,standard deviation,percentiles}"<<'\n';
-  std::cout<<"type 'other' view more functions(have not been made yet)"<<'\n';
+  std::cout<<"type 'formulas' view the formula sheet"<<'\n';
+  std::cout<<"type 'other'for more functions(have not been made yet)"<<'\n';
   std::cin>>response;
   if (response=="basics")
   {
@@ -71,9 +82,9 @@ int main()
       }
     }
   }
-  else if (response=="other")
+  else if (response=="formulas")
   {
-    std::cout<<"sorry I have not made those functions work yet!"<<'\n';
+    readFormulaSheet("formulas.txt");
   }
   else
   {
