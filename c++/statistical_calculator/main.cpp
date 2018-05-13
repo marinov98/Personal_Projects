@@ -14,12 +14,18 @@ void readFormulaSheet(std::string textfile)
 
 int main()
 {
+  // TODO:NOTE(sirflankalot): why are you declaring these variables well before they are being used. You should keep
+	// TODO:NOTE(sirflankalot): variable declarations as close to their use as possible
   std::vector <double> dataset;
   bool repeat;
   int terms;
   int trials=0;
   double inputnumber;
   std::string response;
+
+  // TODO:NOTE(sirflankalot): You need to be consistent in formatting, add spaces around operators: so "a + b" over "a+b"
+	// TODO:NOTE(sirflankalot): and try to keep things readable. I have formatted for you only because I use a tool that auto
+	// TODO:NOTE(sirflankalot): formats all the code I save. If you want it, I can help you set it up.
 
   std::cout<<"~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~"<<'\n';
   std::cout<<"What would you like the calculator to do?"<<'\n';
@@ -44,7 +50,10 @@ int main()
         dataset.push_back(inputnumber);
         trials++;
       }
-      //showcases the dataset's mean, mode, and range
+      // TODO:NOTE(sirflankalot): don't calculate the percentiles more than once. There should be a method that gives you both the percentiles and the IQR (keep the individual methods though).
+
+			//TODO:showcases the dataset's mean, mode, and range
+      //TODO:showcases the dataset's mean, mode, and range
       basics.displayDataset(dataset);
       std::cout<<"The MEAN of the dataset is: "<<basics.calculateMean(dataset,terms)<<'\n';
       std::cout<<"The MEDIAN of the data is: "<<basics.calculatePercentiles(dataset).q2<<'\n';
@@ -67,11 +76,14 @@ int main()
       basics.displayStandardDeviation(dataset,terms);
       std::cout<<'\n';
       //erase terms once finished showing numbers to user
-      dataset.erase(dataset.begin(),dataset.end());
+      dataset.clear();
       //reset the trials
       trials=0;
       std::cout<<"Would like to use this function again? Type 'y' or 'n' "<<'\n';
       std::cin>>answer;
+      // TODO:NOTE(sirflankalot): this should check to see if y or n is the answer at all, it should say invalid answer for the input "Uksajsdjakhoi"
+
+      // TODO:NOTE(sirflankalot): repeat = answer == 'y';
       if (answer=='y')
       {
         repeat=true;
