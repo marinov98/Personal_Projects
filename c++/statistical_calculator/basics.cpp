@@ -5,7 +5,7 @@
 #include <vector>
 #include <cmath>
 #include "basics.h"
-#include <algorithms>
+#include <algorithm>
 
 Basics::Basics()
 {
@@ -53,8 +53,8 @@ const void Basics::displayDataset(std::vector<double> dataset)
 void Basics::displayMinMax(std::vector<double> dataset)
 {
         sortDataset(dataset);
-        std::cout<<"The minimum value of the dataset is: "<<dataset.first()<<'\n';
-        std::cout<<"The maximum value of the dataset is: "<<dataset.last()<<'\n';
+        std::cout<<"The minimum value of the dataset is: "<<dataset[0]<<'\n';
+        std::cout<<"The maximum value of the dataset is: "<<dataset[dataset.size()-1]<<'\n';
 }
 
 void Basics::displayPercentiles(std::vector<double> dataset)
@@ -74,7 +74,7 @@ void Basics::displayPercentiles(std::vector<double> dataset)
 
 void Basics::displayStandardDeviation(std::vector <double> dataset,const int terms)
 {
-        const dataType sd = calculateStandardDeviation(dataset, terms);
+        const DataType sd = calculateStandardDeviation(dataset, terms);
         // TODO:NOTE(sirflankalot): STOP YELLING AT ME
         std::cout << "The SAMPLE STANDARD DEVIATION (Sx) is: " << sd.sample << '\n';
         std::cout << "The SAMPLE VARIANCE (Sx^2) is: " <<(sd.sample*sd.sample)<< '\n';
@@ -96,7 +96,7 @@ double Basics::calculateMean(std::vector <double> dataset,const int terms)
 double Basics::calculateRange(std::vector <double> dataset)
 {
         sortDataset(dataset);
-        range=dataset.last()-dataset.first();
+        range=dataset[dataset.size()-1]-dataset[0];
         return range;
 }
 
@@ -148,7 +148,7 @@ Percentile Basics::calculatePercentiles(std::vector <double> dataset)
 double Basics::calculateMode(std::vector <double> dataset)
 {
         sortDataset(dataset);
-        mode = dataset.first();
+        mode = dataset[0];
         int count=1;
         int maxCount=0;
         // TODO:NOTE(sirflankalot): Off by 1 error, you run off the end of the array here.(CHECK WITH CONOR FIRST!)

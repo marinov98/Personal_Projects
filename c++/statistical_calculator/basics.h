@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <algorithm>
 
 
 
@@ -36,7 +37,7 @@ Basics();
 //TODO:If you are just viewing the array, pass by const reference, if you're modifying, pass by non-const reference
 //sorting/printing functions
 void sortDataset(std::vector <double> &dataset);
-void displayDataset(const std::vector<double> dataset);
+const void displayDataset(const std::vector<double> dataset);
 void displayStandardDeviation(std::vector <double> dataset,int terms);
 void displayMinMax(std::vector<double> dataset);
 void displayPercentiles(std::vector<double> dataset);
@@ -45,7 +46,7 @@ double calculateMean(std::vector <double> dataset,int terms);
 double calculateRange(std::vector <double> dataset);
 Percentile calculatePercentiles(std::vector <double> dataset);
 double calculateMode(std::vector <double> dataset);
-dataType calculateStandardDeviation(std::vector <double> dataset,int terms);
+DataType calculateStandardDeviation(std::vector <double> dataset,int terms);
 double calculateInterquartileRange(std::vector<double> dataset);
 void findOutliers(std::vector<double> dataset);
 };

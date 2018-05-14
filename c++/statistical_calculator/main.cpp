@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "basics.h"
+#include <algorithm>
 
 void readFormulaSheet(std::string textfile)
 {
@@ -52,7 +54,6 @@ int main()
                         //TODO:showcases the dataset's mean, mode, and range
                         basics.displayDataset(dataset);
                         std::cout<<"The MEAN of the dataset is: "<<basics.calculateMean(dataset,terms)<<'\n';
-                        std::cout<<"The MEDIAN of the data is: "<<basics.calculatePercentiles(dataset).q2<<'\n';
                         std::cout<<"The MODE of your dataset is: "<<basics.calculateMode(dataset)<<'\n';
                         std::cout<<"The RANGE of the dataset is: "<<basics.calculateRange(dataset)<<'\n';
                         basics.displayMinMax(dataset);
