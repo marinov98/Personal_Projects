@@ -17,12 +17,6 @@ void readFormulaSheet(std::string textfile)
 int main()
 {
 	std::string response;
-	// TODO:NOTE(sirflankalot): You need to be consistent in formatting, add spaces around
-	// operators: so "a + b" over "a+b"
-	// TODO:NOTE(sirflankalot): and try to keep things readable. I have formatted for you only
-	// because I use a tool that auto
-	// TODO:NOTE(sirflankalot): formats all the code I save. If you want it, I can help you set it
-	// up.
 
 	std::cout << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << '\n';
 	std::cout << "What would you like the calculator to do?" << '\n';
@@ -34,7 +28,6 @@ int main()
 	if (response == "basics")
 	{
 		bool repeat = true;
-		;
 		char answer;
 		while (repeat == true)
 		{
@@ -56,15 +49,13 @@ int main()
 			// be a method that gives you both the percentiles and the IQR (keep the individual
 			// methods though).
 
-			// TODO:showcases the dataset's mean, mode, and range
-			// TODO:showcases the dataset's mean, mode, and range
+			// showcases the dataset's mean, mode, and range
 			displayDataset(dataset);
 			std::cout << "The MEAN of the dataset is: " << calculateMean(dataset, terms) << '\n';
 			std::cout << "The MODE of your dataset is: " << calculateMode(dataset) << '\n';
 			std::cout << "The RANGE of the dataset is: " << calculateRange(dataset) << '\n';
 			displayMinMax(dataset);
 			// prints the 25th,50th, and 75th percentile of the dataset
-			// displayPercentiles(dataset);
 			if (dataset.size() > 3)
 			{
 				std::cout << '\n' << "Percentiles: " << '\n';

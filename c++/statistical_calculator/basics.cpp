@@ -12,19 +12,7 @@
 // TODO:search up better sorting algorithms(std::sort)
 void sortDataset(std::vector<double>& dataset)
 {
-	double hold;
-	for (int x = 0; x < dataset.size(); x++)
-	{
-		for (int y = 0; y < dataset.size() - 1; y++)
-		{
-			if (dataset[y] > dataset[y + 1])
-			{
-				hold = dataset[y];
-				dataset[y] = dataset[y + 1];
-				dataset[y + 1] = hold;
-			}
-		}
-	}
+	std::sort(dataset.begin(), dataset.end());
 }
 
 // displays all the elements in the vector
@@ -66,7 +54,6 @@ const void displayPercentiles(std::vector<double> dataset)
 const void displayStandardDeviation(std::vector<double> dataset, const int terms)
 {
 	const DataType sd = calculateStandardDeviation(dataset, terms);
-	// TODO:NOTE(sirflankalot): STOP YELLING AT ME
 	std::cout << "The SAMPLE STANDARD DEVIATION (Sx) is: " << sd.sample << '\n';
 	std::cout << "The SAMPLE VARIANCE (Sx^2) is: " << (sd.sample * sd.sample) << '\n';
 	std::cout << "The POPULATION STANDARD DEVIATION (σ) is: " << sd.population << '\n';
@@ -93,6 +80,10 @@ double calculateRange(std::vector<double> dataset)
 	return range;
 }
 
+bool isEvenSize(std::vector<double> dataset)
+{
+	return (dataset.size() % 2 == 0);
+}
 // calculates 25th,50th, and 75th percentile of the data set
 Percentile calculatePercentiles(std::vector<double> dataset)
 {
@@ -100,10 +91,7 @@ Percentile calculatePercentiles(std::vector<double> dataset)
 	sortDataset(dataset);
 	// TODO:NOTE(sirflankalot): this function is way to unweildy. Factor it out
 	// into three separate functions finding q1, q2, and q3.
-
-	// TODO:NOTE(sirflankalot): factor this out into a boolean with a clear name
-	// like even_count
-	if (dataset.size() % 2 == 1)
+	if (!(isEvenSize(dataset)))
 	{
 		if ((dataset.size() / 2 - 1) % 2 == 1)
 		{
@@ -120,25 +108,20 @@ Percentile calculatePercentiles(std::vector<double> dataset)
 		}
 		return percentile;
 	}
-	// TODO:NOTE(sirflankalot): else is redundant
+	if ((dataset.size() / 2) % 2 == 1)
+	{
+		percentile.q1 = dataset[(dataset.size() - 1) / 4];
+		percentile.q2 = ((dataset[dataset.size() / 2] + dataset[dataset.size() / 2 - 1]) / 2);
+		percentile.q3 = dataset[dataset.size() * 3 / 4];
+	}
 	else
 	{
-		// TODO:NOTE(sirflankalot): Index out of range error with input 2 2 2
-		if ((dataset.size() / 2) % 2 == 1)
-		{
-			percentile.q1 = dataset[(dataset.size() - 1) / 4];
-			percentile.q2 = ((dataset[dataset.size() / 2] + dataset[dataset.size() / 2 - 1]) / 2);
-			percentile.q3 = dataset[dataset.size() * 3 / 4];
-		}
-		else
-		{
-			percentile.q1 = ((dataset[dataset.size() / 4] + dataset[dataset.size() / 4 - 1]) / 2);
-			percentile.q2 = ((dataset[dataset.size() / 2] + dataset[dataset.size() / 2 - 1]) / 2);
-			percentile.q3 =
-			    ((dataset[dataset.size() * 3 / 4] + dataset[dataset.size() * 3 / 4 - 1]) / 2);
-		}
-		return percentile;
+		percentile.q1 = ((dataset[dataset.size() / 4] + dataset[dataset.size() / 4 - 1]) / 2);
+		percentile.q2 = ((dataset[dataset.size() / 2] + dataset[dataset.size() / 2 - 1]) / 2);
+		percentile.q3 =
+		    ((dataset[dataset.size() * 3 / 4] + dataset[dataset.size() * 3 / 4 - 1]) / 2);
 	}
+	return percentile;
 }
 
 double calculateMode(std::vector<double> dataset)
@@ -147,8 +130,6 @@ double calculateMode(std::vector<double> dataset)
 	double mode = dataset.front();
 	int count = 1;
 	int maxCount = 0;
-	// TODO:NOTE(sirflankalot): Off by 1 error, you run off the end of the array
-	// here.(CHECK WITH CONOR FIRST!)
 	for (int i = 1; i < dataset.size() - 1; i++)
 	{
 		if (dataset[i] == dataset[i + 1])
@@ -183,7 +164,6 @@ DataType calculateStandardDeviation(std::vector<double> dataset, int terms)
 	sd.population = 0;
 	sd.sample = 0;
 	// TODO:NOTE(sirflankalot): replace with foreach loop
-	// TODO:NOTE(sirflankalot): pow(blah, 2) -> blah * blah, use a temporary value
 	for (int i = 0; i < dataset.size(); i++)
 	{
 		double temp = dataset[i] - mean;
