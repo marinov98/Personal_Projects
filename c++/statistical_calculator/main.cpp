@@ -42,7 +42,6 @@ int main()
 			int terms;
 			int trials = 0;
 			double inputnumber;
-			Basics basics;
 			// gets the number of terms in the date set and fills the vector with them
 			std::cout << "How many terms are there?" << '\n';
 			std::cin >> terms;
@@ -59,27 +58,26 @@ int main()
 
 			// TODO:showcases the dataset's mean, mode, and range
 			// TODO:showcases the dataset's mean, mode, and range
-			basics.displayDataset(dataset);
-			std::cout << "The MEAN of the dataset is: " << basics.calculateMean(dataset, terms)
-			          << '\n';
-			std::cout << "The MODE of your dataset is: " << basics.calculateMode(dataset) << '\n';
-			std::cout << "The RANGE of the dataset is: " << basics.calculateRange(dataset) << '\n';
-			basics.displayMinMax(dataset);
+			displayDataset(dataset);
+			std::cout << "The MEAN of the dataset is: " << calculateMean(dataset, terms) << '\n';
+			std::cout << "The MODE of your dataset is: " << calculateMode(dataset) << '\n';
+			std::cout << "The RANGE of the dataset is: " << calculateRange(dataset) << '\n';
+			displayMinMax(dataset);
 			// prints the 25th,50th, and 75th percentile of the dataset
-			// basics.displayPercentiles(dataset);
+			// displayPercentiles(dataset);
 			if (dataset.size() > 3)
 			{
 				std::cout << '\n' << "Percentiles: " << '\n';
 				std::cout << "The INTERQUARTILE RANGE of the dataset is: "
-				          << basics.calculateInterquartileRange(dataset) << '\n';
-				basics.displayPercentiles(dataset);
+				          << calculateInterquartileRange(dataset) << '\n';
+				displayPercentiles(dataset);
 			}
-			basics.findOutliers(dataset);
+			findOutliers(dataset);
 
 			std::cout << '\n';
 			// prints standard deviation and variance
 			std::cout << "Standard deviation and Variance: " << '\n';
-			basics.displayStandardDeviation(dataset, terms);
+			displayStandardDeviation(dataset, terms);
 			std::cout << '\n';
 			// erase terms once finished showing numbers to user
 			dataset.clear();
@@ -95,8 +93,13 @@ int main()
 			{
 				repeat = true;
 			}
+			else if (answer == 'n')
+			{
+				repeat = false;
+			}
 			else
 			{
+				std::cout << "Invalid input, terminating calulator" << '\n';
 				repeat = false;
 			}
 		}
