@@ -105,9 +105,8 @@ int main()
 	else if (response == "CI")
 	{
 		Interval ci;
-		bool repeat = true;
-		std::cout << "This function will allow you calculate confidence intervals and z/t scores!"
-		          << '\n';
+		repeat = true;
+		std::cout << "This function will allow you calculate confidence intervals!" << '\n';
 		while (repeat == true)
 		{
 			std::cout << "type \"zinterval\" for z confidence interval" << '\n';
@@ -164,35 +163,6 @@ int main()
 				std::cin >> sample_size;
 				ci.displayCI_Proportion(percent, p_hat, sample_size);
 			}
-			else if (answer_2 == "zscore")
-			{
-				double point_estimate;
-				double mean;
-				double sd;
-				std::cout << "What is x̄?" << '\n';
-				std::cin >> point_estimate;
-				std::cout << "What is the population mean?" << '\n';
-				std::cin >> mean;
-				std::cout << "Finally, what is the standard deviation" << '\n';
-				std::cin >> sd;
-				ci.calculateZscore(point_estimate, mean, sd);
-			}
-			else if (answer_2 == "tscore")
-			{
-				double point_estimate;
-				double mean;
-				double sd;
-				int sample_size;
-				std::cout << "What is x̄?" << '\n';
-				std::cin >> point_estimate;
-				std::cout << "What is the population mean?" << '\n';
-				std::cin >> mean;
-				std::cout << "What is the sample size?" << '\n';
-				std::cin >> sample_size;
-				std::cout << "Finally, what is the standard deviation" << '\n';
-				std::cin >> sd;
-				ci.calculateTscore(point_estimate, mean, sd, sample_size);
-			}
 			std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 			std::cin >> answer;
 			if (answer == 'y')
@@ -210,6 +180,38 @@ int main()
 			}
 		}
 	}
+	// else if (response == "ht")
+	//{
+	// if (answer_2 == "zscore")
+	// {
+	// 	double point_estimate;
+	// 	double mean;
+	// 	double sd;
+	// 	std::cout << "What is x̄?" << '\n';
+	// 	std::cin >> point_estimate;
+	// 	std::cout << "What is the population mean?" << '\n';
+	// 	std::cin >> mean;
+	// 	std::cout << "Finally, what is the standard deviation" << '\n';
+	// 	std::cin >> sd;
+	// 	ci.calculateZscore(point_estimate, mean, sd);
+	// }
+	// else if (answer_2 == "tscore")
+	// {
+	// 	double point_estimate;
+	// 	double mean;
+	// 	double sd;
+	// 	int sample_size;
+	// 	std::cout << "What is x̄?" << '\n';
+	// 	std::cin >> point_estimate;
+	// 	std::cout << "What is the population mean?" << '\n';
+	// 	std::cin >> mean;
+	// 	std::cout << "What is the sample size?" << '\n';
+	// 	std::cin >> sample_size;
+	// 	std::cout << "Finally, what is the standard deviation" << '\n';
+	// 	std::cin >> sd;
+	// 	ci.calculateTscore(point_estimate, mean, sd, sample_size);
+	// }
+	//}
 	else
 	{
 		std::cout << "Thank you for using this calculat. Come again soon!" << '\n';

@@ -42,6 +42,4 @@ class Interval
 	const void displayCI_Proportion(std::string percent, double p_hat, const int sample_size);
 	// calculation functions
 	double calculateSamplingDistributionSd(double sd, const int sample_size);
-	double calculateZscore(double point_estimate, double mean, double sd);
-	double calculateTscore(double sampleMean, double popMean, double sd, const int sample_size);
 };

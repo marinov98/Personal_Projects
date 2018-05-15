@@ -93,19 +93,4 @@ const void Interval::displayCI_Proportion(std::string percent, double p_hat, con
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
 }
 
-double Interval::calculateZscore(double point_estimate, double mean, double sd)
-{
-	z_score = (point_estimate - mean) / sd;
-	std::cout << "Your z-score is: " << '\n';
-	return z_score;
-}
-double Interval::calculateTscore(double sampleMean,
-                                 double popMean,
-                                 double sd,
-                                 const int sample_size)
-{
-	double new_sd = calculateSamplingDistributionSd(sd, sample_size);
-	t_score = (sampleMean - popMean) / new_sd;
-	std::cout << "Your t-score is: " << '\n';
-	return t_score;
-}
+// TODO:IMPLEMENT TWO SAMPLE CONFIDENCE INTERVAL!!!
