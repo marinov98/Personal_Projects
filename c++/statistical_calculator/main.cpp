@@ -1,5 +1,5 @@
+#include "advanced.h"
 #include "basics.h"
-#include "confidence.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -23,8 +23,9 @@ int main()
 	    << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"
 	    << '\n';
 	std::cout << "type \"formulas\" view the formula sheet" << '\n';
-	std::cout << "type \"other\" for more functions(have not been made yet)" << '\n';
-	std::cout << "type \"CI\" for confidence intervals and z/t scores" << '\n';
+	std::cout << "type \"correlation\" for finding correlation coefficients and LSRL(not finished!)"
+	          << '\n';
+	std::cout << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
 	std::string response;
 	std::cin >> response;
 	bool repeat = true;
@@ -102,66 +103,129 @@ int main()
 	{
 		readFormulaSheet("formulas.txt");
 	}
-	else if (response == "CI")
+	else if (response == "advanced")
 	{
-		Interval ci;
 		repeat = true;
-		std::cout << "This function will allow you calculate confidence intervals!" << '\n';
+		std::string answer_2;
+		std::cout << "This function will allow you calculate confidence intervals and t,z and chi "
+		             "test statistics!"
+		          << '\n';
 		while (repeat == true)
 		{
-			std::cout << "type \"zinterval\" for z confidence interval" << '\n';
-			std::cout << "type \"tinterval\" for t confidence interval" << '\n';
-			std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
-			std::cout << "type \"zscore\" for z-score" << '\n';
-			std::cout << "type \"tscore\" for t-score" << '\n';
-			std::string answer_2;
-			std::cin >> answer_2;
-			if (answer_2 == "zinterval")
+			std::cout << "type \"ci\" for confidence interval or \"ht\" for hypothesis testing? "
+			          << '\n';
+			Cinterval ci;
+			std::string choice;
+			std::cin >> choice;
+			if (choice == "ci")
 			{
-				std::string percent;
-				double point_estimate;
-				double sd;
-				int sample_size;
-				std::cout << "What is the percentage (type in decimal form!)" << '\n';
-				std::cout << "Your options are : .99, .95, .90, .85, .80" << '\n';
-				std::cin >> percent;
-				std::cout << "What is x̄?" << '\n';
-				std::cin >> point_estimate;
-				std::cout << "What is the standard deviation?" << '\n';
-				std::cin >> sd;
-				std::cout << "Finally, what is the sample size" << '\n';
-				std::cin >> sample_size;
-				ci.displayCI_Z(percent, point_estimate, sd, sample_size);
+				std::cout << "type \"zinterval\" for z confidence interval" << '\n';
+				std::cout << "type \"tinterval\" for t confidence interval" << '\n';
+				std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
+				std::cin >> answer_2;
+				if (answer_2 == "zinterval")
+				{
+					std::string percent;
+					double point_estimate;
+					double sd;
+					int sample_size;
+					std::cout << "What is the percentage (type in decimal form!)" << '\n';
+					std::cout << "Your options are : .99, .95, .90, .85, .80" << '\n';
+					std::cin >> percent;
+					std::cout << "What is x̄?" << '\n';
+					std::cin >> point_estimate;
+					std::cout << "What is the standard deviation?" << '\n';
+					std::cin >> sd;
+					std::cout << "Finally, what is the sample size" << '\n';
+					std::cin >> sample_size;
+					ci.displayCI_Z(percent, point_estimate, sd, sample_size);
+				}
+				else if (answer_2 == "tinterval")
+				{
+					double tcrit;
+					double point_estimate;
+					double sd;
+					int sample_size;
+					std::cout << "What is the t-critical? " << '\n';
+					std::cin >> tcrit;
+					std::cout << "What is x̄?" << '\n';
+					std::cin >> point_estimate;
+					std::cout << "What is the standard deviation?" << '\n';
+					std::cin >> sd;
+					std::cout << "Finally, what is the sample size" << '\n';
+					std::cin >> sample_size;
+					ci.displayCI_T(point_estimate, sd, sample_size, tcrit);
+				}
+				else if (answer_2 == "pinterval")
+				{
+					std::string percent;
+					double p_hat;
+					int sample_size;
+					std::cout << "What is the percentage (type in decimal form!)" << '\n';
+					std::cout << "Your options are : .99, .95, .90, .85, .80" << '\n';
+					std::cin >> percent;
+					std::cout << "What is p̂?" << '\n';
+					std::cin >> p_hat;
+					std::cout << "Finally, what is the sample size?" << '\n';
+					std::cin >> sample_size;
+					ci.displayCI_Proportion(percent, p_hat, sample_size);
+				}
 			}
-			else if (answer_2 == "tinterval")
+			else if (choice == "ht")
 			{
-				double tcrit;
-				double point_estimate;
-				double sd;
-				int sample_size;
-				std::cout << "What is the t-critical? " << '\n';
-				std::cin >> tcrit;
-				std::cout << "What is x̄?" << '\n';
-				std::cin >> point_estimate;
-				std::cout << "What is the standard deviation?" << '\n';
-				std::cin >> sd;
-				std::cout << "Finally, what is the sample size" << '\n';
-				std::cin >> sample_size;
-				ci.displayCI_T(point_estimate, sd, sample_size, tcrit);
-			}
-			else if (answer_2 == "pinterval")
-			{
-				std::string percent;
-				double p_hat;
-				int sample_size;
-				std::cout << "What is the percentage (type in decimal form!)" << '\n';
-				std::cout << "Your options are : .99, .95, .90, .85, .80" << '\n';
-				std::cin >> percent;
-				std::cout << "What is p̂?" << '\n';
-				std::cin >> p_hat;
-				std::cout << "Finally, what is the sample size?" << '\n';
-				std::cin >> sample_size;
-				ci.displayCI_Proportion(percent, p_hat, sample_size);
+				HypTest ht;
+				std::cout << "type \"zscore\" for z-score (formula without sample size)" << '\n';
+				std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
+				std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
+				std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
+				std::cout << "type \"2tscore\" for two sample t-score/test-statistic" << '\n';
+				std::cout << "type \"chi\" for chi-square test" << '\n';
+				std::cin >> answer_2;
+				if (answer_2 == "zscore")
+				{
+					double point_estimate;
+					double mean;
+					double sd;
+					std::cout << "What is x̄?" << '\n';
+					std::cin >> point_estimate;
+					std::cout << "What is the population mean?" << '\n';
+					std::cin >> mean;
+					std::cout << "Finally, what is the standard deviation" << '\n';
+					std::cin >> sd;
+					ht.calculateZscore(point_estimate, mean, sd);
+				}
+				else if (answer_2 == "zstat")
+				{
+					double point_estimate;
+					double mean;
+					double sd;
+					int sample_size;
+					std::cout << "What is x̄?" << '\n';
+					std::cin >> point_estimate;
+					std::cout << "What is the population mean?" << '\n';
+					std::cin >> mean;
+					std::cout << "What is the sample size?" << '\n';
+					std::cin >> sample_size;
+					std::cout << "Finally, what is the standard deviation" << '\n';
+					std::cin >> sd;
+					ht.calculateZstat(point_estimate, mean, sd, sample_size);
+				}
+				else if (answer_2 == "tscore")
+				{
+					double point_estimate;
+					double mean;
+					double sd;
+					int sample_size;
+					std::cout << "What is x̄?" << '\n';
+					std::cin >> point_estimate;
+					std::cout << "What is the population mean?" << '\n';
+					std::cin >> mean;
+					std::cout << "What is the sample size?" << '\n';
+					std::cin >> sample_size;
+					std::cout << "Finally, what is the standard deviation" << '\n';
+					std::cin >> sd;
+					ht.calculateTscore(point_estimate, mean, sd, sample_size);
+				}
 			}
 			std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 			std::cin >> answer;
@@ -180,40 +244,8 @@ int main()
 			}
 		}
 	}
-	// else if (response == "ht")
-	//{
-	// if (answer_2 == "zscore")
-	// {
-	// 	double point_estimate;
-	// 	double mean;
-	// 	double sd;
-	// 	std::cout << "What is x̄?" << '\n';
-	// 	std::cin >> point_estimate;
-	// 	std::cout << "What is the population mean?" << '\n';
-	// 	std::cin >> mean;
-	// 	std::cout << "Finally, what is the standard deviation" << '\n';
-	// 	std::cin >> sd;
-	// 	ci.calculateZscore(point_estimate, mean, sd);
-	// }
-	// else if (answer_2 == "tscore")
-	// {
-	// 	double point_estimate;
-	// 	double mean;
-	// 	double sd;
-	// 	int sample_size;
-	// 	std::cout << "What is x̄?" << '\n';
-	// 	std::cin >> point_estimate;
-	// 	std::cout << "What is the population mean?" << '\n';
-	// 	std::cin >> mean;
-	// 	std::cout << "What is the sample size?" << '\n';
-	// 	std::cin >> sample_size;
-	// 	std::cout << "Finally, what is the standard deviation" << '\n';
-	// 	std::cin >> sd;
-	// 	ci.calculateTscore(point_estimate, mean, sd, sample_size);
-	// }
-	//}
 	else
 	{
-		std::cout << "Thank you for using this calculat. Come again soon!" << '\n';
+		std::cout << "Thank you for using this calculator. Come again soon!" << '\n';
 	}
 }

@@ -17,13 +17,11 @@ struct CriticalZ
 	double z80;
 };
 
-class Interval
+class Cinterval
 {
   private:
-	CriticalZ crit = {2.576, 1.960, 1.645, 1.440, 1.282};
-	double z_score;
-	double t_score;
-	double getZcritical(std::string percent);
+	const CriticalZ crit = {2.576, 1.960, 1.645, 1.440, 1.282};
+	const double getZcritical(std::string percent);
 	Bound calculateCI_Z(std::string percent,
 	                    double point_estimate,
 	                    double sd,
@@ -42,4 +40,17 @@ class Interval
 	const void displayCI_Proportion(std::string percent, double p_hat, const int sample_size);
 	// calculation functions
 	double calculateSamplingDistributionSd(double sd, const int sample_size);
+};
+
+class HypTest
+{
+  private:
+	double z_score;
+	double z_stat;
+	double t_score;
+
+  public:
+	double calculateZscore(double point_estimate, double mean, double sd);
+	double calculateZstat(double point_estimate, double mean, double sd, const int sample_size);
+	double calculateTscore(double sampleMean, double popMean, double sd, const int sample_size);
 };

@@ -1,22 +1,22 @@
 CXXFLAGS=-std=c++14
-main: main.o basics.o confidence.o
-	g++ -o main main.o basics.o confidence.o
+main: main.o basics.o advanced.o
+	g++ -o main main.o basics.o advanced.o
 
-main.o: main.cpp basics.h confidence.h
+main.o: main.cpp basics.h advanced.h
 	g++ $(CXXFLAGS) -c main.cpp
 
 basics.o: basics.cpp basics.h
 	g++ $(CXXFLAGS) -c basics.cpp
 
-confidence.o:confidence.cpp confidence.h
-	g++ $(CXXFLAGS) -c confidence.cpp
+advanced.o:advanced.cpp advanced.h
+	g++ $(CXXFLAGS) -c advanced.cpp
 
 debug: CXXFLAGS:=$(CXXFLAGS) -g
 
 debug: main
 
 clean:
-	rm -f main.o basics.o confidence.o main
+	rm -f main.o basics.o advanced.o main
 
 run:
 	./main
