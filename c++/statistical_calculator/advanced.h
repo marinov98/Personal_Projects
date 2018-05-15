@@ -17,6 +17,7 @@ struct CriticalZ
 	double z80;
 };
 
+// functionality for confidence intervals
 class Cinterval
 {
   private:
@@ -40,8 +41,9 @@ class Cinterval
 	const void displayCI_Proportion(std::string percent, double p_hat, const int sample_size);
 	// calculation functions
 	double calculateSamplingDistributionSd(double sd, const int sample_size);
+	// TODO: TWO SAMPLE CONFIDENCE INTERVAL!!!
 };
-
+// functionality for hypothesis testing
 class HypTest
 {
   private:
@@ -50,6 +52,8 @@ class HypTest
 	double t_score;
 
   public:
+	// TODO: TWO sample, chi square , degrees of freedom, function to print a hypothesis tesing
+	// report
 	double calculateZscore(double point_estimate, double mean, double sd);
 	double calculateZstat(double point_estimate, double mean, double sd, const int sample_size);
 	double calculateTscore(double sampleMean, double popMean, double sd, const int sample_size);
