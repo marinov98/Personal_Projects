@@ -24,4 +24,4 @@ if (MSVC)
     )
 endif()
 
-add_executable(main basics.cpp main.cpp basics.h)
+add_executable(main basics.cpp main.cpp basics.h confidence.h confidence.cpp)

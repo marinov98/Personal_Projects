@@ -1,4 +1,4 @@
-// Confidence intervals
+// Confidence const intervals
 // z-critical and t-critical
 #include "basics.h"
 #include <vector>
@@ -20,16 +20,28 @@ struct CriticalZ
 class Interval
 {
   private:
-	CriticalZ.z99 = 2.576;
-	CriticalZ.z95 = 1.960;
-	CriticalZ.z90 = 1.645;
-	CriticalZ.z85 = 1.440;
-	CriticalZ.z80 = 1.282;
+	CriticalZ crit = {2.576, 1.960, 1.645, 1.440, 1.282};
+	double z_score;
+	double t_score;
+	double getZcritical(std::string percent);
+	Bound calculateCI_Z(std::string percent,
+	                    double point_estimate,
+	                    double sd,
+	                    const int sample_size);
 
-	Bound calculateConfidenceInterval_Z(float percent, double point_estimate, double sd);
-	double getZcritical(float percent);
+	Bound calculateCI_T(double point_estimate, double sd, const int sample_size, double tcrit);
+	Bound calculateCI_Proportion(std::string percent, double p_hat, const int sample_size);
 
   public:
-	const void displayZConfidenceInterval(float percent, double point_estimate, double sd);
-	double calculateSamplingDistributionSd(double sd, int sample_size);
+	// display functions
+	const void displayCI_Z(std::string percent,
+	                       double point_estimate,
+	                       double sd,
+	                       const int sample_size);
+	const void displayCI_T(double point_estimate, double sd, const int sample_size, double tcrit);
+	const void displayCI_Proportion(std::string percent, double p_hat, const int sample_size);
+	// calculation functions
+	double calculateSamplingDistributionSd(double sd, const int sample_size);
+	double calculateZscore(double point_estimate, double mean, double sd);
+	double calculateTscore(double sampleMean, double popMean, double sd, const int sample_size);
 };
