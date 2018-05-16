@@ -31,12 +31,14 @@ const double Cinterval::getZcritical(std::string percent)
 	return 0.0;
 }
 
+// calculates σ/n^1/2
 double Cinterval::calculateSamplingDistributionSd(double sd, const int sample_size)
 {
 	double samplingsd = (sd / std::sqrt(sample_size));
 	return samplingsd;
 }
 
+// Z one sample confidence interval
 Bound Cinterval::calculateCI_Z(std::string percent,
                                double point_estimate,
                                double sd,
@@ -49,6 +51,8 @@ Bound Cinterval::calculateCI_Z(std::string percent,
 	bound.upper = (point_estimate + zcrit * new_sd);
 	return bound;
 }
+
+// T one sample confidence interval
 Bound Cinterval::calculateCI_T(double point_estimate,
                                double sd,
                                const int sample_size,
@@ -60,6 +64,8 @@ Bound Cinterval::calculateCI_T(double point_estimate,
 	bound.upper = (point_estimate + tcrit * new_sd);
 	return bound;
 }
+
+// Z proportion confidence interval
 Bound Cinterval::calculateCI_Proportion(std::string percent, double p_hat, const int sample_size)
 {
 	Bound bound;
@@ -70,6 +76,7 @@ Bound Cinterval::calculateCI_Proportion(std::string percent, double p_hat, const
 	return bound;
 }
 
+// void functions that display the intervals to the user
 const void Cinterval::displayCI_Z(std::string percent,
                                   double point_estimate,
                                   double sd,
@@ -99,12 +106,16 @@ const void Cinterval::displayCI_Proportion(std::string percent, double p_hat, co
 }
 
 // Hypothesis testing section :
+
+// calculates regular z score without including sample size
 double HypTest::calculateZscore(double point_estimate, double mean, double sd)
 {
 	z_score = (point_estimate - mean) / sd;
 	std::cout << "Your z-score is: " << '\n';
 	return z_score;
 }
+
+// calculates z score with sample size factored in
 double HypTest::calculateZstat(double point_estimate, double mean, double sd, const int sample_size)
 {
 	Cinterval calc;
@@ -113,6 +124,8 @@ double HypTest::calculateZstat(double point_estimate, double mean, double sd, co
 	std::cout << "Your z test statistic is: " << '\n';
 	return z_stat;
 }
+
+// calculates the t score
 double HypTest::calculateTscore(double sampleMean, double popMean, double sd, const int sample_size)
 {
 	Cinterval calc;

@@ -9,7 +9,6 @@
 #include <vector>
 
 // sorts the vector
-// TODO:search up better sorting algorithms(std::sort)
 void sortDataset(std::vector<double>& dataset)
 {
 	std::sort(dataset.begin(), dataset.end());
@@ -29,6 +28,7 @@ const void displayDataset(std::vector<double> dataset)
 	std::cout << '\n';
 }
 
+// displays the minimum and maximu value to the user
 const void displayMinMax(std::vector<double> dataset)
 {
 	sortDataset(dataset);
@@ -36,6 +36,7 @@ const void displayMinMax(std::vector<double> dataset)
 	std::cout << "The maximum value of the dataset is: " << dataset.back() << '\n';
 }
 
+// displays 25th,50th, and 75th percentile to the user
 const void displayPercentiles(std::vector<double> dataset)
 {
 	const Percentile percentile = calculatePercentiles(dataset);
@@ -51,6 +52,7 @@ const void displayPercentiles(std::vector<double> dataset)
 	}
 }
 
+// displays standard deviation to the user
 const void displayStandardDeviation(std::vector<double> dataset, const int terms)
 {
 	const DataType sd = calculateStandardDeviation(dataset, terms);
@@ -59,7 +61,9 @@ const void displayStandardDeviation(std::vector<double> dataset, const int terms
 	std::cout << "The POPULATION STANDARD DEVIATION (σ) is: " << sd.population << '\n';
 	std::cout << "The POPULATION VARIANCE (σ^2) is: " << (sd.population * sd.population) << '\n';
 }
-// finds the mean of the amount of terms inputed by the user
+
+// Functions for finding MEAN, MEDIAN, RANGE, and
+
 double calculateMean(std::vector<double> dataset, const int terms)
 {
 	double mean;
@@ -89,8 +93,6 @@ Percentile calculatePercentiles(std::vector<double> dataset)
 {
 	Percentile percentile;
 	sortDataset(dataset);
-	// TODO:NOTE(sirflankalot): this function is way to unweildy. Factor it out
-	// into three separate functions finding q1, q2, and q3.
 	if (!(isEvenSize(dataset)))
 	{
 		if ((dataset.size() / 2 - 1) % 2 == 1)
@@ -157,6 +159,7 @@ double calculateMode(std::vector<double> dataset)
 	}
 }
 
+// standard deviation and variance
 DataType calculateStandardDeviation(std::vector<double> dataset, int terms)
 {
 	double mean = calculateMean(dataset, terms);
@@ -174,6 +177,8 @@ DataType calculateStandardDeviation(std::vector<double> dataset, int terms)
 	sd.population = std::sqrt(sd.population / (terms));
 	return sd;
 }
+
+// interquartile range and outliers
 
 double calculateInterquartileRange(std::vector<double> dataset)
 {
@@ -206,6 +211,7 @@ void findOutliers(std::vector<double> dataset)
 			std::cout << outliers[j] << " ";
 		}
 	}
+	// if no outliers are found, notify the user
 	else
 	{
 		std::cout << "No outliers found in the data set";

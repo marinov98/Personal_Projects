@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 
+// function that displays formula sheet to the user
 void readFormulaSheet(std::string textfile)
 {
 	std::string s;

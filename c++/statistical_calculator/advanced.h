@@ -43,7 +43,9 @@ class Cinterval
 	double calculateSamplingDistributionSd(double sd, const int sample_size);
 	// TODO: TWO SAMPLE CONFIDENCE INTERVAL!!!
 };
+
 // functionality for hypothesis testing
+
 class HypTest
 {
   private:
