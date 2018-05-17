@@ -1,4 +1,4 @@
-// Confidence const intervals
+// Confidence intervals  and hypothesis testing 
 // z-critical and t-critical
 #include "basics.h"
 #include <vector>
@@ -8,6 +8,7 @@ struct Bound
 	double lower;
 	double upper;
 };
+
 struct CriticalZ
 {
 	double z99;
@@ -41,7 +42,6 @@ class Cinterval
 	const void displayCI_Proportion(std::string percent, double p_hat, const int sample_size);
 	// calculation functions
 	double calculateSamplingDistributionSd(double sd, const int sample_size);
-	// TODO: TWO SAMPLE CONFIDENCE INTERVAL!!!
 };
 
 // functionality for hypothesis testing

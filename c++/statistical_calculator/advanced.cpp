@@ -1,4 +1,3 @@
-// corelation coeficient
 #include "advanced.h"
 #include <cmath>
 #include <iostream>
@@ -75,6 +74,7 @@ Bound Cinterval::calculateCI_Proportion(std::string percent, double p_hat, const
 	bound.upper = (p_hat + zcrit * std::sqrt((p_hat * q) / sample_size));
 	return bound;
 }
+// TODO:TWO sample Z,T confidence intervals
 
 // void functions that display the intervals to the user
 const void Cinterval::displayCI_Z(std::string percent,
@@ -107,6 +107,7 @@ const void Cinterval::displayCI_Proportion(std::string percent, double p_hat, co
 
 // Hypothesis testing section :
 
+// single sample
 // calculates regular z score without including sample size
 double HypTest::calculateZscore(double point_estimate, double mean, double sd)
 {
@@ -134,5 +135,7 @@ double HypTest::calculateTscore(double sampleMean, double popMean, double sd, co
 	std::cout << "Your t-score is: " << '\n';
 	return t_score;
 }
+
+// two-sample test statistics
 
 // TODO:IMPLEMENT TWO SAMPLE CONFIDENCE INTERVAL!!!
