@@ -14,11 +14,11 @@ outliers= 1.5*(interquartile range)+q3, q1-1.5*(interquartile range)
 CONFIDENCE INTERVALS:
 (z distribution )
 x̄ ± z(critical)*[(standard deviation:σ)/terms^1/2]
-(t distribution)
-x̄ ± t(critical)*[(standard deviation:S)/terms^1/2] df:n-1
 (proportion)
 p=p̂ ± z(critical)[(p̂(1-p̂))/n]^1/2
-
+(t distribution)
+x̄ ± t(critical)*[(standard deviation:S)/terms^1/2] df:n-1
+2 - SAMPLE
 HYPOTHESIS TESTING:
 (one sample)
 z-statistic=x̄-hypothesized value/(σ/terms)^1/2
@@ -38,4 +38,3 @@ CORRELATION COEFFICIENT:
 y=a+bx
 r=(1/terms-1)*(Σ[(x-x̄)/s(x)*(y-ȳ)/s(y)])
 slope(b)=terms*ΣXY-ΣX*ΣY/termsΣX^2-(ΣX)^2
-

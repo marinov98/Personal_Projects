@@ -95,9 +95,9 @@ Percentile calculatePercentiles(std::vector<double> dataset)
 	sortDataset(dataset);
 	if (!(isEvenSize(dataset)))
 	{
-		if ((dataset.size() / 2 ) % 2 == 1)
+		if ((dataset.size() / 2) % 2 == 1)
 		{
-			std::cout<<"here!"<<'\n';
+			std::cout << "here!" << '\n';
 			percentile.q1 = dataset[(dataset.size() - 1) / 4];
 			percentile.q2 = dataset[(dataset.size() - 1) / 2];
 			percentile.q3 = dataset[dataset.size() * 3 / 4];
