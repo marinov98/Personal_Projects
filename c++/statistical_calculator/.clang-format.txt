@@ -13,10 +13,14 @@ AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: true
 AlwaysBreakTemplateDeclarations: true
 BinPackParameters: false
-BraceWrapping:  
+BraceWrapping:
+ AfterNamespace: true
  BeforeCatch: true
  BeforeElse: true
- AfterFunction: false
+ AfterFunction: true
+ AfterStruct: true
+ AfterControlStatement: true
+ AfterExternBlock: true
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Custom
 BreakConstructorInitializers: AfterColon
