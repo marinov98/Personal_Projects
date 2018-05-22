@@ -74,6 +74,23 @@ Bound Cinterval::calculateCI_Proportion(std::string percent, double p_hat, const
 	bound.upper = (p_hat + zcrit * std::sqrt((p_hat * q) / sample_size));
 	return bound;
 }
+
+Bound Cinterval::calculateCI_2Proportions(std::string percent,
+                                          double p_hat,
+                                          double p_hat2,
+                                          const int sample_size,
+                                          const int sample_size2)
+{
+	Bound bound;
+	double q = 1 - p_hat;
+	double q2 = 1 - p_hat2;
+	const double zcrit = getZcritical(percent);
+	bound.lower = ((p_hat - p_hat2)
+	               - zcrit * std::sqrt((p_hat * q) / sample_size + ((p_hat2 * q2) / sample_size2)));
+	bound.upper = ((p_hat - p_hat2)
+	               + zcrit * std::sqrt((p_hat * q) / sample_size + ((p_hat2 * q2) / sample_size2)));
+	return bound;
+}
 // TODO:TWO sample Z,T confidence intervals
 
 // void functions that display the intervals to the user
@@ -101,6 +118,17 @@ const void Cinterval::displayCI_T(double point_estimate,
 const void Cinterval::displayCI_Proportion(std::string percent, double p_hat, const int sample_size)
 {
 	const Bound bound = calculateCI_Proportion(percent, p_hat, sample_size);
+	std::cout << "Your Proportion Confidence interval is: "
+	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
+}
+const void Cinterval::displayCI_2Proportions(std::string percent,
+                                             double p_hat,
+                                             double p_hat2,
+                                             const int sample_size,
+                                             const int sample_size2)
+{
+	// TODO: CIN STATEMENTS
+	const Bound bound = calculateCI_2Proportions(percent, p_hat, p_hat2, sample_size, sample_size2);
 	std::cout << "Your Proportion Confidence interval is: "
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
 }
@@ -132,10 +160,8 @@ double HypTest::calculateTscore(double sampleMean, double popMean, double sd, co
 	Cinterval calc;
 	double new_sd = calc.calculateSamplingDistributionSd(sd, sample_size);
 	t_score = (sampleMean - popMean) / new_sd;
-	std::cout << "Your t-score is: " << '\n';
+	std::cout << "Your t-score/statistic is: " << '\n';
 	return t_score;
 }
 
 // two-sample test statistics
-
-// TODO:IMPLEMENT TWO SAMPLE CONFIDENCE INTERVAL!!!

@@ -81,9 +81,6 @@ int main()
 			trials = 0;
 			std::cout << "Would like to use this function again? Type 'y' or 'n' " << '\n';
 			std::cin >> answer;
-			// TODO:NOTE(sirflankalot): this should check to see if y or n is the answer at all, it
-			// should say invalid answer for the input "Uksajsdjakhoi"
-
 			// TODO:NOTE(sirflankalot): repeat = answer == 'y';
 			if (answer == 'y')
 			{
@@ -123,6 +120,7 @@ int main()
 				std::cout << "type \"zinterval\" for z confidence interval" << '\n';
 				std::cout << "type \"tinterval\" for t confidence interval" << '\n';
 				std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
+				std::cout << "type \"pinterval2\" for 2 Proportions confidence interval" << '\n';
 				std::cin >> answer_2;
 				if (answer_2 == "zinterval")
 				{
@@ -170,6 +168,10 @@ int main()
 					std::cout << "Finally, what is the sample size?" << '\n';
 					std::cin >> sample_size;
 					ci.displayCI_Proportion(percent, p_hat, sample_size);
+				}
+				else if (answer_2 == "pinterval2")
+				{
+					std::cout << "wait for implementation!" << '\n';
 				}
 			}
 			else if (choice == "ht")
