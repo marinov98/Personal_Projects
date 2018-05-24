@@ -19,6 +19,12 @@ struct CriticalZ
 	double z80;
 };
 
+struct Chi
+{
+	double expected;
+	double observed;
+};
+
 // functionality for confidence intervals
 class Cinterval
 {
@@ -79,6 +85,7 @@ class HypTest
 	double z_score;
 	double z_stat;
 	double t_score;
+	std::vector<Chi> chi_values;
 	double calculate2sampleZstat();
 	double calculate2sampleTscore();
 	double calculate2PairedsampleTscore();
