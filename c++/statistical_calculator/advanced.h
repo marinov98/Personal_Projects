@@ -20,7 +20,8 @@ struct CriticalZ
 };
 
 // functionality for confidence intervals
-class Cinterval {
+class Cinterval
+{
   private:
 	const CriticalZ crit = {2.576, 1.960, 1.645, 1.440, 1.282};
 	const double getZcritical(std::string percent);
@@ -38,6 +39,20 @@ class Cinterval {
 	                               double p_hat2,
 	                               const int sample_size,
 	                               const int sample_size2);
+	Bound calculateCI_2Z(std::string percent,
+	                     double mean1,
+	                     double mean2,
+	                     double sd1,
+	                     double sd2,
+	                     const int sample_size,
+	                     const int sample_size2);
+	Bound calculateCI_2T(std::string percent,
+	                     double mean1,
+	                     double mean2,
+	                     double sd1,
+	                     double sd2,
+	                     const int sample_size,
+	                     const int sample_size2);
 
   public:
 	// display functions
@@ -58,7 +73,8 @@ class Cinterval {
 
 // functionality for hypothesis testing
 
-class HypTest {
+class HypTest
+{
   private:
 	double z_score;
 	double z_stat;
@@ -80,8 +96,10 @@ class HypTest {
 	// TODO:HAVE THE REPORT SHOW WHAT FORMULAS WERE USED AND HAVE THEM TAKE INPUT
 	void printHypothesisReport_Z();
 	void printHypothesisReport_T();
+	void printHypothesisReport_P();
 	void printHypothesisReport_2Z();
 	void printHypothesisReport_2T();
+	void printHypothesisReport_2P();
 	void printChiTest();
 	// calculations
 	double calculateZscore(double point_estimate, double mean, double sd);
