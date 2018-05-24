@@ -19,6 +19,7 @@ BraceWrapping:
  BeforeElse: true
  AfterFunction: true
  AfterStruct: true
+ AfterClass: true
  AfterControlStatement: true
  AfterExternBlock: true
 BreakBeforeBinaryOperators: NonAssignment
