@@ -22,8 +22,8 @@ struct CriticalZ
 
 struct Chi
 {
-	double expected;
 	double observed;
+	double expected;
 };
 
 // functionality for confidence intervals

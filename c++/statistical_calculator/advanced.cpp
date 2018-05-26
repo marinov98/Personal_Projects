@@ -482,32 +482,27 @@ void HypTest::printChiTest()
 	int inputs = 0;
 	std::cout << "how many terms? " << '\n';
 	std::cin >> n;
-	std::cout << " type in your observed values" << '\n';
+	std::cout << "Type in your observed values" << '\n';
 	while (inputs != n)
 	{
+		std::cout << "Type in oberved value #" << (inputs + 1) << '\n';
 		std::cin >> obs;
-		chi_values[inputs].observed = obs;
-		inputs++;
-	}
-	inputs = 0;
-	std::cout << " type in your expected values" << '\n';
-	while (inputs != n)
-	{
+		std::cout << "Type in expected value #" << (inputs + 1) << '\n';
 		std::cin >> ex;
-		chi_values[inputs].expected = ex;
+		chi_values.push_back(Chi{obs, ex});
 		inputs++;
 	}
 	double chi_test = performChiSquare(chi_values);
-	std::cout << " Your input observed values are :" << '\n';
+	std::cout << "Your input observed values are :" << '\n';
 	for (int i = 0; i < n; i++)
 	{
-		std::cout << chi_values[i].observed;
+		std::cout << " " << chi_values[i].observed;
 	}
 	std::cout << '\n';
-	std::cout << " Your input expected values are :" << '\n';
+	std::cout << "Your input expected values are :" << '\n';
 	for (int j = 0; j < n; j++)
 	{
-		std::cout << chi_values[j].expected;
+		std::cout << " " << chi_values[j].expected;
 	}
 	std::cout << '\n';
 	std::cout << "χ^2 = " << chi_test << '\n';

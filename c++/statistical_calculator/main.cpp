@@ -181,7 +181,7 @@ int main()
 				std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
 				std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
 				std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
-				std::cout << "type \"2tscore\" for two sample t-score/test-statistic" << '\n';
+				std::cout << "type \"2tstat\" for two sample t-score/test-statistic" << '\n';
 				std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic" << '\n';
 				std::cout << "type \"p\" for single proportion test" << '\n';
 				std::cout << "type \"twop\" for 2 proportion test" << '\n';
@@ -289,32 +289,53 @@ int main()
 	}
 	else if (response == "cc")
 	{
-		std::vector<double> datasetX;
-		std::vector<double> datasetY;
-		int terms;
-		int trials = 0;
-		double inputnumbers;
-		// gets the number of terms in the date set and fills the vector with them
-		std::cout << "How many terms are there?" << '\n';
-		std::cin >> terms;
-		std::cout << "You may now type the numbers in your X data set" << '\n';
-		while (trials != terms)
+		repeat = true;
+		while (repeat == true)
 		{
-			std::cin >> inputnumbers;
-			datasetX.push_back(inputnumbers);
-			trials++;
+			std::vector<double> datasetX;
+			std::vector<double> datasetY;
+			int terms;
+			int trials = 0;
+			double inputnumbers;
+			// gets the number of terms in the date set and fills the vector with them
+			std::cout << "How many terms are there?" << '\n';
+			std::cin >> terms;
+			std::cout << "You may now type the numbers in your X data set" << '\n';
+			while (trials != terms)
+			{
+				std::cin >> inputnumbers;
+				datasetX.push_back(inputnumbers);
+				trials++;
+			}
+			trials = 0;
+			std::cout << "You may now type the numbers in your Y data set" << '\n';
+			while (trials != terms)
+			{
+				std::cin >> inputnumbers;
+				datasetY.push_back(inputnumbers);
+				trials++;
+			}
+			sortDatasetXY(datasetX, datasetY);
+			displayDatasetXY(datasetX, datasetY);
+			std::cout << '\n';
+			displayLSRL(datasetX, datasetY, terms);
+			std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
+			char decision;
+			std::cin >> decision;
+			if (decision == 'y')
+			{
+				repeat = true;
+			}
+			else if (decision == 'n')
+			{
+				repeat = false;
+			}
+			else
+			{
+				std::cout << "Invalid input, terminating calulator..." << '\n';
+				repeat = false;
+			}
 		}
-		trials = 0;
-		while (trials != terms)
-		{
-			std::cin >> inputnumbers;
-			datasetY.push_back(inputnumbers);
-			trials++;
-		}
-		sortDatasetXY(datasetX, datasetY);
-		displayDatasetXY(datasetX, datasetY);
-		std::cout << '\n';
-		displayLSRL(datasetX, datasetY, terms);
 	}
 	else
 	{
