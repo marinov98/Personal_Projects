@@ -1,5 +1,6 @@
 // Confidence intervals  and hypothesis testing
 // z-critical and t-critical
+#pragma once
 #include "basics.h"
 #include <string>
 

@@ -312,6 +312,10 @@ int main()
 			datasetY.push_back(inputnumbers);
 			trials++;
 		}
+		sortDatasetXY(datasetX, datasetY);
+		displayDatasetXY(datasetX, datasetY);
+		std::cout << '\n';
+		displayLSRL(datasetX, datasetY, terms);
 	}
 	else
 	{

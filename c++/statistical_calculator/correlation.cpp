@@ -96,4 +96,8 @@ void displayLSRL(std::vector<double> datasetX, std::vector<double> datasetY, con
 	{
 		std::cout << "Strong correlation" << '\n';
 	}
+	else
+	{
+		std::cout << " no correlation" << '\n';
+	}
 }
