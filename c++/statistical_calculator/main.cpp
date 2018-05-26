@@ -25,8 +25,7 @@ int main()
 	    << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"
 	    << '\n';
 	std::cout << "type \"formulas\" view the formula sheet" << '\n';
-	std::cout << "type \"correlation\" for finding correlation coefficients and LSRL(not finished!)"
-	          << '\n';
+	std::cout << "type \"cc\" for finding correlation coefficients and LSRL(not finished!)" << '\n';
 	std::cout << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
 	std::string response;
 	std::cin >> response;
@@ -288,7 +287,7 @@ int main()
 			}
 		}
 	}
-	else if (response == "correlation")
+	else if (response == "cc")
 	{
 		std::vector<double> datasetX;
 		std::vector<double> datasetY;
