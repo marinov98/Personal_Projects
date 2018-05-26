@@ -24,7 +24,7 @@ x1 - x2 ± z(critical) * [σ1^2 / n1 + σ2^2 / n2]^1/2
 (t distribution)
 x1 - x2 ± t(critical) * [s1^2 / n1 + s2^2 / n2]^1/2
 (proportion)
-p̂1 - p̂2 ± z(critical) * [p̂1(1-p̂1/n1 + p̂2(1-p̂2)/n2)]^1/2
+p̂1 - p̂2 ± z(critical) * [p̂1(1-p̂1)/n1 + p̂2(1-p̂2)/n2)]^1/2
 
 
 HYPOTHESIS TESTING:
