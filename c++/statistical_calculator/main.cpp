@@ -1,5 +1,6 @@
 #include "advanced.h"
 #include "basics.h"
+#include "correlation.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -285,6 +286,31 @@ int main()
 				std::cout << "Invalid input, terminating calulator..." << '\n';
 				repeat = false;
 			}
+		}
+	}
+	else if (response == "correlation")
+	{
+		std::vector<double> datasetX;
+		std::vector<double> datasetY;
+		int terms;
+		int trials = 0;
+		double inputnumbers;
+		// gets the number of terms in the date set and fills the vector with them
+		std::cout << "How many terms are there?" << '\n';
+		std::cin >> terms;
+		std::cout << "You may now type the numbers in your X data set" << '\n';
+		while (trials != terms)
+		{
+			std::cin >> inputnumbers;
+			datasetX.push_back(inputnumbers);
+			trials++;
+		}
+		trials = 0;
+		while (trials != terms)
+		{
+			std::cin >> inputnumbers;
+			datasetY.push_back(inputnumbers);
+			trials++;
 		}
 	}
 	else

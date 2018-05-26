@@ -2,7 +2,7 @@
 // z-critical and t-critical
 #include "basics.h"
 #include <string>
-#include <vector>
+
 struct Bound
 {
 	double lower;
