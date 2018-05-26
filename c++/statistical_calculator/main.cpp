@@ -182,6 +182,9 @@ int main()
 				std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
 				std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
 				std::cout << "type \"2tscore\" for two sample t-score/test-statistic" << '\n';
+				std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic" << '\n';
+				std::cout << "type \"p\" for single proportion test" << '\n';
+				std::cout << "type \"twop\" for 2 proportion test" << '\n';
 				std::cout << "type \"chi\" for chi-square test" << '\n';
 				std::cin >> answer_2;
 				if (answer_2 == "zscore")
@@ -221,13 +224,50 @@ int main()
 					int sample_size;
 					std::cout << "What is x̄?" << '\n';
 					std::cin >> point_estimate;
-					std::cout << "What is the population mean?" << '\n';
+					std::cout << "What is the hypothesized value?" << '\n';
 					std::cin >> mean;
 					std::cout << "What is the sample size?" << '\n';
 					std::cin >> sample_size;
 					std::cout << "Finally, what is the standard deviation" << '\n';
 					std::cin >> sd;
 					ht.calculateTscore(point_estimate, mean, sd, sample_size);
+				}
+				else if (answer_2 == "p")
+				{
+					double p_hat;
+					double p;
+					int sample_size;
+					std::cout << "What is p̂?" << '\n';
+					std::cin >> p_hat;
+					std::cout << "What is p?" << '\n';
+					std::cin >> p;
+					std::cout << "Finally, what is the sample size?" << '\n';
+					std::cin >> sample_size;
+					ht.calculateProportion(p_hat, p, sample_size);
+				}
+				else if (answer_2 == "2zstat")
+				{
+					ht.printHypothesisReport_2Z();
+				}
+				else if (answer_2 == "2tstat")
+				{
+					ht.printHypothesisReport_2T();
+				}
+				else if (answer_2 == "2tstat")
+				{
+					ht.printHypothesisReport_2T();
+				}
+				else if (answer_2 == "2tpair")
+				{
+					ht.printHypothesisReport_pairedT();
+				}
+				else if (answer_2 == "twop")
+				{
+					ht.printHypothesisReport_2P();
+				}
+				else if (answer_2 == "chi")
+				{
+					ht.printChiTest();
 				}
 			}
 			std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
