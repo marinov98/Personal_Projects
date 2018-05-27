@@ -118,60 +118,35 @@ int main()
 			if (choice == "ci")
 			{
 				std::cout << "type \"zinterval\" for z confidence interval" << '\n';
+				std::cout << "type \"2zinterval\" for  2 z confidence interval" << '\n';
 				std::cout << "type \"tinterval\" for t confidence interval" << '\n';
+				std::cout << "type \"2tinterval\" for 2 t confidence interval" << '\n';
 				std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
-				std::cout << "type \"pinterval2\" for 2 Proportions confidence interval" << '\n';
+				std::cout << "type \"2pinterval\" for 2 Proportions confidence interval" << '\n';
 				std::cin >> answer_2;
 				if (answer_2 == "zinterval")
 				{
-					std::string percent;
-					double point_estimate;
-					double sd;
-					int sample_size;
-					std::cout << "What is the percentage (type in decimal form!)" << '\n';
-					std::cout << "Your options are : .99, .95, .90, .85, .80" << '\n';
-					std::cin >> percent;
-					std::cout << "What is x̄?" << '\n';
-					std::cin >> point_estimate;
-					std::cout << "What is the standard deviation?" << '\n';
-					std::cin >> sd;
-					std::cout << "Finally, what is the sample size" << '\n';
-					std::cin >> sample_size;
-					ci.displayCI_Z(percent, point_estimate, sd, sample_size);
+					ci.displayCI_Z();
 				}
 				else if (answer_2 == "tinterval")
 				{
-					double tcrit;
-					double point_estimate;
-					double sd;
-					int sample_size;
-					std::cout << "What is the t-critical? " << '\n';
-					std::cin >> tcrit;
-					std::cout << "What is x̄?" << '\n';
-					std::cin >> point_estimate;
-					std::cout << "What is the standard deviation?" << '\n';
-					std::cin >> sd;
-					std::cout << "Finally, what is the sample size" << '\n';
-					std::cin >> sample_size;
-					ci.displayCI_T(point_estimate, sd, sample_size, tcrit);
+					ci.displayCI_T();
 				}
 				else if (answer_2 == "pinterval")
 				{
-					std::string percent;
-					double p_hat;
-					int sample_size;
-					std::cout << "What is the percentage (type in decimal form!)" << '\n';
-					std::cout << "Your options are : .99, .95, .90, .85, .80" << '\n';
-					std::cin >> percent;
-					std::cout << "What is p̂?" << '\n';
-					std::cin >> p_hat;
-					std::cout << "Finally, what is the sample size?" << '\n';
-					std::cin >> sample_size;
-					ci.displayCI_Proportion(percent, p_hat, sample_size);
+					ci.displayCI_Proportion();
 				}
-				else if (answer_2 == "pinterval2")
+				else if (answer_2 == "2zinterval")
 				{
-					std::cout << "wait for implementation!" << '\n';
+					ci.displayCI_2Z();
+				}
+				else if (answer_2 == "2tinterval")
+				{
+					ci.displayCI_2T();
+				}
+				else if (answer_2 == "2pinterval")
+				{
+					ci.displayCI_2Proportions();
 				}
 			}
 			else if (choice == "ht")

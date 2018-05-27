@@ -46,22 +46,31 @@ class Cinterval
 	                               double p_hat2,
 	                               const int sample_size,
 	                               const int sample_size2);
+	Bound calculateCI2Sample_T(double tcrit,
+	                           double mean1,
+	                           double mean2,
+	                           double sd1,
+	                           double sd2,
+	                           const int sample_size,
+	                           const int sample_size2);
+	Bound calculateCI2Sample_Z(std::string percent,
+	                           double mean1,
+	                           double mean2,
+	                           double sd1,
+	                           double sd2,
+	                           const int sample_size,
+	                           const int sample_size2);
 
   public:
 	// display functions
-	const void displayCI_Z(std::string percent,
-	                       double point_estimate,
-	                       double sd,
-	                       const int sample_size);
-	const void displayCI_T(double point_estimate, double sd, const int sample_size, double tcrit);
-	const void displayCI_Proportion(std::string percent, double p_hat, const int sample_size);
+	const void displayCI_Z();
+	const void displayCI_T();
+	const void displayCI_Proportion();
 	// calculation functions
 	double calculateSamplingDistributionSd(double sd, const int sample_size);
-	const void displayCI_2Proportions(std::string percent,
-	                                  double p_hat,
-	                                  double p_hat2,
-	                                  const int sample_size,
-	                                  const int sample_size2);
+	const void displayCI_2Proportions();
+	const void displayCI_2Z();
+	const void displayCI_2T();
 };
 
 // functionality for hypothesis testing
