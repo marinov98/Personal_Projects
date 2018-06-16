@@ -25,7 +25,7 @@ int main()
 	    << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"
 	    << '\n';
 	std::cout << "type \"formulas\" view the formula sheet" << '\n';
-	std::cout << "type \"cc\" for finding correlation coefficients and LSRL(not finished!)" << '\n';
+	std::cout << "type \"cc\" for finding correlation coefficients and LSRL" << '\n';
 	std::cout << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
 	std::string response;
 	std::cin >> response;
@@ -50,10 +50,6 @@ int main()
 				dataset.push_back(inputnumber);
 				trials++;
 			}
-			// TODO:NOTE(sirflankalot): don't calculate the percentiles more than once. There should
-			// be a method that gives you both the percentiles and the IQR (keep the individual
-			// methods though).
-
 			// showcases the dataset's mean, mode, and range
 			displayDataset(dataset);
 			std::cout << "The MEAN of the dataset is: " << calculateMean(dataset, terms) << '\n';
