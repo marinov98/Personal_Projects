@@ -1,2 +1,4 @@
 # Personal_Projects
-my personal projects 
+
+
+# Contains my Statistical calculator project 
