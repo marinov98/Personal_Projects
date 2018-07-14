@@ -43,36 +43,44 @@ int main()
 			// gets the number of terms in the date set and fills the vector with them
 			std::cout << "How many terms are there?" << '\n';
 			std::cin >> terms;
-			std::cout << "You may now type the numbers in your data set" << '\n';
-			while (trials != terms)
+			if (terms < 1)
 			{
-				std::cin >> inputnumber;
-				dataset.push_back(inputnumber);
-				trials++;
+				std::cout << "Invalid number of terms!" << '\n';
 			}
-			// showcases the dataset's mean, mode, and range
-			displayDataset(dataset);
-			std::cout << "The MEAN of the dataset is: " << calculateMean(dataset, terms) << '\n';
-			std::cout << "The MODE of your dataset is: " << calculateMode(dataset) << '\n';
-			std::cout << "The RANGE of the dataset is: " << calculateRange(dataset) << '\n';
-			displayMinMax(dataset);
-			// prints the 25th,50th, and 75th percentile of the dataset
-			if (dataset.size() > 3)
+			else
 			{
-				std::cout << '\n' << "Percentiles: " << '\n';
-				std::cout << "The INTERQUARTILE RANGE of the dataset is: "
-				          << calculateInterquartileRange(dataset) << '\n';
-				displayPercentiles(dataset);
-			}
-			findOutliers(dataset);
+				std::cout << "You may now type the numbers in your data set" << '\n';
+				while (trials != terms)
+				{
+					std::cin >> inputnumber;
+					dataset.push_back(inputnumber);
+					trials++;
+				}
+				// showcases the dataset's mean, mode, and range
+				displayDataset(dataset);
+				std::cout << "The MEAN of the dataset is: " << calculateMean(dataset, terms)
+				          << '\n';
+				std::cout << "The MODE of your dataset is: " << calculateMode(dataset) << '\n';
+				std::cout << "The RANGE of the dataset is: " << calculateRange(dataset) << '\n';
+				displayMinMax(dataset);
+				// prints the 25th,50th, and 75th percentile of the dataset
+				if (dataset.size() > 3)
+				{
+					std::cout << '\n' << "Percentiles: " << '\n';
+					std::cout << "The INTERQUARTILE RANGE of the dataset is: "
+					          << calculateInterquartileRange(dataset) << '\n';
+					displayPercentiles(dataset);
+				}
+				findOutliers(dataset);
 
-			std::cout << '\n';
-			// prints standard deviation and variance
-			std::cout << "Standard deviation and Variance: " << '\n';
-			displayStandardDeviation(dataset, terms);
-			std::cout << '\n';
-			// erase terms once finished showing numbers to user
-			dataset.clear();
+				std::cout << '\n';
+				// prints standard deviation and variance
+				std::cout << "Standard deviation and Variance: " << '\n';
+				displayStandardDeviation(dataset, terms);
+				std::cout << '\n';
+				// erase terms once finished showing numbers to user
+				dataset.clear();
+			}
 			// reset the trials
 			trials = 0;
 			std::cout << "Would like to use this function again? Type 'y' or 'n' " << '\n';
