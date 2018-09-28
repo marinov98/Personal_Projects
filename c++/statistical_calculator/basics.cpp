@@ -59,13 +59,11 @@ const void displayStandardDeviation(std::vector<double> dataset, const int terms
 
 double calculateMean(std::vector<double> dataset, const int terms) {
 	double sum = std::accumulate(dataset.begin(), dataset.end(), 0);
-
 	return sum / terms;
 }
 
 double calculateRange(std::vector<double> dataset) {
 	sortDataset(dataset);
-
 	return dataset.back() - dataset.front();
 }
 
