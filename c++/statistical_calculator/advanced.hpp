@@ -4,12 +4,14 @@
 #include "basics.hpp"
 #include <string>
 
-struct Bound {
+struct Bound
+{
 	double lower;
 	double upper;
 };
 
-struct CriticalZ {
+struct CriticalZ
+{
 	double z99;
 	double z95;
 	double z90;
@@ -17,13 +19,15 @@ struct CriticalZ {
 	double z80;
 };
 
-struct Chi {
+struct Chi
+{
 	double observed;
 	double expected;
 };
 
 // functionality for confidence intervals
-class Cinterval {
+class Cinterval
+{
   private:
 	const CriticalZ crit = {2.576, 1.960, 1.645, 1.440, 1.282};
 	const double getZcritical(std::string percent);
@@ -56,6 +60,8 @@ class Cinterval {
 	                           const int sample_size2);
 
   public:
+	// Contructor
+	Cinterval() = default;
 	// display functions
 	const void displayCI_Z();
 	const void displayCI_T();
@@ -69,7 +75,8 @@ class Cinterval {
 
 // functionality for hypothesis testing
 
-class HypTest {
+class HypTest
+{
   private:
 	double z_score;
 	double z_stat;
@@ -106,6 +113,9 @@ class HypTest {
 	double performChiSquare(std::vector<Chi> chitest);
 
   public:
+	// Constructor
+	HypTest() = default;
+	// printing
 	void printHypothesisReport_2Z();
 	void printHypothesisReport_2T();
 	void printHypothesisReport_pairedT();
