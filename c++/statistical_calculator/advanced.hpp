@@ -10,7 +10,6 @@ struct Bound {
 };
 
 struct CriticalZ {
-	// TODO: add more options in case users need them
 	double z99;
 	double z95;
 	double z90;
@@ -35,8 +34,7 @@ class Cinterval {
 
 	Bound calculateCI_T(double point_estimate, double sd, const int sample_size, double tcrit);
 	Bound calculateCI_Proportion(std::string percent, double p_hat, const int sample_size);
-	// TODO: two sample proportion
-	// TODO: IMPLEMENT THESE:
+	// two sample proportion
 	Bound calculateCI_2Proportions(std::string percent,
 	                               double p_hat,
 	                               double p_hat2,
@@ -108,10 +106,6 @@ class HypTest {
 	double performChiSquare(std::vector<Chi> chitest);
 
   public:
-	// TODO: TWO sample, chi square , degrees of freedom, function to print a hypothesis tesing
-	// report
-	// print hypothesis test report
-	// TODO:HAVE THE REPORT SHOW WHAT FORMULAS WERE USED AND HAVE THEM TAKE INPUT
 	void printHypothesisReport_2Z();
 	void printHypothesisReport_2T();
 	void printHypothesisReport_pairedT();
