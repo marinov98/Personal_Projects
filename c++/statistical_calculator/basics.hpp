@@ -1,14 +1,12 @@
 #pragma once
 #include <vector>
 
-struct DataType
-{
+struct DataType {
 	double population;
 	double sample;
 };
 
-struct Percentile
-{
+struct Percentile {
 	double q1;
 	double q2;
 	double q3;

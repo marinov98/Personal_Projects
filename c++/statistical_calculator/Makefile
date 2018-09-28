@@ -2,16 +2,16 @@ CXXFLAGS=-std=c++14
 main: main.o basics.o advanced.o correlation.o
 	g++ -o main main.o basics.o advanced.o correlation.o
 
-main.o: main.cpp basics.h advanced.h
+main.o: main.cpp basics.hpp advanced.hpp
 	g++ $(CXXFLAGS) -c main.cpp
 
-basics.o: basics.cpp basics.h
+basics.o: basics.cpp basics.hpp
 	g++ $(CXXFLAGS) -c basics.cpp
 
-advanced.o:advanced.cpp advanced.h
+advanced.o:advanced.cpp advanced.hpp
 	g++ $(CXXFLAGS) -c advanced.cpp
 
-correlation.o:correlation.cpp correlation.h
+correlation.o:correlation.cpp correlation.hpp
 		g++ $(CXXFLAGS) -c correlation.cpp
 
 debug: CXXFLAGS:=$(CXXFLAGS) -g

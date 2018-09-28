@@ -1,24 +1,21 @@
-#include "advanced.h"
-#include "basics.h"
-#include "correlation.h"
+#include "advanced.hpp"
+#include "basics.hpp"
+#include "correlation.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <vector>
 
 // function that displays formula sheet to the user
-void readFormulaSheet(std::string textfile)
-{
+void readFormulaSheet(std::string textfile) {
 	std::string s;
 	std::ifstream formula(textfile);
-	while (getline(formula, s))
-	{
+	while (getline(formula, s)) {
 		std::cout << s << '\n';
 	}
 }
 
-int main()
-{
+int main() {
 	std::cout << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << '\n';
 	std::cout << "What would you like the calculator to do?" << '\n';
 	std::cout
@@ -32,10 +29,8 @@ int main()
 	bool repeat = true;
 	// for whether the user wants to repeat using a functions
 	char answer;
-	if (response == "basics")
-	{
-		while (repeat == true)
-		{
+	if (response == "basics") {
+		while (repeat == true) {
 			std::vector<double> dataset;
 			int terms;
 			int trials = 0;
@@ -43,15 +38,12 @@ int main()
 			// gets the number of terms in the date set and fills the vector with them
 			std::cout << "How many terms are there?" << '\n';
 			std::cin >> terms;
-			if (terms < 1)
-			{
+			if (terms < 1) {
 				std::cout << "Invalid number of terms!" << '\n';
 			}
-			else
-			{
+			else {
 				std::cout << "You may now type the numbers in your data set" << '\n';
-				while (trials != terms)
-				{
+				while (trials != terms) {
 					std::cin >> inputnumber;
 					dataset.push_back(inputnumber);
 					trials++;
@@ -64,15 +56,14 @@ int main()
 				std::cout << "The RANGE of the dataset is: " << calculateRange(dataset) << '\n';
 				displayMinMax(dataset);
 				// prints the 25th,50th, and 75th percentile of the dataset
-				if (dataset.size() > 3)
-				{
+				if (dataset.size() > 3) {
 					std::cout << '\n' << "Percentiles: " << '\n';
 					std::cout << "The INTERQUARTILE RANGE of the dataset is: "
 					          << calculateInterquartileRange(dataset) << '\n';
 					displayPercentiles(dataset);
 				}
-				findOutliers(dataset);
 
+				findOutliers(dataset);
 				std::cout << '\n';
 				// prints standard deviation and variance
 				std::cout << "Standard deviation and Variance: " << '\n';
@@ -86,41 +77,34 @@ int main()
 			std::cout << "Would like to use this function again? Type 'y' or 'n' " << '\n';
 			std::cin >> answer;
 			// TODO:NOTE(sirflankalot): repeat = answer == 'y';
-			if (answer == 'y')
-			{
+			if (answer == 'y') {
 				repeat = true;
 			}
-			else if (answer == 'n')
-			{
+			else if (answer == 'n') {
 				repeat = false;
 			}
-			else
-			{
+			else {
 				std::cout << "Invalid input, terminating calulator..." << '\n';
 				repeat = false;
 			}
 		}
 	}
-	else if (response == "formulas")
-	{
+	else if (response == "formulas") {
 		readFormulaSheet("formulas.txt");
 	}
-	else if (response == "advanced")
-	{
+	else if (response == "advanced") {
 		repeat = true;
 		std::string answer_2;
 		std::cout << "This function will allow you calculate confidence intervals and t,z and chi "
 		             "test statistics!"
 		          << '\n';
-		while (repeat == true)
-		{
+		while (repeat == true) {
 			std::cout << "type \"ci\" for confidence interval or \"ht\" for hypothesis testing? "
 			          << '\n';
 			Cinterval ci;
 			std::string choice;
 			std::cin >> choice;
-			if (choice == "ci")
-			{
+			if (choice == "ci") {
 				std::cout << "type \"zinterval\" for z confidence interval" << '\n';
 				std::cout << "type \"2zinterval\" for  2 z confidence interval" << '\n';
 				std::cout << "type \"tinterval\" for t confidence interval" << '\n';
@@ -128,33 +112,26 @@ int main()
 				std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
 				std::cout << "type \"2pinterval\" for 2 Proportions confidence interval" << '\n';
 				std::cin >> answer_2;
-				if (answer_2 == "zinterval")
-				{
+				if (answer_2 == "zinterval") {
 					ci.displayCI_Z();
 				}
-				else if (answer_2 == "tinterval")
-				{
+				else if (answer_2 == "tinterval") {
 					ci.displayCI_T();
 				}
-				else if (answer_2 == "pinterval")
-				{
+				else if (answer_2 == "pinterval") {
 					ci.displayCI_Proportion();
 				}
-				else if (answer_2 == "2zinterval")
-				{
+				else if (answer_2 == "2zinterval") {
 					ci.displayCI_2Z();
 				}
-				else if (answer_2 == "2tinterval")
-				{
+				else if (answer_2 == "2tinterval") {
 					ci.displayCI_2T();
 				}
-				else if (answer_2 == "2pinterval")
-				{
+				else if (answer_2 == "2pinterval") {
 					ci.displayCI_2Proportions();
 				}
 			}
-			else if (choice == "ht")
-			{
+			else if (choice == "ht") {
 				HypTest ht;
 				std::cout << "type \"zscore\" for z-score (formula without sample size)" << '\n';
 				std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
@@ -166,8 +143,7 @@ int main()
 				std::cout << "type \"twop\" for 2 proportion test" << '\n';
 				std::cout << "type \"chi\" for chi-square test" << '\n';
 				std::cin >> answer_2;
-				if (answer_2 == "zscore")
-				{
+				if (answer_2 == "zscore") {
 					double point_estimate;
 					double mean;
 					double sd;
@@ -179,8 +155,7 @@ int main()
 					std::cin >> sd;
 					ht.calculateZscore(point_estimate, mean, sd);
 				}
-				else if (answer_2 == "zstat")
-				{
+				else if (answer_2 == "zstat") {
 					double point_estimate;
 					double mean;
 					double sd;
@@ -195,8 +170,7 @@ int main()
 					std::cin >> sd;
 					ht.calculateZstat(point_estimate, mean, sd, sample_size);
 				}
-				else if (answer_2 == "tscore")
-				{
+				else if (answer_2 == "tscore") {
 					double point_estimate;
 					double mean;
 					double sd;
@@ -211,8 +185,7 @@ int main()
 					std::cin >> sd;
 					ht.calculateTscore(point_estimate, mean, sd, sample_size);
 				}
-				else if (answer_2 == "p")
-				{
+				else if (answer_2 == "p") {
 					double p_hat;
 					double p;
 					int sample_size;
@@ -224,53 +197,42 @@ int main()
 					std::cin >> sample_size;
 					ht.calculateProportion(p_hat, p, sample_size);
 				}
-				else if (answer_2 == "2zstat")
-				{
+				else if (answer_2 == "2zstat") {
 					ht.printHypothesisReport_2Z();
 				}
-				else if (answer_2 == "2tstat")
-				{
+				else if (answer_2 == "2tstat") {
 					ht.printHypothesisReport_2T();
 				}
-				else if (answer_2 == "2tstat")
-				{
+				else if (answer_2 == "2tstat") {
 					ht.printHypothesisReport_2T();
 				}
-				else if (answer_2 == "2tpair")
-				{
+				else if (answer_2 == "2tpair") {
 					ht.printHypothesisReport_pairedT();
 				}
-				else if (answer_2 == "twop")
-				{
+				else if (answer_2 == "twop") {
 					ht.printHypothesisReport_2P();
 				}
-				else if (answer_2 == "chi")
-				{
+				else if (answer_2 == "chi") {
 					ht.printChiTest();
 				}
 			}
 			std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 			std::cin >> answer;
-			if (answer == 'y')
-			{
+			if (answer == 'y') {
 				repeat = true;
 			}
-			else if (answer == 'n')
-			{
+			else if (answer == 'n') {
 				repeat = false;
 			}
-			else
-			{
+			else {
 				std::cout << "Invalid input, terminating calulator..." << '\n';
 				repeat = false;
 			}
 		}
 	}
-	else if (response == "cc")
-	{
+	else if (response == "cc") {
 		repeat = true;
-		while (repeat == true)
-		{
+		while (repeat == true) {
 			std::vector<double> datasetX;
 			std::vector<double> datasetY;
 			int terms;
@@ -280,16 +242,14 @@ int main()
 			std::cout << "How many terms are there?" << '\n';
 			std::cin >> terms;
 			std::cout << "You may now type the numbers in your X data set" << '\n';
-			while (trials != terms)
-			{
+			while (trials != terms) {
 				std::cin >> inputnumbers;
 				datasetX.push_back(inputnumbers);
 				trials++;
 			}
 			trials = 0;
 			std::cout << "You may now type the numbers in your Y data set" << '\n';
-			while (trials != terms)
-			{
+			while (trials != terms) {
 				std::cin >> inputnumbers;
 				datasetY.push_back(inputnumbers);
 				trials++;
@@ -301,23 +261,19 @@ int main()
 			std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 			char decision;
 			std::cin >> decision;
-			if (decision == 'y')
-			{
+			if (decision == 'y') {
 				repeat = true;
 			}
-			else if (decision == 'n')
-			{
+			else if (decision == 'n') {
 				repeat = false;
 			}
-			else
-			{
+			else {
 				std::cout << "Invalid input, terminating calulator..." << '\n';
 				repeat = false;
 			}
 		}
 	}
-	else
-	{
+	else {
 		std::cout << "Thank you for using this calculator. Come again soon!" << '\n';
 	}
 }
