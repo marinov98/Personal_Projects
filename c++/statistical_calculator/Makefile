@@ -1,4 +1,5 @@
 CXXFLAGS=-std=c++14
+
 main: main.o basics.o cInterval.o hypTest.o correlation.o
 	g++ -o main main.o basics.o cInterval.o hypTest.o correlation.o
 
@@ -15,7 +16,7 @@ cInterval.o:cInterval.cpp cInterval.hpp
 	g++ $(CXXFLAGS) -c cInterval.cpp
 
 correlation.o:correlation.cpp correlation.hpp
-		g++ $(CXXFLAGS) -c correlation.cpp
+	g++ $(CXXFLAGS) -c correlation.cpp
 
 debug: CXXFLAGS:=$(CXXFLAGS) -g
 
