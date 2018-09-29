@@ -1,7 +1,7 @@
-#include "advanced.hpp"
 #include "basics.hpp"
+#include "cInterval.hpp"
 #include "correlation.hpp"
-#include <algorithm>
+#include "hypTest.hpp"
 #include <fstream>
 #include <iostream>
 #include <vector>
