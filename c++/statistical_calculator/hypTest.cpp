@@ -339,7 +339,7 @@ void HypTest::printChiTest() {
 	std::cin >> n;
 	std::cout << "Type in your observed values" << '\n';
 	while (inputs != n) {
-		std::cout << "Type in oberved value #" << (inputs + 1) << '\n';
+		std::cout << "Type in observed value #" << (inputs + 1) << '\n';
 		std::cin >> obs;
 		std::cout << "Type in expected value #" << (inputs + 1) << '\n';
 		std::cin >> ex;
