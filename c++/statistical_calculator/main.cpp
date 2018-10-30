@@ -7,7 +7,7 @@
 #include <vector>
 
 // function that displays formula sheet to the user
-void readFormulaSheet(const std::string text) {
+void readFormulaSheet(const std::string &text) {
 	std::string s;
 	std::ifstream formula(text);
 	while (getline(formula, s)) {
