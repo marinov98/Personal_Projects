@@ -7,9 +7,9 @@
 #include <vector>
 
 // function that displays formula sheet to the user
-void readFormulaSheet(std::string textfile) {
+void readFormulaSheet(const std::string text) {
 	std::string s;
-	std::ifstream formula(textfile);
+	std::ifstream formula(text);
 	while (getline(formula, s)) {
 		std::cout << s << '\n';
 	}
@@ -31,7 +31,6 @@ int main() {
 	char answer;
 	if (response == "basics") {
 		while (repeat == true) {
-			std::vector<double> dataset;
 			int terms;
 			int trials = 0;
 			double inputnumber;
@@ -42,23 +41,24 @@ int main() {
 				std::cout << "Invalid number of terms!" << '\n';
 			}
 			else {
+			    std::vector<double> dataset;
+				dataset.reserve(terms);
 				std::cout << "You may now type the numbers in your data set" << '\n';
 				while (trials != terms) {
 					std::cin >> inputnumber;
-					dataset.push_back(inputnumber);
+					dataset.emplace_back(inputnumber);
 					trials++;
 				}
 				// showcases the dataset's mean, mode, and range
 				displayDataset(dataset);
-				std::cout << "The MEAN of the dataset is: " << calculateMean(dataset, terms)
-				          << '\n';
-				std::cout << "The MODE of your dataset is: " << calculateMode(dataset) << '\n';
-				std::cout << "The RANGE of the dataset is: " << calculateRange(dataset) << '\n';
+				std::cout << "The MEAN of the data set is: " << calculateMean(dataset, terms) << '\n';
+				std::cout << "The MODE of your data set is: " << calculateMode(dataset) << '\n';
+				std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
 				displayMinMax(dataset);
 				// prints the 25th,50th, and 75th percentile of the dataset
 				if (dataset.size() > 3) {
 					std::cout << '\n' << "Percentiles: " << '\n';
-					std::cout << "The INTERQUARTILE RANGE of the dataset is: "
+					std::cout << "The INTERQUARTILE RANGE of the data set is: "
 					          << calculateInterquartileRange(dataset) << '\n';
 					displayPercentiles(dataset);
 				}
@@ -76,7 +76,6 @@ int main() {
 			trials = 0;
 			std::cout << "Would like to use this function again? Type 'y' or 'n' " << '\n';
 			std::cin >> answer;
-			// TODO:NOTE(sirflankalot): repeat = answer == 'y';
 			if (answer == 'y') {
 				repeat = true;
 			}
@@ -98,7 +97,7 @@ int main() {
 		std::cout << "This function will allow you calculate confidence intervals and t,z and chi "
 		             "test statistics!"
 		          << '\n';
-		while (repeat == true) {
+		while (repeat) {
 			std::cout << "type \"ci\" for confidence interval or \"ht\" for hypothesis testing? "
 			          << '\n';
 			Cinterval ci;
@@ -232,7 +231,7 @@ int main() {
 	}
 	else if (response == "cc") {
 		repeat = true;
-		while (repeat == true) {
+		while (repeat) {
 			std::vector<double> datasetX;
 			std::vector<double> datasetY;
 			int terms;
