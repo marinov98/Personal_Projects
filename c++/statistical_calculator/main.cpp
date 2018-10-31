@@ -3,11 +3,12 @@
 #include "correlation.hpp"
 #include "hypTest.hpp"
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <vector>
 
 // function that displays formula sheet to the user
-void readFormulaSheet(const std::string &text) {
+void readFormulaSheet(const std::string& text) {
 	std::string s;
 	std::ifstream formula(text);
 	while (getline(formula, s)) {
@@ -41,7 +42,7 @@ int main() {
 				std::cout << "Invalid number of terms!" << '\n';
 			}
 			else {
-			    std::vector<double> dataset;
+				std::vector<double> dataset;
 				dataset.reserve(terms);
 				std::cout << "You may now type the numbers in your data set" << '\n';
 				while (trials != terms) {
@@ -51,7 +52,8 @@ int main() {
 				}
 				// showcases the dataset's mean, mode, and range
 				displayDataset(dataset);
-				std::cout << "The MEAN of the data set is: " << calculateMean(dataset, terms) << '\n';
+				std::cout << "The MEAN of the data set is: " << calculateMean(dataset, terms)
+				          << '\n';
 				std::cout << "The MODE of your data set is: " << calculateMode(dataset) << '\n';
 				std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
 				displayMinMax(dataset);
@@ -232,31 +234,38 @@ int main() {
 	else if (response == "cc") {
 		repeat = true;
 		while (repeat) {
-			std::vector<double> datasetX;
-			std::vector<double> datasetY;
 			int terms;
 			int trials = 0;
 			double inputnumbers;
 			// gets the number of terms in the date set and fills the vector with them
 			std::cout << "How many terms are there?" << '\n';
 			std::cin >> terms;
-			std::cout << "You may now type the numbers in your X data set" << '\n';
-			while (trials != terms) {
-				std::cin >> inputnumbers;
-				datasetX.push_back(inputnumbers);
-				trials++;
+			if (terms < 1) {
+				std::cout << "invalid number of terms!" << '\n';
 			}
-			trials = 0;
-			std::cout << "You may now type the numbers in your Y data set" << '\n';
-			while (trials != terms) {
-				std::cin >> inputnumbers;
-				datasetY.push_back(inputnumbers);
-				trials++;
+			else {
+				std::vector<double> datasetX;
+				datasetX.reserve(terms);
+				std::cout << "You may now type the numbers in your X data set" << '\n';
+				while (trials != terms) {
+					std::cin >> inputnumbers;
+					datasetX.emplace_back(inputnumbers);
+					trials++;
+				}
+				trials = 0;
+				std::vector<double> datasetY;
+				datasetY.reserve(terms);
+				std::cout << "You may now type the numbers in your Y data set" << '\n';
+				while (trials != terms) {
+					std::cin >> inputnumbers;
+					datasetY.emplace_back(inputnumbers);
+					trials++;
+				}
+				sortDatasetXY(datasetX, datasetY);
+				displayDatasetXY(datasetX, datasetY);
+				std::cout << '\n';
+				displayLSRL(datasetX, datasetY, terms);
 			}
-			sortDatasetXY(datasetX, datasetY);
-			displayDatasetXY(datasetX, datasetY);
-			std::cout << '\n';
-			displayLSRL(datasetX, datasetY, terms);
 			std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 			char decision;
 			std::cin >> decision;
