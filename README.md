@@ -17,7 +17,7 @@
 - Allow users to have all in one program that does everything instead of having them search online for different types of statistic calculators
 
 ## Functionality 
-- **Basics**: takes the dataset and displays:
+### **Basics**: takes the dataset and displays:
   - mean, median, mode, range
   - Sample/Population standard deviation & variance
   - Min and Max
