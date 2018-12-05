@@ -5,6 +5,7 @@
 - make the program able to accept csv's (and maybe other file types in the future)
 - restructure the program to a CLI
 - make a website for the stat calculator
+- use cmake to launch
 
 ## Table of Contents
   1. [Goals](#Goals)
