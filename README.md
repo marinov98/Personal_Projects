@@ -43,7 +43,7 @@
 ### Correlation Coefficient
 - slope, y-intercept
 - line of best fit 
-- least squares regression
+- least squares regression line
 
 ## How-To-Use
 - clone this repository
