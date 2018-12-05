@@ -19,7 +19,7 @@
 
 ## Functionality 
 
-### Contains Its own Formuala Sheet!
+### Contains Its own Formula Sheet!
 
 ### Basics: takes the dataset and displays:
 - mean, median, mode, range
