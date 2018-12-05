@@ -17,9 +17,34 @@
 - Allow users to have all in one program that does everything instead of having them search online for different types of statistic calculators
 
 ## Functionality 
+
 ### Basics: takes the dataset and displays:
-  - mean, median, mode, range
-  - Sample/Population standard deviation & variance
-  - Min and Max
+- mean, median, mode, range
+- Sample/Population standard deviation & variance
+- Min and Max
+- Percentiles
+- Interquartile range
+- Outliers
+
+### Contains Its own Formuala Sheet!
+
+### Hypothesis Testing
+- calculate z-score and t-score
+- one/two sample **t** and **z** tests
+  - proportions, pair, difference 
+- Chi-square test
+
+### Confidence intervals 
+- Sampling Distribution
+- z/t confidence intervals
+  - proportion, sample
+  - multple z-critical values
+  
+### Correlation Coefficient
+- slope, y-intercept
+- line of best fit 
 
 ## How-To-Use
+- clone this repository
+- cd into it from terminal
+- run ```make``` then ```make run``` or ```./main```
