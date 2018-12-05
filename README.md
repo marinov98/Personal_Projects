@@ -18,6 +18,8 @@
 
 ## Functionality 
 
+### Contains Its own Formuala Sheet!
+
 ### Basics: takes the dataset and displays:
 - mean, median, mode, range
 - Sample/Population standard deviation & variance
@@ -25,8 +27,6 @@
 - Percentiles
 - Interquartile range
 - Outliers
-
-### Contains Its own Formuala Sheet!
 
 ### Hypothesis Testing
 - calculate z-score and t-score
