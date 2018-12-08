@@ -1,5 +1,5 @@
 
-# Welcome to my Statistics Calculator!
+# Welcome to my Statistics Calculator! :octocat:
 
 ## To Do's
 - make the program able to accept csv's (and maybe other file types in the future)
