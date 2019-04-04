@@ -1,3 +1,11 @@
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: hypTest.cpp
+purpose: implements the hypothesis testing class
+
+######################## */
+
 #include "hypTest.hpp"
 #include <cmath>
 #include <iostream>

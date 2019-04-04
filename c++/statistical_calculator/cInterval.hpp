@@ -1,5 +1,14 @@
 // Confidence intervals  and hypothesis testing
 // z-critical and t-critical
+
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: cInterval.hpp
+purpose: Confidence intervals class, calculates z,t,proportion,performs
+
+######################## */
+
 #pragma once
 #include "basics.hpp"
 #include <string>

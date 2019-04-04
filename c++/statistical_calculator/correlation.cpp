@@ -1,3 +1,11 @@
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: correlation.cpp
+purpose: implements the correlation class
+
+######################## */
+
 #include "basics.hpp"
 #include <iostream>
 #include <vector>

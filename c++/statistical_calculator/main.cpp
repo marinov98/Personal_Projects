@@ -1,3 +1,12 @@
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: main.cpp
+purpose: shows all the calculations as well as the formulas to the user
+
+######################## */
+
+
 #include "basics.hpp"
 #include "cInterval.hpp"
 #include "correlation.hpp"

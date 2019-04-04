@@ -1,3 +1,13 @@
+
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: basics.hpp
+purpose: all the functions that perform basic functions such as mean,median,mode, standard deviation
+	     and has methods that display them to the user
+
+######################## */
+
 #pragma once
 #include <vector>
 #include <algorithm>

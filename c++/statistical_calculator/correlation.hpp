@@ -1,3 +1,11 @@
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: correlation.hpp
+purpose: correlation header file. Calculates slope, y-intercept, LSRL line and Correlation Coefficient
+
+######################## */
+
 #include "basics.hpp"
 #include <iostream>
 #include <vector>

@@ -1,3 +1,11 @@
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: hypTest.hpp
+purpose: hypothesis testing class performs 1/2 sample Z/T tests as well as Chi square tests
+
+######################## */
+
 #pragma once
 #include "basics.hpp"
 #include "cInterval.hpp"

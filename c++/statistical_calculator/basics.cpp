@@ -2,6 +2,15 @@
 // aim: create a statistical calculator that provides basic functions for
 // beginner statistics project will become more advanced as I learn new concepts
 // in statistics
+
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: basic.cpp
+purpose: implements the functions defined in the basics.hpp file
+
+######################## */
+
 #include "basics.hpp"
 
 

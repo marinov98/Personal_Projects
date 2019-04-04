@@ -1,3 +1,11 @@
+/* ########################
+
+Name: Marin Pavlinov Marinov
+file: cInterval.cpp
+purpose: implements the confidence interval class
+
+######################## */
+
 #include "cInterval.hpp"
 #include <cmath>
 #include <iostream>
