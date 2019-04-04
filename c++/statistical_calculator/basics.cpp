@@ -3,11 +3,7 @@
 // beginner statistics project will become more advanced as I learn new concepts
 // in statistics
 #include "basics.hpp"
-#include <algorithm>
-#include <cmath>
-#include <iostream>
-#include <numeric>
-#include <vector>
+
 
 // sorts the vector
 void sortDataset(std::vector<double>& dataSet) {

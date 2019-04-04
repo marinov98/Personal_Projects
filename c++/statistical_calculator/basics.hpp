@@ -1,5 +1,9 @@
 #pragma once
 #include <vector>
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <numeric>
 
 struct DataType {
 	double population;
