@@ -1,29 +1,27 @@
-CXXFLAGS=-std=c++14
 
-main: main.o basics.o cInterval.o hypTest.o correlation.o
-	g++ -o main main.o basics.o cInterval.o hypTest.o correlation.o
+CXX 		:= g++
+CXXFLAGS 	:= $(CXXFLAGS) -std=c++14
+SRCS		:= basics.cpp cInterval.cpp hypTest.cpp correlation.cpp main.cpp
+OBJS		:= $(patsubst %.cpp,%.o, $(SRCS))
+EXEC		:= main
 
-main.o: main.cpp basics.hpp cInterval.hpp hypTest.hpp
-	g++ $(CXXFLAGS) -c main.cpp
+$(EXEC): $(OBJS)
+	@echo 'building executable...'
+	$(CXX) -o $@ $^
 
-hypTest.o: hypTest.cpp hypTest.hpp
-	g++ $(CXXFLAGS) -c hypTest.cpp
-
-basics.o: basics.cpp basics.hpp
-	g++ $(CXXFLAGS) -c basics.cpp
-
-cInterval.o:cInterval.cpp cInterval.hpp
-	g++ $(CXXFLAGS) -c cInterval.cpp
-
-correlation.o:correlation.cpp correlation.hpp
-	g++ $(CXXFLAGS) -c correlation.cpp
+%.o: %.cpp %.hpp
+	@echo 'building object -> $@ ...'
+	$(CXX) $(CXXFLAGS) -c $<
 
 debug: CXXFLAGS:=$(CXXFLAGS) -g
 
 debug: main
 
+.PHONY: clean
+
 clean:
-	rm -f main.o basics.o cInterval.o correlation.o hypTest.o main
+	@echo 'removing object files and executables...'
+	$(RM) $(EXEC) $(OBJS)
 
 run:
 	./main
