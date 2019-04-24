@@ -13,7 +13,7 @@ $(EXEC): $(OBJS)
 	@echo 'building object -> $@ ...'
 	$(CXX) $(CXXFLAGS) -c $<
 
-debug: CXXFLAGS:=$(CXXFLAGS) -g
+debug: CXXFLAGS:=$(CXXFLAGS) -g -fsanitize=address,undefined
 
 debug: main
 
