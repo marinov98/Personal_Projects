@@ -8,7 +8,7 @@ EXEC		:= main
 $(EXEC): $(OBJS)
 	@echo 'building executable...'
 	@$(CXX) -o $@ $^
-	@echo 'Done!'
+	@echo 'Calculator ready to launch'
 
 %.o: %.cpp %.hpp
 	@echo 'building object -> $@ ...'
