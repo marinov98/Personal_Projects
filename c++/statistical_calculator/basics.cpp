@@ -63,8 +63,7 @@ const void displayStandardDeviation(std::vector<double> dataSet, const int terms
 // Functions for finding MEAN, MEDIAN, RANGE, and
 
 double calculateMean(std::vector<double> dataSet, const int terms) {
-	double sum = std::accumulate(dataSet.begin(), dataSet.end(), 0);
-	return sum / terms;
+	return  std::accumulate(dataSet.begin(), dataSet.end(), 0.0)/ terms;
 }
 
 double calculateRange(std::vector<double> dataSet) {
