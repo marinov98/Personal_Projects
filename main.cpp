@@ -6,7 +6,6 @@ purpose: shows all the calculations as well as the formulas to the user
 
 ######################## */
 
-
 #include "basics.hpp"
 #include "cInterval.hpp"
 #include "correlation.hpp"
@@ -31,8 +30,8 @@ int main() {
 		std::cout << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << '\n';
 		std::cout << "What would you like the calculator to do?" << '\n';
 		std::cout
-				<< "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"
-				<< '\n';
+		    << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"
+		    << '\n';
 		std::cout << "type \"formulas\" view the formula sheet" << '\n';
 		std::cout << "type \"cc\" for finding correlation coefficients and LSRL" << '\n';
 		std::cout << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
@@ -67,7 +66,8 @@ int main() {
 					std::cout << "The MEAN of the data set is: " << calculateMean(dataset, terms)
 					          << '\n';
 					std::cout << "The MODE of your data set is: " << calculateMode(dataset) << '\n';
-					std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
+					std::cout << "The RANGE of the data set is: " << calculateRange(dataset)
+					          << '\n';
 					displayMinMax(dataset);
 					// prints the 25th,50th, and 75th percentile of the dataset
 					if (dataset.size() > 3) {
@@ -97,7 +97,7 @@ int main() {
 					repeat = false;
 				}
 				else {
-					std::cout << "Invalid input, terminating calulator..." << '\n';
+					std::cout << "Invalid input, going back to main page..." << '\n';
 					repeat = false;
 				}
 			}
@@ -108,12 +108,14 @@ int main() {
 		else if (response == "advanced") {
 			repeat = true;
 			std::string answer_2;
-			std::cout << "This function will allow you calculate confidence intervals and t,z and chi "
-			             "test statistics!"
-			          << '\n';
+			std::cout
+			    << "This function will allow you calculate confidence intervals and t,z and chi "
+			       "test statistics!"
+			    << '\n';
 			while (repeat) {
-				std::cout << "type \"ci\" for confidence interval or \"ht\" for hypothesis testing? "
-				          << '\n';
+				std::cout
+				    << "type \"ci\" for confidence interval or \"ht\" for hypothesis testing? "
+				    << '\n';
 				Cinterval ci;
 				std::string choice;
 				std::cin >> choice;
@@ -123,7 +125,8 @@ int main() {
 					std::cout << "type \"tinterval\" for t confidence interval" << '\n';
 					std::cout << "type \"2tinterval\" for 2 t confidence interval" << '\n';
 					std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
-					std::cout << "type \"2pinterval\" for 2 Proportions confidence interval" << '\n';
+					std::cout << "type \"2pinterval\" for 2 Proportions confidence interval"
+					          << '\n';
 					std::cin >> answer_2;
 					if (answer_2 == "zinterval") {
 						ci.displayCI_Z();
@@ -146,12 +149,14 @@ int main() {
 				}
 				else if (choice == "ht") {
 					HypTest ht;
-					std::cout << "type \"zscore\" for z-score (formula without sample size)" << '\n';
+					std::cout << "type \"zscore\" for z-score (formula without sample size)"
+					          << '\n';
 					std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
 					std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
 					std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
 					std::cout << "type \"2tstat\" for two sample t-score/test-statistic" << '\n';
-					std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic" << '\n';
+					std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic"
+					          << '\n';
 					std::cout << "type \"p\" for single proportion test" << '\n';
 					std::cout << "type \"twop\" for 2 proportion test" << '\n';
 					std::cout << "type \"chi\" for chi-square test" << '\n';
@@ -238,7 +243,7 @@ int main() {
 					repeat = false;
 				}
 				else {
-					std::cout << "Invalid input, terminating calulator..." << '\n';
+					std::cout << "Invalid input, going back to main page..." << '\n';
 					repeat = false;
 				}
 			}
@@ -288,7 +293,7 @@ int main() {
 					repeat = false;
 				}
 				else {
-					std::cout << "Invalid input, terminating calulator..." << '\n';
+					std::cout << "Invalid input, going back to main page..." << '\n';
 					repeat = false;
 				}
 			}
@@ -298,8 +303,7 @@ int main() {
 			backtrack = false;
 		}
 		else {
-			std::cout << "You have typed something incorrectly, please try again";
-			backtrack = false;
+			std::cout << "You have typed something incorrectly, please try again" << '\n';
 		}
 	}
 

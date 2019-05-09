@@ -27,4 +27,5 @@ clean:
 	@echo 'Done!'
 
 run:
-	./main
+	@echo 'Launching...'
+	@./main
