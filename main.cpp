@@ -53,19 +53,12 @@ int main() {
 				// gets the number of terms in the date set and fills the vector with them
 				std::cout << "How many terms are there?" << '\n';
 				std::cin >> terms;
-				while (!std::cin) {
+				// Ensure # of terms is correct
+				while (!std::cin || terms <= 1) {
 					std::cout << "Invalid input! try again" << '\n';
 					std::cin.clear();
 					std::cin.ignore();
 					std::cin >> terms;
-				}
-				// Ensure # of terms is correct
-				if (terms <= 1) {
-					while (terms <= 1) {
-						std::cout << "Invalid number of terms!" << '\n';
-						std::cout << "Please try to input the number of terms again: " << '\n';
-						std::cin >> terms;
-					}
 				}
 				// Perform calculations only when # of terms is valid
 				if (terms > 1) {
@@ -288,12 +281,11 @@ int main() {
 				// gets the number of terms in the date set and fills the vector with them
 				std::cout << "How many terms are there?" << '\n';
 				std::cin >> terms;
-				if (terms <= 1) {
-					while (terms <= 1) {
-						std::cout << "Invalid number of terms!" << '\n';
-						std::cout << "Please try to input the number of terms again: " << '\n';
-						std::cin >> terms;
-					}
+				while (!std::cin || terms <= 1) {
+					std::cout << "Invalid input! try again" << '\n';
+					std::cin.clear();
+					std::cin.ignore();
+					std::cin >> terms;
 				}
 				if (terms > 1) {
 					std::vector<double> datasetX;

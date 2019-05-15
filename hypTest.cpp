@@ -486,20 +486,14 @@ void HypTest::printChiTest() {
 
 	std::cout << "how many terms? " << '\n';
 	std::cin >> n;
-	while (!std::cin) {
+	// Ensure # of terms is correct
+	while (!std::cin || n <= 1) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
 		std::cin >> n;
 	}
-	// Ensure # of terms is correct
-	if (n <= 1) {
-		while (n <= 1) {
-			std::cout << "Invalid number of terms!" << '\n';
-			std::cout << "Please try to input the number of terms again: " << '\n';
-			std::cin >> n;
-		}
-	}
+
 	std::cout << "Type in your observed values" << '\n';
 	while (inputs != n) {
 		std::cout << "Type in observed value #" << (inputs + 1) << '\n';
