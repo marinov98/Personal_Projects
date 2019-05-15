@@ -21,10 +21,18 @@ for creating termcolor
 
 // function that displays formula sheet to the user
 void readFormulaSheet(const std::string& text) {
-	std::string s;
-	std::ifstream formula(text);
-	while (getline(formula, s)) {
-		std::cout << s << '\n';
+	try {
+		std::string s;
+		std::ifstream formulas(text);
+		while (getline(formulas, s)) {
+			std::cout << s << '\n';
+		}
+
+		formulas.close();
+	}
+	catch (std::exception const& e) {
+		std::cout << "Error reading: " << text << '\n';
+		std::cout << "Reason: " << e.what() << '\n';
 	}
 }
 

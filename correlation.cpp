@@ -58,6 +58,9 @@ double calculateSlope(const std::vector<double>& datasetX,
 		top += ((datasetX[i] - x) * (datasetY[i] - y));
 	}
 
+	if (bottom == 0)
+		throw std::runtime_error("Attempted to divide by Zero\n");
+
 	return (top / bottom);
 }
 
