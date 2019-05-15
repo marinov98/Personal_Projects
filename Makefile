@@ -1,6 +1,6 @@
-##########################
+#######################################################
 ##### VARIABLES
-#####################################################
+#######################################################
 CXX 		:= g++
 CXXFLAGS 	:= -std=c++14
 SRCS		:= basics.cpp hypTest.cpp cInterval.cpp correlation.cpp #$(wildcard *.cpp)
@@ -16,7 +16,9 @@ EXEC		:= main
 $(EXEC): main.o $(OBJS)
 	@echo 'building executable...'
 	@$(CXX) -o $@ $^
-	@echo 'Calculator ready to launch'
+	$(if $(findstring g,$(CXXFLAGS)),\
+		@echo 'Calculator ready to be debugged',\
+		@echo 'Calculator ready to launch')
 
 main.o: main.cpp $(HDRS)
 	@echo 'building main object file..'
@@ -24,7 +26,9 @@ main.o: main.cpp $(HDRS)
 	@echo 'Success!'
 
 %.o: %.cpp %.hpp
-	$(if $(findstring g,$(CXXFLAGS)),@echo 'debugging -> $@',@echo 'building object -> $@')
+	$(if $(findstring g,$(CXXFLAGS)),\
+		@echo 'debugging -> $@',\
+		@echo 'building object -> $@')
 	@$(CXX) $(CXXFLAGS) -c $<
 	@echo 'Success!'
 
@@ -38,7 +42,6 @@ run:
 debug: CXXFLAGS := $(CXXFLAGS) -g # -fsanitize=address,undefined
 	
 debug: main
-	@echo 'Calculator can also be debugged'
 
 ##########################
 #### CLEANING
