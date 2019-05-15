@@ -517,13 +517,13 @@ void HypTest::printChiTest() {
 	}
 
 	double chi_test = performChiSquare(chi_values);
-	std::cout << "Your input observed values are :" << '\n';
+	std::cout << "The observed values you inputted are :" << '\n';
 	for (int i = 0; i < n; i++) {
 		std::cout << " " << chi_values[i].observed;
 	}
 	std::cout << '\n';
 
-	std::cout << "Your input expected values are :" << '\n';
+	std::cout << "The expected values you inputted are :" << '\n';
 	for (int j = 0; j < n; j++) {
 		std::cout << " " << chi_values[j].expected;
 	}
