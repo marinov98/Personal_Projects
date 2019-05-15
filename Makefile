@@ -3,8 +3,8 @@
 #######################################################
 CXX 		:= g++
 CXXFLAGS 	:= -std=c++14
-SRCS		:= basics.cpp hypTest.cpp cInterval.cpp correlation.cpp #$(wildcard *.cpp)
-HDRS        := $(patsubst %.cpp,%.hpp, $(SRCS))
+SRCS		:= basics.cpp hypTest.cpp cInterval.cpp correlation.cpp # $(wildcard *.cpp)
+HDRS        	:= $(patsubst %.cpp,%.hpp, $(SRCS))
 OBJS		:= $(patsubst %.cpp,%.o, $(SRCS))
 EXEC		:= main
 #######################################################
