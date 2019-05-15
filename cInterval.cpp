@@ -131,10 +131,29 @@ const void Cinterval::displayCI_Z() {
 	std::cin >> percent;
 	std::cout << "What is x̄?" << '\n';
 	std::cin >> point_estimate;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> point_estimate;
+	}
 	std::cout << "What is the standard deviation?" << '\n';
 	std::cin >> sd;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd;
+	}
 	std::cout << "Finally, what is the sample size" << '\n';
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
+
 	const Bound bound = calculateCI_Z(percent, point_estimate, sd, sample_size);
 	std::cout << "Your Z Confidence interval is: "
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
@@ -148,12 +167,37 @@ const void Cinterval::displayCI_T() {
 
 	std::cout << "What is the t-critical? " << '\n';
 	std::cin >> tcrit;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> tcrit;
+	}
 	std::cout << "What is x̄?" << '\n';
 	std::cin >> point_estimate;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> point_estimate;
+	}
 	std::cout << "What is the standard deviation?" << '\n';
 	std::cin >> sd;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd;
+	}
 	std::cout << "Finally, what is the sample size" << '\n';
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
+
 	const Bound bound = calculateCI_T(point_estimate, sd, sample_size, tcrit);
 
 	std::cout << "Your T Confidence interval is: "
@@ -170,8 +214,20 @@ const void Cinterval::displayCI_Proportion() {
 	std::cin >> percent;
 	std::cout << "What is p̂?" << '\n';
 	std::cin >> p_hat;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> p_hat;
+	}
 	std::cout << "Finally, what is the sample size?" << '\n';
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
 	const Bound bound = calculateCI_Proportion(percent, p_hat, sample_size);
 	std::cout << "Your Proportion Confidence interval is: "
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
@@ -188,12 +244,36 @@ const void Cinterval::displayCI_2Proportions() {
 	std::cin >> percent;
 	std::cout << "What is p̂?" << '\n';
 	std::cin >> p_hat;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> p_hat;
+	}
 	std::cout << "What is p̂2?" << '\n';
 	std::cin >> p_hat2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> p_hat2;
+	}
 	std::cout << "What is the  first sample size?" << '\n';
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
 	std::cout << "Finally, what is the  second sample size?" << '\n';
 	std::cin >> sample_size2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size2;
+	}
 	const Bound bound = calculateCI_2Proportions(percent, p_hat, p_hat2, sample_size, sample_size2);
 	std::cout << "Your 2 Proportion Confidence interval is: "
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
@@ -213,16 +293,53 @@ const void Cinterval::displayCI_2Z() {
 	std::cin >> percent;
 	std::cout << "What is x̄1?" << '\n';
 	std::cin >> mean1;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean1;
+	}
 	std::cout << "What is x̄2?" << '\n';
 	std::cin >> mean2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean2;
+	}
 	std::cout << "What is the first standard deviation?" << '\n';
 	std::cin >> sd1;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd1;
+	}
 	std::cout << "What is the second standard deviation?" << '\n';
 	std::cin >> sd2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd2;
+	}
 	std::cout << "What is the  first sample size?" << '\n';
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
 	std::cout << "Finally, what is the  second sample size?" << '\n';
 	std::cin >> sample_size2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size2;
+	}
+
 	const Bound bound =
 	    calculateCI2Sample_Z(percent, mean1, mean2, sd1, sd2, sample_size, sample_size2);
 	std::cout << "Your 2 Z Confidence interval is: "
@@ -240,18 +357,62 @@ const void Cinterval::displayCI_2T() {
 
 	std::cout << "What is the t critical value?" << '\n';
 	std::cin >> tcrit;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> tcrit;
+	}
 	std::cout << "What is x̄1?" << '\n';
 	std::cin >> mean1;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean1;
+	}
 	std::cout << "What is x̄2?" << '\n';
 	std::cin >> mean2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean2;
+	}
 	std::cout << "What is the first standard deviation?" << '\n';
 	std::cin >> sd1;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd1;
+	}
 	std::cout << "What is the second standard deviation?" << '\n';
 	std::cin >> sd2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd2;
+	}
 	std::cout << "What is the  first sample size?" << '\n';
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
 	std::cout << "Finally, what is the  second sample size?" << '\n';
 	std::cin >> sample_size2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size2;
+	}
+
+
 	const Bound bound =
 	    calculateCI2Sample_T(tcrit, mean1, mean2, sd1, sd2, sample_size, sample_size2);
 	std::cout << "Your 2 T Confidence interval is: "

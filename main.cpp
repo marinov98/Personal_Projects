@@ -4,12 +4,16 @@ Name: Marin Pavlinov Marinov
 file: main.cpp
 purpose: shows all the calculations as well as the formulas to the user
 
+SPECIAL THANKS TO Ihor Kalnytskyi
+for creating termcolor
+
 ######################## */
 
 #include "basics.hpp"
 #include "cInterval.hpp"
 #include "correlation.hpp"
 #include "hypTest.hpp"
+#include "termcolor.hpp" // courtesy of Ihor Kalnytskyi's project
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -27,15 +31,15 @@ void readFormulaSheet(const std::string& text) {
 int main() {
 	bool backtrack = true;
 	while (backtrack) {
-		std::cout << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << '\n';
-		std::cout << "What would you like the calculator to do?" << '\n';
-		std::cout
+		std::cout << termcolor::blue << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << '\n';
+		std::cout << termcolor::blue << "What would you like the calculator to do?" << '\n';
+		std::cout << termcolor::yellow
 		    << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"
 		    << '\n';
-		std::cout << "type \"formulas\" view the formula sheet" << '\n';
-		std::cout << "type \"cc\" for finding correlation coefficients and LSRL" << '\n';
-		std::cout << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
-		std::cout << "type \"exit\" to quit the calculator" << '\n';
+		std::cout << termcolor::green << "type \"formulas\" view the formula sheet" << '\n';
+		std::cout << termcolor::magenta << "type \"cc\" for finding correlation coefficients and LSRL" << '\n';
+		std::cout << termcolor::cyan << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
+		std::cout << termcolor::white << "type \"exit\" to quit the calculator" << '\n';
 		std::string response;
 		std::cin >> response;
 		bool repeat = true;
@@ -85,12 +89,13 @@ int main() {
 					sortDataset(dataset);
 					// showcases the dataset's mean, mode, and range
 					displayDataset(dataset);
-					std::cout << "The MEAN of the data set is: " << calculateMean(dataset, terms)
+					std::cout << termcolor::bold << termcolor::red << "The MEAN of the data set is: " << calculateMean(dataset, terms)
 					          << '\n';
 					std::cout << "The MODE of your data set is: " << calculateMode(dataset) << '\n';
 					std::cout << "The RANGE of the data set is: " << calculateRange(dataset)
 					          << '\n';
 					displayMinMax(dataset);
+					std::cout << termcolor::bold << termcolor::yellow;
 					// prints the 25th,50th, and 75th percentile of the dataset
 					if (dataset.size() > 3) {
 						std::cout << '\n' << "Percentiles: " << '\n';
@@ -102,24 +107,26 @@ int main() {
 					findOutliers(dataset);
 					std::cout << '\n';
 					// prints standard deviation and variance
-					std::cout << "Standard deviation and Variance: " << '\n';
+					std::cout << termcolor::bold << termcolor::cyan << "Standard deviation and Variance: " << '\n';
 					displayStandardDeviation(dataset, terms);
 					std::cout << '\n';
 					// erase terms once finished showing numbers to user
 					dataset.clear();
 				}
 
-				std::cout << "Would like to use this function again? Type 'y' or 'n' " << '\n';
+				std::cout << termcolor::white << "Would like to use this function again? Type 'y' or 'n' " << '\n';
 				std::cin >> answer;
 				if (answer == 'y') {
 					repeat = true;
 				}
 				else if (answer == 'n') {
 					repeat = false;
+					std::cout << termcolor::reset;
 				}
 				else {
 					std::cout << "Invalid input, going back to main page..." << '\n';
 					repeat = false;
+					std::cout << termcolor::reset;
 				}
 			}
 		}
@@ -129,7 +136,7 @@ int main() {
 		else if (response == "advanced") {
 			repeat = true;
 			std::string answer_2;
-			std::cout
+			std::cout << termcolor::bold << termcolor::cyan
 			    << "This function will allow you calculate confidence intervals and t,z and chi "
 			       "test statistics!"
 			    << '\n';
@@ -262,14 +269,17 @@ int main() {
 				}
 				else if (answer == 'n') {
 					repeat = false;
+					std::cout << termcolor::reset;
 				}
 				else {
 					std::cout << "Invalid input, going back to main page..." << '\n';
 					repeat = false;
+					std::cout << termcolor::reset;
 				}
 			}
 		}
 		else if (response == "cc") {
+			std::cout << termcolor::bold << termcolor::magenta;
 			repeat = true;
 			while (repeat) {
 				int terms;
@@ -324,19 +334,23 @@ int main() {
 				}
 				else if (decision == 'n') {
 					repeat = false;
+					std::cout << termcolor::reset;
 				}
 				else {
 					std::cout << "Invalid input, going back to main page..." << '\n';
 					repeat = false;
+					std::cout << termcolor::reset;
 				}
 			}
 		}
 		else if (response == "exit") {
+			std::cout << termcolor::bold << termcolor::white;
 			std::cout << "Thank you for using this calculator. Come again soon!" << '\n';
 			backtrack = false;
 		}
 		else {
 			std::cout << "You have typed something incorrectly, please try again" << '\n';
+			std::cout << termcolor::reset;
 		}
 	}
 
