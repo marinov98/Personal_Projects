@@ -29,7 +29,8 @@ const double Cinterval::getZcritical(std::string percent) {
 	else if (percent == ".80") {
 		return crit.z80;
 	}
-	return 0.0;
+	std::cout << "improper input, using 90% as default Z critical" << '\n';
+	return crit.z90;
 }
 
 // calculates σ/n^1/2
