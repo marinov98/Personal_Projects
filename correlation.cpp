@@ -15,8 +15,8 @@ void sortDatasetXY(std::vector<double>& datasetX, std::vector<double>& datasetY)
 	std::sort(datasetY.begin(), datasetY.end());
 }
 
-const void displayDatasetXY(const std::vector<double> datasetX,
-                            const std::vector<double> datasetY) {
+const void displayDatasetXY(const std::vector<double>& datasetX,
+                            const std::vector<double>& datasetY) {
 	std::cout << "The x values of this dataset are: " << '\n';
 	for (const auto& numberX : datasetX) {
 		std::cout << " " << numberX;
@@ -28,10 +28,10 @@ const void displayDatasetXY(const std::vector<double> datasetX,
 	}
 }
 
-double calculateCorrelationCoefficient(std::vector<double> datasetX,
-                                       std::vector<double> datasetY,
+double calculateCorrelationCoefficient(const std::vector<double>& datasetX,
+                                       const std::vector<double>& datasetY,
                                        const int terms) {
-	double sum = 0;
+	double sum = 0.0;
 	double x = calculateMean(datasetX, terms);
 	double y = calculateMean(datasetY, terms);
 	double sdX = calculateStandardDeviation(datasetX, terms).sample;
@@ -44,9 +44,11 @@ double calculateCorrelationCoefficient(std::vector<double> datasetX,
 	return (sum / (terms - 1));
 }
 
-double calculateSlope(std::vector<double> datasetX, std::vector<double> datasetY, const int terms) {
-	double top = 0;
-	double bottom = 0;
+double calculateSlope(const std::vector<double>& datasetX,
+		              const std::vector<double>& datasetY,
+		              const int terms) {
+	double top = 0.0;
+	double bottom = 0.0;
 	double x = calculateMean(datasetX, terms);
 	double y = calculateMean(datasetY, terms);
 
@@ -59,8 +61,8 @@ double calculateSlope(std::vector<double> datasetX, std::vector<double> datasetY
 	return (top / bottom);
 }
 
-double calculateYintercept(std::vector<double> datasetX,
-                           std::vector<double> datasetY,
+double calculateYintercept(const std::vector<double>& datasetX,
+                           const std::vector<double>& datasetY,
                            const int terms) {
 	double x = calculateMean(datasetX, terms);
 	double y = calculateMean(datasetY, terms);
@@ -69,7 +71,9 @@ double calculateYintercept(std::vector<double> datasetX,
 	return (y - b * x);
 }
 
-void displayLSRL(std::vector<double> datasetX, std::vector<double> datasetY, const int terms) {
+void displayLSRL(const std::vector<double>& datasetX,
+		         const std::vector<double>& datasetY,
+		         const int terms) {
 	double x = calculateMean(datasetX, terms);
 	double y = calculateMean(datasetY, terms);
 	double b = calculateSlope(datasetX, datasetY, terms);

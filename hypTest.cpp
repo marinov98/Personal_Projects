@@ -131,23 +131,66 @@ void HypTest::printHypothesisReport_2Z() {
 	double mean1;
 	double mean2;
 	std::cin >> mean1;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean1;
+	}
 	std::cin >> mean2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean2;
+	}
 
 	std::cout << "what is the hypothesized value?" << '\n';
 	double hvalue;
 	std::cin >> hvalue;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> hvalue;
+	}
 
 	std::cout << " Next, input your two standard deviations(Enter one at a time)" << '\n';
 	double sd;
 	double sd2;
 	std::cin >> sd;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd;
+	}
 	std::cin >> sd2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd2;
+	}
 
 	std::cout << "Now input your two sample sizes (Enter one at a time)" << '\n';
 	int sample_size;
 	int sample_size2;
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
 	std::cin >> sample_size2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size2;
+	}
+
 	double z_stat = calculate2sampleZstat(mean1, mean2, hvalue, sample_size, sample_size2, sd, sd2);
 
 	std::cout
@@ -188,23 +231,66 @@ void HypTest::printHypothesisReport_2T() {
 	double mean1;
 	double mean2;
 	std::cin >> mean1;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean1;
+	}
 	std::cin >> mean2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean2;
+	}
 
 	std::cout << "what is the hypothesized value?" << '\n';
 	double hvalue;
 	std::cin >> hvalue;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> hvalue;
+	}
 
 	std::cout << " Next, input your two standard deviations(Enter one at a time)" << '\n';
 	double sd;
 	double sd2;
 	std::cin >> sd;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd;
+	}
 	std::cin >> sd2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd2;
+	}
 
 	std::cout << "Now input your two sample sizes (Enter one at a time)" << '\n';
 	int sample_size;
 	int sample_size2;
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
 	std::cin >> sample_size2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size2;
+	}
+
 	double t_stat =
 	    calculate2sampleTscore(mean1, mean2, hvalue, sample_size, sample_size2, sd, sd2);
 	std::cout
@@ -245,18 +331,43 @@ void HypTest::printHypothesisReport_pairedT() {
 	std::cout << "input your two means (Enter one at a time)" << '\n';
 	double mean1;
 	std::cin >> mean1;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> mean1;
+	}
 
 	std::cout << "what is the hypothesized value?" << '\n';
 	double hvalue;
 	std::cin >> hvalue;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> hvalue;
+	}
 
 	std::cout << " Next, input your two standard deviations(Enter one at a time)" << '\n';
 	double sd;
 	std::cin >> sd;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sd;
+	}
 
 	std::cout << "Now input your sample size" << '\n';
 	int sample_size;
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
+
 	double t_stat = calculate2PairedsampleTscore(mean1, hvalue, sd, sample_size);
 	std::cout
 	    << "μ1 != μ2(nequal), μ1 < μ2 (less), or μ1 > μ2 (greater) type \"less\", \"nequal\", or "
@@ -294,17 +405,47 @@ void HypTest::printHypothesisReport_2P() {
 	double p_hat;
 	double p_hat2;
 	std::cin >> p_hat;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> p_hat;
+	}
 	std::cin >> p_hat2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> p_hat2;
+	}
 
 	std::cout << "what is the hypothesized value (p1-p2)?" << '\n';
 	double hvalue;
 	std::cin >> hvalue;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> hvalue;
+	}
 
 	std::cout << "Now input your two sample sizes (Enter one at a time)" << '\n';
 	int sample_size;
 	int sample_size2;
 	std::cin >> sample_size;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size;
+	}
 	std::cin >> sample_size2;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> sample_size2;
+	}
 
 	const double p_stat = calculate2zproportion(p_hat, p_hat2, hvalue, sample_size, sample_size2);
 	std::cout
@@ -345,12 +486,38 @@ void HypTest::printChiTest() {
 
 	std::cout << "how many terms? " << '\n';
 	std::cin >> n;
+	while (!std::cin) {
+		std::cout << "Invalid input! try again" << '\n';
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> n;
+	}
+	// Ensure # of terms is correct
+	if (n <= 1) {
+		while (n <= 1) {
+			std::cout << "Invalid number of terms!" << '\n';
+			std::cout << "Please try to input the number of terms again: " << '\n';
+			std::cin >> n;
+		}
+	}
 	std::cout << "Type in your observed values" << '\n';
 	while (inputs != n) {
 		std::cout << "Type in observed value #" << (inputs + 1) << '\n';
 		std::cin >> obs;
+		while (!std::cin) {
+			std::cout << "Invalid input! try again" << '\n';
+			std::cin.clear();
+			std::cin.ignore();
+			std::cin >> obs;
+		}
 		std::cout << "Type in expected value #" << (inputs + 1) << '\n';
 		std::cin >> ex;
+		while (!std::cin) {
+			std::cout << "Invalid input! try again" << '\n';
+			std::cin.clear();
+			std::cin.ignore();
+			std::cin >> ex;
+		}
 		chi_values.push_back(Chi{obs, ex});
 		inputs++;
 	}

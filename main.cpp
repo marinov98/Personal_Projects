@@ -42,25 +42,47 @@ int main() {
 		// for whether the user wants to repeat using a functions
 		char answer;
 		if (response == "basics") {
-			while (repeat == true) {
+			while (repeat) {
 				int terms;
 				int trials = 0;
 				double inputnumber;
 				// gets the number of terms in the date set and fills the vector with them
 				std::cout << "How many terms are there?" << '\n';
 				std::cin >> terms;
-				if (terms < 1) {
-					std::cout << "Invalid number of terms!" << '\n';
+				while (!std::cin) {
+					std::cout << "Invalid input! try again" << '\n';
+					std::cin.clear();
+					std::cin.ignore();
+					std::cin >> terms;
 				}
-				else {
+				// Ensure # of terms is correct
+				if (terms <= 1) {
+					while (terms <= 1) {
+						std::cout << "Invalid number of terms!" << '\n';
+						std::cout << "Please try to input the number of terms again: " << '\n';
+						std::cin >> terms;
+					}
+				}
+				// Perform calculations only when # of terms is valid
+				if (terms > 1) {
 					std::vector<double> dataset;
 					dataset.reserve(terms);
 					std::cout << "You may now type the numbers in your data set" << '\n';
 					while (trials != terms) {
 						std::cin >> inputnumber;
-						dataset.emplace_back(inputnumber);
-						trials++;
+						if (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> inputnumber;
+						}
+						else {
+							dataset.emplace_back(inputnumber);
+							trials++;
+						}
 					}
+					// Ensure dataset is sorted so all functions work as intended
+					sortDataset(dataset);
 					// showcases the dataset's mean, mode, and range
 					displayDataset(dataset);
 					std::cout << "The MEAN of the data set is: " << calculateMean(dataset, terms)
@@ -86,8 +108,7 @@ int main() {
 					// erase terms once finished showing numbers to user
 					dataset.clear();
 				}
-				// reset the trials
-				trials = 0;
+
 				std::cout << "Would like to use this function again? Type 'y' or 'n' " << '\n';
 				std::cin >> answer;
 				if (answer == 'y') {
@@ -257,17 +278,29 @@ int main() {
 				// gets the number of terms in the date set and fills the vector with them
 				std::cout << "How many terms are there?" << '\n';
 				std::cin >> terms;
-				if (terms < 1) {
-					std::cout << "invalid number of terms!" << '\n';
+				if (terms <= 1) {
+					while (terms <= 1) {
+						std::cout << "Invalid number of terms!" << '\n';
+						std::cout << "Please try to input the number of terms again: " << '\n';
+						std::cin >> terms;
+					}
 				}
-				else {
+				if (terms > 1) {
 					std::vector<double> datasetX;
 					datasetX.reserve(terms);
 					std::cout << "You may now type the numbers in your X data set" << '\n';
 					while (trials != terms) {
 						std::cin >> inputnumbers;
-						datasetX.emplace_back(inputnumbers);
-						trials++;
+						if (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> inputnumbers;
+						}
+						else {
+							datasetX.emplace_back(inputnumbers);
+							trials++;
+						}
 					}
 					trials = 0;
 					std::vector<double> datasetY;

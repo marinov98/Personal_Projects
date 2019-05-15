@@ -20,8 +20,7 @@ void sortDataset(std::vector<double>& dataSet) {
 }
 
 // displays all the elements in the vector
-const void displayDataset(std::vector<double> dataSet) {
-	sortDataset(dataSet);
+const void displayDataset(const std::vector<double>& dataSet) {
 	std::cout << "The data set you inputted is: " << '\n';
 
 	for (const auto& number : dataSet) {
@@ -31,14 +30,13 @@ const void displayDataset(std::vector<double> dataSet) {
 }
 
 // displays the minimum and maximum value to the user
-const void displayMinMax(std::vector<double> dataSet) {
-	sortDataset(dataSet);
+const void displayMinMax(const std::vector<double>& dataSet) {
 	std::cout << "The minimum value of the data set is: " << dataSet.front() << '\n';
 	std::cout << "The maximum value of the data set is: " << dataSet.back() << '\n';
 }
 
 // displays 25th,50th, and 75th percentile to the user
-const void displayPercentiles(std::vector<double> dataSet) {
+const void displayPercentiles(const std::vector<double>& dataSet) {
 	const Percentile percentile = calculatePercentiles(dataSet);
 	if (dataSet.size() <= 3) {
 		std::cout << "The 50th percentile(MEDIAN) of the data set is: " << percentile.q2 << '\n';
@@ -62,22 +60,20 @@ const void displayStandardDeviation(std::vector<double> dataSet, const int terms
 
 // Functions for finding MEAN, MEDIAN, RANGE, and
 
-double calculateMean(std::vector<double> dataSet, const int terms) {
+double calculateMean(const std::vector<double>& dataSet, const int terms) {
 	return  std::accumulate(dataSet.begin(), dataSet.end(), 0.0)/ terms;
 }
 
-double calculateRange(std::vector<double> dataSet) {
-	sortDataset(dataSet);
+double calculateRange(const std::vector<double>& dataSet) {
 	return dataSet.back() - dataSet.front();
 }
 
-bool isEvenSize(std::vector<double> dataSet) {
+bool isEvenSize(const std::vector<double>& dataSet) {
 	return (dataSet.size() % 2 == 0);
 }
 // calculates 25th,50th, and 75th percentile of the data set
-Percentile calculatePercentiles(std::vector<double> dataSet) {
+Percentile calculatePercentiles(const std::vector<double>& dataSet) {
 	Percentile percentile;
-	sortDataset(dataSet);
 	if (!(isEvenSize(dataSet))) {
 		if ((dataSet.size() / 2) % 2 == 1) {
 			percentile.q1 = dataSet[(dataSet.size() - 1) / 4];
@@ -106,8 +102,7 @@ Percentile calculatePercentiles(std::vector<double> dataSet) {
 	return percentile;
 }
 
-double calculateMode(std::vector<double> dataSet) {
-	sortDataset(dataSet);
+double calculateMode(const std::vector<double>& dataSet) {
 	double mode = dataSet.front();
 	int count = 1;
 	int maxCount = 0;
@@ -133,11 +128,11 @@ double calculateMode(std::vector<double> dataSet) {
 }
 
 // standard deviation and variance
-DataType calculateStandardDeviation(std::vector<double> dataSet, int terms) {
+DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms) {
 	double mean = calculateMean(dataSet, terms);
 	DataType sd;
-	sd.population = 0;
-	sd.sample = 0;
+	sd.population = 0.0;
+	sd.sample = 0.0;
 
 	for (double number : dataSet) {
 		double temp = number - mean;
@@ -152,22 +147,22 @@ DataType calculateStandardDeviation(std::vector<double> dataSet, int terms) {
 
 // interquartile range and outliers
 
-double calculateInterquartileRange(std::vector<double> dataSet) {
+double calculateInterquartileRange(const std::vector<double>& dataSet) {
 	const Percentile percentile = calculatePercentiles(dataSet);
 	const double iqr = percentile.q3 - percentile.q1;
 	return iqr;
 }
 
-void findOutliers(std::vector<double> dataSet) {
+void findOutliers(const std::vector<double>& dataSet) {
 	const Percentile percentile = calculatePercentiles(dataSet);
 	const double iqr = calculateInterquartileRange(dataSet);
 	const double lower = percentile.q1 - (iqr * 1.5);
 	const double upper = percentile.q3 + (iqr * 1.5);
 	std::vector<double> outliers;
 
-	for (double number : dataSet) {
+	for (const auto& number : dataSet) {
 		if ((number > upper && number > lower) || (number < lower && number < upper)) {
-			outliers.push_back(number);
+			outliers.emplace_back(number);
 		}
 	}
 	// if outliers found, print them to the user
