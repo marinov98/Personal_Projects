@@ -7,6 +7,9 @@
 - make a website for the stat calculator
 - use cmake to launch
 
+## Outside namespaces used
+- [termcolor]: https://github.com/marinov98/termcolor
+
 ## Table of Contents
   1. [Goals](#Goals)
   2. [Functionality](#Functionality)
