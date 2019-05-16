@@ -52,7 +52,7 @@
 ## How-To-Use
 - clone this repository
 - cd into it (Do not cd into src)
-- run ```make``` then ```make run``` or ```./main```
+- run ```make``` then ```make run```
 
 ## Regarding CMake
 - right now it is best to compile with the Makefile I made for the project
