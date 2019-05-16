@@ -15,15 +15,15 @@ void sortDatasetXY(std::vector<double>& datasetX, std::vector<double>& datasetY)
 const void displayDatasetXY(const std::vector<double>& datasetX, const std::vector<double>& datasetY);
 void displayLSRL(const std::vector<double>& datasetX,
 			     const std::vector<double>& datasetY,
-			     const int terms);
+			     int terms);
 
 // calculation functions
 double calculateCorrelationCoefficient(const std::vector<double>& datasetX,
                                        const std::vector<double>& datasetY,
-                                       const int terms);
+                                       int terms);
 double calculateSlope(const std::vector<double>& datasetX,
 		              const std::vector<double>& datasetY,
-		              const int terms);
+		              int terms);
 double calculateYintercept(const std::vector<double>& datasetX,
                            const std::vector<double>& datasetY,
-                           const int terms);
+                           int terms);

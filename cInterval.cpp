@@ -50,7 +50,7 @@ Bound Cinterval::calculateCI_Z(std::string percent,
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
-	const double zcrit = getZcritical(percent);
+	const double zcrit = getZcritical(std::move(percent));
 	const double new_sd = calculateSamplingDistributionSd(sd, sample_size);
 	bound.lower = (point_estimate - zcrit * new_sd);
 	bound.upper = (point_estimate + zcrit * new_sd);
@@ -79,7 +79,7 @@ Bound Cinterval::calculateCI_Proportion(std::string percent, double p_hat, const
 
 	Bound bound;
 	double q = 1 - p_hat;
-	const double zcrit = getZcritical(percent);
+	const double zcrit = getZcritical(std::move(percent));
 	bound.lower = (p_hat - zcrit * std::sqrt((p_hat * q) / sample_size));
 	bound.upper = (p_hat + zcrit * std::sqrt((p_hat * q) / sample_size));
 	return bound;
@@ -96,7 +96,7 @@ Bound Cinterval::calculateCI_2Proportions(std::string percent,
 	Bound bound;
 	double q = 1 - p_hat;
 	double q2 = 1 - p_hat2;
-	const double zcrit = getZcritical(percent);
+	const double zcrit = getZcritical(std::move(percent));
 	bound.lower = ((p_hat - p_hat2)
 	               - zcrit * std::sqrt((p_hat * q) / sample_size + ((p_hat2 * q2) / sample_size2)));
 	bound.upper = ((p_hat - p_hat2)
@@ -115,7 +115,7 @@ Bound Cinterval::calculateCI2Sample_Z(std::string percent,
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
-	const double zcrit = getZcritical(percent);
+	const double zcrit = getZcritical(std::move(percent));
 	bound.lower =
 	    (mean1 - mean2) - zcrit * std::sqrt(sd1 * sd1 / sample_size + sd2 * sd2 / sample_size2);
 	bound.upper =

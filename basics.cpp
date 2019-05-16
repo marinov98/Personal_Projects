@@ -68,13 +68,10 @@ double calculateRange(const std::vector<double>& dataSet) {
 	return dataSet.back() - dataSet.front();
 }
 
-bool isEvenSize(const std::vector<double>& dataSet) {
-	return (dataSet.size() % 2 == 0);
-}
 // calculates 25th,50th, and 75th percentile of the data set
 Percentile calculatePercentiles(const std::vector<double>& dataSet) {
 	Percentile percentile;
-	if (!(isEvenSize(dataSet))) {
+	if (dataSet.size() % 2 != 0) {
 		if ((dataSet.size() / 2) % 2 == 1) {
 			percentile.q1 = dataSet[(dataSet.size() - 1) / 4];
 			percentile.q2 = dataSet[(dataSet.size() - 1) / 2];
@@ -131,10 +128,8 @@ double calculateMode(const std::vector<double>& dataSet) {
 DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms) {
 	double mean = calculateMean(dataSet, terms);
 	DataType sd;
-	sd.population = 0.0;
-	sd.sample = 0.0;
 
-	for (double number : dataSet) {
+	for (const auto& number : dataSet) {
 		double temp = number - mean;
 		sd.sample += (temp * temp);
 		sd.population += (temp * temp);

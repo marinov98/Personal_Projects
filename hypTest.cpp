@@ -14,9 +14,9 @@ purpose: implements the hypothesis testing class
 // single sample
 // calculates regular z score without including sample size
 double HypTest::calculateZscore(double point_estimate, double mean, double sd) {
-	z_score = (point_estimate - mean) / sd;
+	this->z_score = (point_estimate - mean) / sd;
 	std::cout << "Your z-score is: " << '\n';
-	return z_score;
+	return this->z_score;
 }
 
 // calculates z score with sample size factored in
@@ -25,10 +25,10 @@ double HypTest::calculateZstat(double point_estimate,
                                double sd,
                                const int sample_size) {
 	double new_sd = calculateSamplingDistributionSd(sd, sample_size);
-	z_stat = (point_estimate - mean) / new_sd;
+	this->z_stat = (point_estimate - mean) / new_sd;
 
 	std::cout << "Your z test statistic is: " << '\n';
-	return z_stat;
+	return this->z_stat;
 }
 
 // calculates the t score
@@ -36,11 +36,14 @@ double HypTest::calculateTscore(double sampleMean,
                                 double popMean,
                                 double sd,
                                 const int sample_size) {
+	if (sample_size == 0)
+		throw std::runtime_error("Invalid sample size");
+
 	double new_sd = calculateSamplingDistributionSd(sd, sample_size);
-	t_score = (sampleMean - popMean) / new_sd;
+	this->t_score = (sampleMean - popMean) / new_sd;
 
 	std::cout << "Your t-score/statistic is: " << '\n';
-	return t_score;
+	return this->t_score;
 }
 
 // two-sample test statistics
@@ -51,9 +54,12 @@ double HypTest::calculate2sampleZstat(double mean1,
                                       const int sample_size2,
                                       double sd1,
                                       double sd2) {
-	z_stat = ((mean1 - mean2) - hvalue)
+	if (sample_size1 == 0 || sample_size2 == 0)
+		throw std::runtime_error("Invalid sample size");
+
+	this->z_stat = ((mean1 - mean2) - hvalue)
 	         / std::sqrt((sd1 * sd1) / sample_size1 + (sd2 * sd2) / sample_size2);
-	return z_stat;
+	return this->z_stat;
 }
 
 double HypTest::calculate2sampleTscore(double mean1,
@@ -63,16 +69,22 @@ double HypTest::calculate2sampleTscore(double mean1,
                                        const int sample_size2,
                                        double sd1,
                                        double sd2) {
-	t_score = ((mean1 - mean2) - hvalue)
+	if (sample_size1 == 0 || sample_size2 == 0)
+		throw std::runtime_error("Invalid sample size");
+
+	this->t_score = ((mean1 - mean2) - hvalue)
 	          / std::sqrt((sd1 * sd1) / sample_size1 + (sd2 * sd2) / sample_size2);
 
-	return t_score;
+	return this->t_score;
 }
 
 double HypTest::calculate2T_DF(double sd,
                                double sd2,
                                const int sample_size,
                                const int sample_size2) {
+	if (sample_size == 0 || sample_size2 == 0)
+		throw std::runtime_error("Invalid sample size");
+
 	double v1 = (sd * sd) / sample_size;
 	double v2 = (sd2 * sd2) / sample_size2;
 
@@ -87,41 +99,56 @@ double HypTest::calculate2PairedsampleTscore(double mean_difference,
                                              double hvalue,
                                              double sd_d,
                                              const int sample_size) {
+	if (sample_size == 0)
+		throw std::runtime_error("Invalid sample size");
+
 	const double new_sd = calculateSamplingDistributionSd(sd_d, sample_size);
-	t_score = (mean_difference - hvalue) / new_sd;
-	return t_score;
+	this->t_score = (mean_difference - hvalue) / new_sd;
+	return this->t_score;
 }
 
 double HypTest::calculatePhatC(double p_hat,
                                double p_hat2,
                                const int sample_size,
                                const int sample_size2) {
-	double p_c = (sample_size * p_hat + sample_size2 * p_hat2) / (sample_size + sample_size2);
-	return p_c;
+	if (sample_size == 0 || sample_size2 == 0)
+		throw std::runtime_error("Invalid sample size");
+
+	return ((sample_size * p_hat + sample_size2 * p_hat2) / (sample_size + sample_size2));
 }
 double HypTest::calculateProportion(double p_hat, double p, const int sample_size) {
-	double p_stat = (p_hat - p) / std::sqrt((p * (1 - p)) / sample_size);
+	if (sample_size == 0)
+		throw std::runtime_error("Invalid sample size");
+
 	std::cout << "Your test statistics is: " << '\n';
-	return p_stat;
+	return ((p_hat - p) / std::sqrt((p * (1 - p)) / sample_size));
 }
 double HypTest::calculate2zproportion(double p_hat,
                                       double p_hat2,
                                       double hvalue,
                                       const int sample_size,
                                       const int sample_size2) {
+	if (sample_size == 0 || sample_size2 == 0)
+		throw std::runtime_error("Invalid sample size");
+
 	const double p_c = calculatePhatC(p_hat, p_hat2, sample_size, sample_size2);
 	const double bottom =
 	    std::sqrt((p_c * (1 - p_c) / sample_size) + (p_c * (1 - p_c) / sample_size2));
-	double p_stat = (((p_hat - p_hat2) - hvalue) / bottom);
-	return p_stat;
+
+	if (bottom == 0)
+		throw std::runtime_error("Attempt to divide by zero");
+
+	return (((p_hat - p_hat2) - hvalue) / bottom);
 }
 
-double HypTest::performChiSquare(std::vector<Chi> chitest) {
-	double test = 0;
-	for (int i = 0; i < chitest.size(); i++) {
-		double difference = (chitest[i].observed - chitest[i].expected);
-		test += (difference * difference) / chitest[i].expected;
+double HypTest::performChiSquare(const std::vector<Chi>& chitest) {
+	double test = 0.0;
+
+	for (const auto& data : chitest) {
+		double difference = (data.observed - data.expected);
+		test += (difference * difference) / data.expected;
 	}
+
 	return test;
 }
 
@@ -494,6 +521,8 @@ void HypTest::printChiTest() {
 		std::cin >> n;
 	}
 
+	this->chi_values.reserve(n);
+
 	std::cout << "Type in your observed values" << '\n';
 	while (inputs != n) {
 		std::cout << "Type in observed value #" << (inputs + 1) << '\n';
@@ -506,26 +535,26 @@ void HypTest::printChiTest() {
 		}
 		std::cout << "Type in expected value #" << (inputs + 1) << '\n';
 		std::cin >> ex;
-		while (!std::cin) {
+		while (!std::cin || ex == 0) {
 			std::cout << "Invalid input! try again" << '\n';
 			std::cin.clear();
 			std::cin.ignore();
 			std::cin >> ex;
 		}
-		chi_values.push_back(Chi{obs, ex});
+		this->chi_values.emplace_back(Chi{obs, ex});
 		inputs++;
 	}
 
-	double chi_test = performChiSquare(chi_values);
+	double chi_test = performChiSquare(this->chi_values);
 	std::cout << "The observed values you inputted are :" << '\n';
-	for (int i = 0; i < n; i++) {
-		std::cout << " " << chi_values[i].observed;
+	for (const auto& value : this->chi_values) {
+		std::cout << " " << value.observed;
 	}
 	std::cout << '\n';
 
 	std::cout << "The expected values you inputted are :" << '\n';
-	for (int j = 0; j < n; j++) {
-		std::cout << " " << chi_values[j].expected;
+	for (const auto& value : this->chi_values) {
+		std::cout << " " << value.expected;
 	}
 	std::cout << '\n';
 

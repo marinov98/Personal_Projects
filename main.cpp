@@ -143,8 +143,8 @@ int main() {
 			    << '\n';
 			while (repeat) {
 				std::cout
-				    << "type \"ci\" for confidence interval or \"ht\" for hypothesis testing? "
-				    << '\n';
+				    << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )"
+						<< '\n';
 				Cinterval ci;
 				std::string choice;
 				std::cin >> choice;

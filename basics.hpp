@@ -18,12 +18,16 @@ purpose: all the functions that perform basic functions such as mean,median,mode
 struct DataType {
 	double population;
 	double sample;
+
+	DataType() : population(0.0), sample(0.0) {}
 };
 
 struct Percentile {
 	double q1;
 	double q2;
 	double q3;
+
+	Percentile() : q1(0.0), q2(0.0), q3(0.0) {}
 };
 
 // sorting and printing functions
@@ -35,7 +39,6 @@ const void displayPercentiles(const std::vector<double>& dataSet);
 // calculation and functionality functions
 double calculateMean(const std::vector<double>& dataSet, int terms);
 double calculateRange(const std::vector<double>& dataset);
-bool isEvenSize(const std::vector<double>& dataSet);
 Percentile calculatePercentiles(const std::vector<double>& dataSet);
 double calculateMode(const std::vector<double>& dataSet);
 DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms);
