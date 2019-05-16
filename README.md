@@ -51,5 +51,5 @@
 
 ## How-To-Use
 - clone this repository
-- cd into it from terminal
+- cd into it (Do not cd in src)
 - run ```make``` then ```make run``` or ```./main```
