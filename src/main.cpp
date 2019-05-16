@@ -194,12 +194,30 @@ int main() {
 						double sd;
 						std::cout << "What is x̄?" << '\n';
 						std::cin >> point_estimate;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> point_estimate;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "What is the population mean?" << '\n';
 						std::cin >> mean;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> mean;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the standard deviation" << '\n';
 						std::cin >> sd;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> sd;
+						}
 						std::cin.ignore(100000,'\n');
 						ht.calculateZscore(point_estimate, mean, sd);
 					}
@@ -210,15 +228,39 @@ int main() {
 						int sample_size;
 						std::cout << "What is x̄?" << '\n';
 						std::cin >> point_estimate;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> point_estimate;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "What is the population mean?" << '\n';
 						std::cin >> mean;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> mean;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "What is the sample size?" << '\n';
 						std::cin >> sample_size;
+						while (!std::cin || sample_size <= 0) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> sample_size;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the standard deviation" << '\n';
 						std::cin >> sd;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> sd;
+						}
 						std::cin.ignore(100000,'\n');
 						ht.calculateZstat(point_estimate, mean, sd, sample_size);
 					}
@@ -229,15 +271,39 @@ int main() {
 						int sample_size;
 						std::cout << "What is x̄?" << '\n';
 						std::cin >> point_estimate;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> point_estimate;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "What is the hypothesized value?" << '\n';
 						std::cin >> mean;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> mean;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "What is the sample size?" << '\n';
 						std::cin >> sample_size;
+						while (!std::cin || sample_size <= 0) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> sample_size;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the standard deviation" << '\n';
 						std::cin >> sd;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> sd;
+						}
 						std::cin.ignore(100000,'\n');
 						ht.calculateTscore(point_estimate, mean, sd, sample_size);
 					}
@@ -247,12 +313,30 @@ int main() {
 						int sample_size;
 						std::cout << "What is p̂?" << '\n';
 						std::cin >> p_hat;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> p_hat;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "What is p?" << '\n';
 						std::cin >> p;
+						while (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> p;
+						}
 						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the sample size?" << '\n';
 						std::cin >> sample_size;
+						while (!std::cin || sample_size <= 0) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> sample_size;
+						}
 						std::cin.ignore(100000,'\n');
 						ht.calculateProportion(p_hat, p, sample_size);
 					}
