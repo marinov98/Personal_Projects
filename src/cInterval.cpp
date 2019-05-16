@@ -15,22 +15,22 @@ purpose: implements the confidence interval class
 // get the z critical score based on the percent inputed by the user
 const double Cinterval::getZcritical(std::string percent) {
 	if (percent == ".99") {
-		return crit.z99;
+		return this->crit.z99;
 	}
 	else if (percent == ".95") {
-		return crit.z95;
+		return this->crit.z95;
 	}
 	else if (percent == ".90") {
-		return crit.z90;
+		return this->crit.z90;
 	}
 	else if (percent == ".85") {
-		return crit.z85;
+		return this->crit.z85;
 	}
 	else if (percent == ".80") {
-		return crit.z80;
+		return this->crit.z80;
 	}
 	std::cout << "improper input, using 90% as default Z critical" << '\n';
-	return crit.z90;
+	return this->crit.z90;
 }
 
 // calculates σ/n^1/2

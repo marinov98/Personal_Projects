@@ -16,6 +16,8 @@ purpose: Confidence intervals class, calculates z,t,proportion,performs
 struct Bound {
 	double lower;
 	double upper;
+
+	Bound() : lower(0.0), upper(0.0) {}
 };
 
 struct CriticalZ {
@@ -24,6 +26,8 @@ struct CriticalZ {
 	double z90;
 	double z85;
 	double z80;
+
+	CriticalZ() : z99(2.576), z95(1.960), z90(1.645), z85(1.440), z80(1.282) {}
 };
 
 struct Chi {
@@ -63,7 +67,7 @@ class Cinterval {
 	                           int sample_size,
 	                           int sample_size2);
 
-	const CriticalZ crit = {2.576, 1.960, 1.645, 1.440, 1.282};
+	const CriticalZ crit;
 
   public:
 	// Constructor and destructor
