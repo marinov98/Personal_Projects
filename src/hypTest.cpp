@@ -182,7 +182,7 @@ void HypTest::printHypothesisReport_2Z() {
 		std::cin >> hvalue;
 	}
 
-	std::cout << " Next, input your two standard deviations(Enter one at a time)" << '\n';
+	std::cout << " Next, input your two standard deviations (Enter one at a time)" << '\n';
 	double sd;
 	double sd2;
 	std::cin >> sd;
@@ -192,6 +192,7 @@ void HypTest::printHypothesisReport_2Z() {
 		std::cin.ignore();
 		std::cin >> sd;
 	}
+	std::cin.ignore(100000,'\n');
 	std::cin >> sd2;
 	while (!std::cin) {
 		std::cout << "Invalid input! try again" << '\n';
@@ -199,6 +200,7 @@ void HypTest::printHypothesisReport_2Z() {
 		std::cin.ignore();
 		std::cin >> sd2;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << "Now input your two sample sizes (Enter one at a time)" << '\n';
 	int sample_size;
@@ -210,6 +212,7 @@ void HypTest::printHypothesisReport_2Z() {
 		std::cin.ignore();
 		std::cin >> sample_size;
 	}
+	std::cin.ignore(100000,'\n');
 	std::cin >> sample_size2;
 	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
@@ -217,6 +220,7 @@ void HypTest::printHypothesisReport_2Z() {
 		std::cin.ignore();
 		std::cin >> sample_size2;
 	}
+	std::cin.ignore(100000,'\n');
 
 	double z_stat = calculate2sampleZstat(mean1, mean2, hvalue, sample_size, sample_size2, sd, sd2);
 
@@ -230,15 +234,15 @@ void HypTest::printHypothesisReport_2Z() {
 	std::cout << "Hypothesis Report: 2 Z" << '\n';
 	if (choice == "less") {
 		std::cout << "null hypothesis: μ1 - μ2 = 0" << '\n';
-		std::cout << "alternative hypotheis: μ1 < μ2 " << '\n';
+		std::cout << "alternative hypothesis: μ1 < μ2 " << '\n';
 	}
 	else if (choice == "greater") {
 		std::cout << "null hypothesis: μ1 - μ2 = 0" << '\n';
-		std::cout << "alternative hypotheis: μ1 > μ2 " << '\n';
+		std::cout << "alternative hypothesis: μ1 > μ2 " << '\n';
 	}
 	else if (choice == "nequal") {
 		std::cout << "null hypothesis: μ1 - μ2 = 0" << '\n';
-		std::cout << "alternative hypotheis: μ1 != μ2 " << '\n';
+		std::cout << "alternative hypothesis: μ1 != μ2 " << '\n';
 	}
 	else {
 		std::cout << "Invalid, input no null and alternative hypothesis generated.." << '\n';
@@ -264,6 +268,7 @@ void HypTest::printHypothesisReport_2T() {
 		std::cin.ignore();
 		std::cin >> mean1;
 	}
+	std::cin.ignore(100000,'\n');
 	std::cin >> mean2;
 	while (!std::cin) {
 		std::cout << "Invalid input! try again" << '\n';
@@ -271,6 +276,7 @@ void HypTest::printHypothesisReport_2T() {
 		std::cin.ignore();
 		std::cin >> mean2;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << "what is the hypothesized value?" << '\n';
 	double hvalue;
@@ -281,6 +287,7 @@ void HypTest::printHypothesisReport_2T() {
 		std::cin.ignore();
 		std::cin >> hvalue;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << " Next, input your two standard deviations(Enter one at a time)" << '\n';
 	double sd;
@@ -292,6 +299,7 @@ void HypTest::printHypothesisReport_2T() {
 		std::cin.ignore();
 		std::cin >> sd;
 	}
+	std::cin.ignore(100000,'\n');
 	std::cin >> sd2;
 	while (!std::cin) {
 		std::cout << "Invalid input! try again" << '\n';
@@ -299,6 +307,7 @@ void HypTest::printHypothesisReport_2T() {
 		std::cin.ignore();
 		std::cin >> sd2;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << "Now input your two sample sizes (Enter one at a time)" << '\n';
 	int sample_size;
@@ -310,6 +319,8 @@ void HypTest::printHypothesisReport_2T() {
 		std::cin.ignore();
 		std::cin >> sample_size;
 	}
+	std::cin.ignore(100000,'\n');
+
 	std::cin >> sample_size2;
 	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
@@ -317,6 +328,7 @@ void HypTest::printHypothesisReport_2T() {
 		std::cin.ignore();
 		std::cin >> sample_size2;
 	}
+	std::cin.ignore(100000,'\n');
 
 	double t_stat =
 	    calculate2sampleTscore(mean1, mean2, hvalue, sample_size, sample_size2, sd, sd2);
@@ -364,6 +376,7 @@ void HypTest::printHypothesisReport_pairedT() {
 		std::cin.ignore();
 		std::cin >> mean1;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << "what is the hypothesized value?" << '\n';
 	double hvalue;
@@ -374,6 +387,7 @@ void HypTest::printHypothesisReport_pairedT() {
 		std::cin.ignore();
 		std::cin >> hvalue;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << " Next, input your two standard deviations(Enter one at a time)" << '\n';
 	double sd;
@@ -384,6 +398,7 @@ void HypTest::printHypothesisReport_pairedT() {
 		std::cin.ignore();
 		std::cin >> sd;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << "Now input your sample size" << '\n';
 	int sample_size;
@@ -394,6 +409,7 @@ void HypTest::printHypothesisReport_pairedT() {
 		std::cin.ignore();
 		std::cin >> sample_size;
 	}
+	std::cin.ignore(100000,'\n');
 
 	double t_stat = calculate2PairedsampleTscore(mean1, hvalue, sd, sample_size);
 	std::cout
@@ -438,6 +454,8 @@ void HypTest::printHypothesisReport_2P() {
 		std::cin.ignore();
 		std::cin >> p_hat;
 	}
+	std::cin.ignore(100000,'\n');
+
 	std::cin >> p_hat2;
 	while (!std::cin) {
 		std::cout << "Invalid input! try again" << '\n';
@@ -445,6 +463,7 @@ void HypTest::printHypothesisReport_2P() {
 		std::cin.ignore();
 		std::cin >> p_hat2;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << "what is the hypothesized value (p1-p2)?" << '\n';
 	double hvalue;
@@ -455,6 +474,7 @@ void HypTest::printHypothesisReport_2P() {
 		std::cin.ignore();
 		std::cin >> hvalue;
 	}
+	std::cin.ignore(100000,'\n');
 
 	std::cout << "Now input your two sample sizes (Enter one at a time)" << '\n';
 	int sample_size;
@@ -466,6 +486,8 @@ void HypTest::printHypothesisReport_2P() {
 		std::cin.ignore();
 		std::cin >> sample_size;
 	}
+	std::cin.ignore(100000,'\n');
+
 	std::cin >> sample_size2;
 	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
@@ -473,6 +495,7 @@ void HypTest::printHypothesisReport_2P() {
 		std::cin.ignore();
 		std::cin >> sample_size2;
 	}
+	std::cin.ignore(100000,'\n');
 
 	const double p_stat = calculate2zproportion(p_hat, p_hat2, hvalue, sample_size, sample_size2);
 	std::cout
@@ -520,6 +543,7 @@ void HypTest::printChiTest() {
 		std::cin.ignore();
 		std::cin >> n;
 	}
+	std::cin.ignore(100000,'\n');
 
 	this->chi_values.reserve(n);
 
@@ -533,6 +557,8 @@ void HypTest::printChiTest() {
 			std::cin.ignore();
 			std::cin >> obs;
 		}
+		std::cin.ignore(100000,'\n');
+
 		std::cout << "Type in expected value #" << (inputs + 1) << '\n';
 		std::cin >> ex;
 		while (!std::cin || ex == 0) {
@@ -541,6 +567,8 @@ void HypTest::printChiTest() {
 			std::cin.ignore();
 			std::cin >> ex;
 		}
+		std::cin.ignore(100000,'\n');
+
 		this->chi_values.emplace_back(Chi{obs, ex});
 		inputs++;
 	}

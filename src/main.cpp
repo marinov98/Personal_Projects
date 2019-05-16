@@ -66,6 +66,7 @@ int main() {
 					std::cin.ignore();
 					std::cin >> terms;
 				}
+				std::cin.ignore(100000,'\n');
 				// Perform calculations only when # of terms is valid
 				if (terms > 1) {
 					std::vector<double> dataset;
@@ -77,7 +78,6 @@ int main() {
 							std::cout << "Invalid input! try again" << '\n';
 							std::cin.clear();
 							std::cin.ignore();
-							std::cin >> inputnumber;
 						}
 						else {
 							dataset.emplace_back(inputnumber);
@@ -114,7 +114,8 @@ int main() {
 					// erase terms once finished showing numbers to user
 					dataset.clear();
 				}
-
+				// clear excessive inputs
+				std::cin.ignore(100000,'\n');
 				std::cout << termcolor::white << "Would like to use this function again? Type 'y' or 'n' " << '\n';
 				std::cin >> answer;
 				if (answer == 'y') {
@@ -191,10 +192,13 @@ int main() {
 						double sd;
 						std::cout << "What is x̄?" << '\n';
 						std::cin >> point_estimate;
+						std::cin.ignore(100000,'\n');
 						std::cout << "What is the population mean?" << '\n';
 						std::cin >> mean;
+						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the standard deviation" << '\n';
 						std::cin >> sd;
+						std::cin.ignore(100000,'\n');
 						ht.calculateZscore(point_estimate, mean, sd);
 					}
 					else if (answer_2 == "zstat") {
@@ -204,12 +208,16 @@ int main() {
 						int sample_size;
 						std::cout << "What is x̄?" << '\n';
 						std::cin >> point_estimate;
+						std::cin.ignore(100000,'\n');
 						std::cout << "What is the population mean?" << '\n';
 						std::cin >> mean;
+						std::cin.ignore(100000,'\n');
 						std::cout << "What is the sample size?" << '\n';
 						std::cin >> sample_size;
+						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the standard deviation" << '\n';
 						std::cin >> sd;
+						std::cin.ignore(100000,'\n');
 						ht.calculateZstat(point_estimate, mean, sd, sample_size);
 					}
 					else if (answer_2 == "tscore") {
@@ -219,12 +227,16 @@ int main() {
 						int sample_size;
 						std::cout << "What is x̄?" << '\n';
 						std::cin >> point_estimate;
+						std::cin.ignore(100000,'\n');
 						std::cout << "What is the hypothesized value?" << '\n';
 						std::cin >> mean;
+						std::cin.ignore(100000,'\n');
 						std::cout << "What is the sample size?" << '\n';
 						std::cin >> sample_size;
+						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the standard deviation" << '\n';
 						std::cin >> sd;
+						std::cin.ignore(100000,'\n');
 						ht.calculateTscore(point_estimate, mean, sd, sample_size);
 					}
 					else if (answer_2 == "p") {
@@ -233,10 +245,13 @@ int main() {
 						int sample_size;
 						std::cout << "What is p̂?" << '\n';
 						std::cin >> p_hat;
+						std::cin.ignore(100000,'\n');
 						std::cout << "What is p?" << '\n';
 						std::cin >> p;
+						std::cin.ignore(100000,'\n');
 						std::cout << "Finally, what is the sample size?" << '\n';
 						std::cin >> sample_size;
+						std::cin.ignore(100000,'\n');
 						ht.calculateProportion(p_hat, p, sample_size);
 					}
 					else if (answer_2 == "2zstat") {
@@ -261,6 +276,8 @@ int main() {
 						std::cout << "Invalid answer, type y when prompted to try again" << '\n';
 					}
 				}
+				// clear excessive inputs
+				std::cin.ignore(100000,'\n');
 				std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 				std::cin >> answer;
 				if (answer == 'y') {
@@ -293,6 +310,7 @@ int main() {
 					std::cin.ignore();
 					std::cin >> terms;
 				}
+				std::cin.ignore(100000,'\n');
 				if (terms > 1) {
 					std::vector<double> datasetX;
 					datasetX.reserve(terms);
@@ -303,7 +321,6 @@ int main() {
 							std::cout << "Invalid input! try again" << '\n';
 							std::cin.clear();
 							std::cin.ignore();
-							std::cin >> inputnumbers;
 						}
 						else {
 							datasetX.emplace_back(inputnumbers);
@@ -311,6 +328,7 @@ int main() {
 						}
 					}
 					trials = 0;
+					std::cin.ignore(100000,'\n');
 					std::vector<double> datasetY;
 					datasetY.reserve(terms);
 					std::cout << "You may now type the numbers in your Y data set" << '\n';
@@ -320,7 +338,6 @@ int main() {
 							std::cout << "Invalid input! try again" << '\n';
 							std::cin.clear();
 							std::cin.ignore();
-							std::cin >> inputnumbers;
 						}
 						else {
 							datasetY.emplace_back(inputnumbers);
@@ -334,6 +351,8 @@ int main() {
 					std::cout << termcolor::bold << termcolor::magenta;
 					displayLSRL(datasetX, datasetY, terms);
 				}
+				// clear excessive inputs
+				std::cin.ignore(100000,'\n');
 				std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 				char decision;
 				std::cin >> decision;
