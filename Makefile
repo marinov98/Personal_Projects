@@ -1,5 +1,5 @@
 ##### VARIABLES
-EXEC    := main
+EXEC    := statistical_calculator
 #####
 
 
@@ -11,7 +11,7 @@ debug:
 
 run:
 	@echo 'launching..'
-	@./main
+	@./statistical_calculator
 
 .PHONY: clean
 
