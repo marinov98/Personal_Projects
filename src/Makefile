@@ -34,7 +34,9 @@ main.o: main.cpp $(HDRS)
 
 run:
 	@echo 'Launching...'
-	@cd .. && ./$(EXEC)
+	../$(EXEC)
+
+#@cd .. && ./$(EXEC)
 
 ##########################
 #### DEBUGGING

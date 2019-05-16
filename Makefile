@@ -7,7 +7,7 @@ all:
 	@echo 'Running application...'
 	@echo 'Please wait while calculator is being built...'
 	+@$(MAKE) -C src
-	@echo 'You may now start calculator with "make run"'
+	@echo 'You may now start the calculator with "make run"'
 
 debug:
 	@echo 'Debug mode requested.'

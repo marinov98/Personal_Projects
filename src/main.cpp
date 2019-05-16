@@ -61,9 +61,11 @@ int main() {
 				std::cin >> terms;
 				// Ensure # of terms is correct
 				while (!std::cin || terms <= 1) {
+					// notify user input is incorrect
 					std::cout << "Invalid input! try again" << '\n';
+					std::cout << "Expected one input that is greater than 1" << '\n';
 					std::cin.clear();
-					std::cin.ignore();
+					std::cin.ignore(1000,'\n');
 					std::cin >> terms;
 				}
 				std::cin.ignore(100000,'\n');
@@ -305,9 +307,11 @@ int main() {
 				std::cout << "How many terms are there?" << '\n';
 				std::cin >> terms;
 				while (!std::cin || terms <= 1) {
+					// notify user input is incorrect
 					std::cout << "Invalid input! try again" << '\n';
+					std::cout << "Expected one input that is greater than 1" << '\n';
 					std::cin.clear();
-					std::cin.ignore();
+					std::cin.ignore(1000,'\n');
 					std::cin >> terms;
 				}
 				std::cin.ignore(100000,'\n');

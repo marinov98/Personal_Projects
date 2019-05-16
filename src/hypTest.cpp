@@ -538,9 +538,11 @@ void HypTest::printChiTest() {
 	std::cin >> n;
 	// Ensure # of terms is correct
 	while (!std::cin || n <= 1) {
+		// notify user input is incorrect
 		std::cout << "Invalid input! try again" << '\n';
+		std::cout << "Expected one input that is greater than 1" << '\n';
 		std::cin.clear();
-		std::cin.ignore();
+		std::cin.ignore(1000,'\n');
 		std::cin >> n;
 	}
 	std::cin.ignore(100000,'\n');
