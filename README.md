@@ -56,4 +56,4 @@
 
 ## Regarding CMake
 - right now it is best to compile with the Makefile I made for the project
-- The Cmake should work as well but it is best used with an IDE that creates projects off of it (Clion)
+- The Cmake works just as well
