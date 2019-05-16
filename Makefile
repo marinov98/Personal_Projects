@@ -4,16 +4,21 @@ EXEC    := statistical_calculator
 
 
 all: 
-	+$(MAKE) -C src
+	@echo 'Running application...'
+	@echo 'Please wait while calculator is being built...'
+	+@$(MAKE) -C src
+	@echo 'You may now start calculator with "make run"'
 
 debug:
-	cd src && $(MAKE) debug 
+	@echo 'Debug mode requested.'
+	@echo 'Compiling calculator with debug mode...'
+	+@$(MAKE) debug -C src 
 
 run:
-	@echo 'launching..'
-	@./$(EXEC)
+	+@$(MAKE) run -C src 
 
 .PHONY: clean
 
 clean:
-	cd src && $(MAKE) clean
+	+@$(MAKE) clean -C src
+#	cd src && $(MAKE) clean

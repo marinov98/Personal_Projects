@@ -1,4 +1,4 @@
-#######################################################
+######################################################
 ##### VARIABLES
 #######################################################
 CXX 		:= g++
@@ -14,21 +14,21 @@ EXEC		:= statistical_calculator
 #### COMPILING & RUNNING
 ##########################
 ../$(EXEC): main.o $(OBJS)
-	@echo 'linking objects and building executable...'
+	@echo 'Linking objects and building executable...'
 	@$(CXX) -o $@ $^
 	$(if $(findstring g,$(CXXFLAGS)),\
-		@echo 'Calculator ready to be debugged',\
-		@echo 'Calculator ready to launch')
+		@echo 'Calculator is ready to be debugged',\
+		@echo 'Calculator is ready to launch')
 
 main.o: main.cpp $(HDRS)
-	@echo 'building main object file..'
+	@echo 'Compiling main object file..'
 	@$(CXX) $(CXXFLAGS) -c main.cpp
 	@echo 'Success!'
 
 %.o: %.cpp %.hpp
 	$(if $(findstring g,$(CXXFLAGS)),\
-		@echo 'debugging -> $@',\
-		@echo 'building object -> $@')
+		@echo 'Generating debugging information for $@',\
+		@echo 'Compiling object -> $@')
 	@$(CXX) $(CXXFLAGS) -c $<
 	@echo 'Success!'
 
