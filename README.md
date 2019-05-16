@@ -51,7 +51,7 @@
 
 ## How-To-Use
 - clone this repository
-- cd into it (Do not cd into src)
+- cd into it (being in either root directory or src/ works)
 - run ```make``` then ```make run```
 
 ## Regarding CMake
