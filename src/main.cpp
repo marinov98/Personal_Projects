@@ -39,12 +39,12 @@ void readFormulaSheet(const std::string& text) {
 int main() {
 	bool backtrack = true;
 	while (backtrack) {
-		std::cout << termcolor::blue << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << '\n';
+		std::cout << termcolor::blue << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << termcolor::reset<< '\n';
 		std::cout << termcolor::blue << "What would you like the calculator to do?" << '\n';
-		std::cout << termcolor::yellow << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"<< '\n';
+		std::cout << termcolor::yellow << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}" << termcolor::reset << '\n';
 		std::cout << termcolor::green << "type \"formulas\" view the formula sheet" << '\n';
-		std::cout << termcolor::magenta << "type \"cc\" for finding correlation coefficients and LSRL" << '\n';
-		std::cout << termcolor::cyan << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
+		std::cout << termcolor::magenta << "type \"cc\" for finding correlation coefficients and LSRL" << termcolor::reset << '\n';
+		std::cout << termcolor::cyan << "type \"advanced\" for confidence intervals and hypothesis testings" << termcolor::reset << '\n';
 		std::cout << termcolor::white << "type \"exit\" to quit the calculator" << '\n';
 		std::string response;
 		std::cin >> response;
@@ -345,10 +345,10 @@ int main() {
 						}
 					}
 					sortDatasetXY(datasetX, datasetY);
-					std::cout << termcolor::reset << termcolor::bold << termcolor::cyan;
+					std::cout << termcolor::reset << termcolor::bold << termcolor::blue;
 					displayDatasetXY(datasetX, datasetY);
 					std::cout << termcolor::reset << '\n';
-					std::cout << termcolor::bold << termcolor::magenta;
+					std::cout << termcolor::bold << termcolor::cyan;
 					displayLSRL(datasetX, datasetY, terms);
 				}
 				// clear excessive inputs
