@@ -30,9 +30,9 @@ void readFormulaSheet(const std::string& text) {
 
 		formulas.close();
 	}
-	catch (std::exception const& e) {
-		std::cout << "Error reading: " << text << '\n';
-		std::cout << "Reason: " << e.what() << '\n';
+	catch (std::fstream::failure const& e) {
+		std::cerr << "Error reading: " << text << '\n';
+		std::cerr << "Reason: " << e.what() << '\n';
 	}
 }
 
@@ -41,9 +41,7 @@ int main() {
 	while (backtrack) {
 		std::cout << termcolor::blue << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << '\n';
 		std::cout << termcolor::blue << "What would you like the calculator to do?" << '\n';
-		std::cout << termcolor::yellow
-		    << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"
-		    << '\n';
+		std::cout << termcolor::yellow << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}"<< '\n';
 		std::cout << termcolor::green << "type \"formulas\" view the formula sheet" << '\n';
 		std::cout << termcolor::magenta << "type \"cc\" for finding correlation coefficients and LSRL" << '\n';
 		std::cout << termcolor::cyan << "type \"advanced\" for confidence intervals and hypothesis testings" << '\n';
@@ -140,13 +138,10 @@ int main() {
 			repeat = true;
 			std::string answer_2;
 			std::cout << termcolor::bold << termcolor::cyan
-			    << "This function will allow you calculate confidence intervals and t,z and chi "
-			       "test statistics!"
-			    << '\n';
+				<< "This function will allow you calculate confidence intervals and t,z and chi "
+			       "test statistics!" << '\n';
 			while (repeat) {
-				std::cout
-				    << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )"
-						<< '\n';
+				std::cout << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )" << '\n';
 				Cinterval ci;
 				std::string choice;
 				std::cin >> choice;
@@ -180,14 +175,12 @@ int main() {
 				}
 				else if (choice == "ht") {
 					HypTest ht;
-					std::cout << "type \"zscore\" for z-score (formula without sample size)"
-					          << '\n';
+					std::cout << "type \"zscore\" for z-score (formula without sample size)" << '\n';
 					std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
 					std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
 					std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
 					std::cout << "type \"2tstat\" for two sample t-score/test-statistic" << '\n';
-					std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic"
-					          << '\n';
+					std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic" << '\n';
 					std::cout << "type \"p\" for single proportion test" << '\n';
 					std::cout << "type \"twop\" for 2 proportion test" << '\n';
 					std::cout << "type \"chi\" for chi-square test" << '\n';
@@ -264,6 +257,9 @@ int main() {
 					else if (answer_2 == "chi") {
 						ht.printChiTest();
 					}
+					else {
+						std::cout << "Invalid answer, type y when prompted to try again" << '\n';
+					}
 				}
 				std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
 				std::cin >> answer;
@@ -320,8 +316,16 @@ int main() {
 					std::cout << "You may now type the numbers in your Y data set" << '\n';
 					while (trials != terms) {
 						std::cin >> inputnumbers;
-						datasetY.emplace_back(inputnumbers);
-						trials++;
+						if (!std::cin) {
+							std::cout << "Invalid input! try again" << '\n';
+							std::cin.clear();
+							std::cin.ignore();
+							std::cin >> inputnumbers;
+						}
+						else {
+							datasetY.emplace_back(inputnumbers);
+							trials++;
+						}
 					}
 					sortDatasetXY(datasetX, datasetY);
 					std::cout << termcolor::reset << termcolor::bold << termcolor::cyan;

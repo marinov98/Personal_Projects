@@ -58,7 +58,7 @@ double HypTest::calculate2sampleZstat(double mean1,
 		throw std::runtime_error("Invalid sample size");
 
 	this->z_stat = ((mean1 - mean2) - hvalue)
-	         / std::sqrt((sd1 * sd1) / sample_size1 + (sd2 * sd2) / sample_size2);
+	               / std::sqrt((sd1 * sd1) / sample_size1 + (sd2 * sd2) / sample_size2);
 	return this->z_stat;
 }
 
@@ -73,7 +73,7 @@ double HypTest::calculate2sampleTscore(double mean1,
 		throw std::runtime_error("Invalid sample size");
 
 	this->t_score = ((mean1 - mean2) - hvalue)
-	          / std::sqrt((sd1 * sd1) / sample_size1 + (sd2 * sd2) / sample_size2);
+	                / std::sqrt((sd1 * sd1) / sample_size1 + (sd2 * sd2) / sample_size2);
 
 	return this->t_score;
 }
