@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-file(GLOB SRCS "*.cpp")
-file(GLOB HDRS "*.hpp")
+file(GLOB SRCS "src/*.cpp")
+file(GLOB HDRS "src/*.hpp")
 
 add_executable(statistical_calculator ${SRCS} ${HDRS})
