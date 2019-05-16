@@ -36,7 +36,7 @@ double HypTest::calculateTscore(double sampleMean,
                                 double popMean,
                                 double sd,
                                 const int sample_size) {
-	if (sample_size == 0)
+	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	double new_sd = calculateSamplingDistributionSd(sd, sample_size);
@@ -54,7 +54,7 @@ double HypTest::calculate2sampleZstat(double mean1,
                                       const int sample_size2,
                                       double sd1,
                                       double sd2) {
-	if (sample_size1 == 0 || sample_size2 == 0)
+	if (sample_size1 <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	this->z_stat = ((mean1 - mean2) - hvalue)
@@ -69,7 +69,7 @@ double HypTest::calculate2sampleTscore(double mean1,
                                        const int sample_size2,
                                        double sd1,
                                        double sd2) {
-	if (sample_size1 == 0 || sample_size2 == 0)
+	if (sample_size1 <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	this->t_score = ((mean1 - mean2) - hvalue)
@@ -82,7 +82,7 @@ double HypTest::calculate2T_DF(double sd,
                                double sd2,
                                const int sample_size,
                                const int sample_size2) {
-	if (sample_size == 0 || sample_size2 == 0)
+	if (sample_size <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	double v1 = (sd * sd) / sample_size;
@@ -99,7 +99,7 @@ double HypTest::calculate2PairedsampleTscore(double mean_difference,
                                              double hvalue,
                                              double sd_d,
                                              const int sample_size) {
-	if (sample_size == 0)
+	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	const double new_sd = calculateSamplingDistributionSd(sd_d, sample_size);
@@ -111,13 +111,13 @@ double HypTest::calculatePhatC(double p_hat,
                                double p_hat2,
                                const int sample_size,
                                const int sample_size2) {
-	if (sample_size == 0 || sample_size2 == 0)
+	if (sample_size <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	return ((sample_size * p_hat + sample_size2 * p_hat2) / (sample_size + sample_size2));
 }
 double HypTest::calculateProportion(double p_hat, double p, const int sample_size) {
-	if (sample_size == 0)
+	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	std::cout << "Your test statistics is: " << '\n';
@@ -128,7 +128,7 @@ double HypTest::calculate2zproportion(double p_hat,
                                       double hvalue,
                                       const int sample_size,
                                       const int sample_size2) {
-	if (sample_size == 0 || sample_size2 == 0)
+	if (sample_size <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	const double p_c = calculatePhatC(p_hat, p_hat2, sample_size, sample_size2);

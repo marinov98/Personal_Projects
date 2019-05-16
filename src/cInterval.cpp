@@ -35,7 +35,7 @@ const double Cinterval::getZcritical(std::string percent) {
 
 // calculates σ/n^1/2
 double Cinterval::calculateSamplingDistributionSd(double sd, const int sample_size) {
-	if (sample_size == 0)
+	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	return (sd / std::sqrt(sample_size));
@@ -46,7 +46,7 @@ Bound Cinterval::calculateCI_Z(std::string percent,
                                double point_estimate,
                                double sd,
                                const int sample_size) {
-	if (sample_size == 0)
+	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
@@ -62,7 +62,7 @@ Bound Cinterval::calculateCI_T(double point_estimate,
                                double sd,
                                const int sample_size,
                                double tcrit) {
-	if (sample_size == 0)
+	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
@@ -74,7 +74,7 @@ Bound Cinterval::calculateCI_T(double point_estimate,
 
 // Z proportion confidence interval
 Bound Cinterval::calculateCI_Proportion(std::string percent, double p_hat, const int sample_size) {
-	if (sample_size == 0)
+	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
@@ -90,7 +90,7 @@ Bound Cinterval::calculateCI_2Proportions(std::string percent,
                                           double p_hat2,
                                           const int sample_size,
                                           const int sample_size2) {
-	if (sample_size == 0 || sample_size2 == 0)
+	if (sample_size <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
@@ -111,7 +111,7 @@ Bound Cinterval::calculateCI2Sample_Z(std::string percent,
                                       double sd2,
                                       const int sample_size,
                                       const int sample_size2) {
-	if (sample_size == 0 || sample_size2 == 0)
+	if (sample_size <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
@@ -130,7 +130,7 @@ Bound Cinterval::calculateCI2Sample_T(double tcrit,
                                       double sd2,
                                       const int sample_size,
                                       const int sample_size2) {
-	if (sample_size == 0 || sample_size2 == 0)
+	if (sample_size <= 0 || sample_size2 <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
