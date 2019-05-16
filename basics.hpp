@@ -33,7 +33,7 @@ struct Percentile {
 // sorting and printing functions
 void sortDataset(std::vector<double>& dataSet);
 const void displayDataset(const std::vector<double>& dataSet);
-const void displayStandardDeviation(std::vector<double> dataSet, int terms);
+const void displayStandardDeviation(const std::vector<double>& dataSet, int terms);
 const void displayMinMax(const std::vector<double>& dataSet);
 const void displayPercentiles(const std::vector<double>& dataSet);
 // calculation and functionality functions

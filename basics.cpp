@@ -37,7 +37,7 @@ const void displayMinMax(const std::vector<double>& dataSet) {
 
 // displays 25th,50th, and 75th percentile to the user
 const void displayPercentiles(const std::vector<double>& dataSet) {
-	const Percentile percentile = calculatePercentiles(dataSet);
+	const Percentile& percentile = calculatePercentiles(dataSet);
 	if (dataSet.size() <= 3) {
 		std::cout << "The 50th percentile(MEDIAN) of the data set is: " << percentile.q2 << '\n';
 	}
@@ -49,8 +49,8 @@ const void displayPercentiles(const std::vector<double>& dataSet) {
 }
 
 // displays standard deviation to the user
-const void displayStandardDeviation(std::vector<double> dataSet, const int terms) {
-	const DataType sd = calculateStandardDeviation(dataSet, terms);
+const void displayStandardDeviation(const std::vector<double>& dataSet, const int terms) {
+	const DataType& sd = calculateStandardDeviation(dataSet, terms);
 
 	std::cout << "The SAMPLE standard deviation (Sx) is: " << sd.sample << '\n';
 	std::cout << "The SAMPLE variance (Sx^2) is: " << (sd.sample * sd.sample) << '\n';
@@ -103,7 +103,7 @@ double calculateMode(const std::vector<double>& dataSet) {
 	double mode = dataSet.front();
 	int count = 1;
 	int maxCount = 0;
-	for (int i = 1; i < dataSet.size() - 1; i++) {
+	for (int i = 0; i < dataSet.size() - 1; i++) {
 		if (dataSet[i] == dataSet[i + 1]) {
 			count++;
 			if (count > maxCount) {
@@ -143,7 +143,7 @@ DataType calculateStandardDeviation(const std::vector<double>& dataSet, int term
 // interquartile range and outliers
 
 double calculateInterquartileRange(const std::vector<double>& dataSet) {
-	const Percentile percentile = calculatePercentiles(dataSet);
+	const Percentile& percentile = calculatePercentiles(dataSet);
 	const double iqr = percentile.q3 - percentile.q1;
 	return iqr;
 }
