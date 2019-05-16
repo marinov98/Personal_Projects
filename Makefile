@@ -11,7 +11,7 @@ debug:
 
 run:
 	@echo 'launching..'
-	@./statistical_calculator
+	@./$(EXEC)
 
 .PHONY: clean
 
