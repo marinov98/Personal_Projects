@@ -1,0 +1,62 @@
+Formulas:
+
+BASICS:
+mean = Σx / n
+mode = number that gets repeated the most
+median(50th percentile) = the middle of the dataset(sorted in ascending order)
+standard deviation(sample) = Sx = Σ[(x - x̄)^2 / terms - 1]
+standard deviation(population) = σ = Σ[(x - x̄)^2 / terms]
+variance = (standard deviation)^2 || standard deviation = (variance)^1/2
+range = max - min
+interquartile range = q3 - q1
+outliers = 1.5*(interquartile range) + q3, q1 - 1.5*(interquartile range)
+
+CONFIDENCE INTERVALS:
+(z distribution )
+x̄ ± z(critical)*[(standard deviation:σ) / terms^1/2]
+(proportion)
+p = p̂ ± z(critical)*[(p̂(1 - p̂)) / n]^1/2
+(t distribution)
+x̄ ± t(critical) * [(standard deviation:Sx) / terms^1/2] degrees of freed = n-1
+2 SAMPLE
+(z distribution)
+x1 - x2 ± z(critical) * [σ1^2 / n1 + σ2^2 / n2]^1/2
+(t distribution)
+x1 - x2 ± t(critical) * [s1^2 / n1 + s2^2 / n2]^1/2
+(proportion)
+p̂1 - p̂2 ± z(critical) * [p̂1(1-p̂1)/n1 + p̂2(1-p̂2)/n2)]^1/2
+
+
+HYPOTHESIS TESTING:
+
+{one sample}
+z-statistic = x̄ - hypothesized value / (σ / terms)^1/2
+t-statistic = x̄ - hypothesized value / (S / terms)^1/2
+proportion(z) = (p̂-p) / [p(1-p) / terms]
+
+{two sample}
+(z-distribution)
+z-statistic = (x̄1 - x̄2 - hypothesized value /[(σ1^2 / n1 )+(σ2^2 / n2)])
+(t-distribution)
+
+**Paired
+t-statistic = [x̄d(difference in means) - hypothesized value / (sd / n^1/2)]
+degree of freedom = n -1
+t-statistic=x̄(first mean)-x̄(second mean)-hypothesized value/[(S1^2/terms of first sample)+(S2^2/terms of second sample])
+degree of freedom = [(V1 + V2)^2 / (V1^2/n1-1 + V2^2/n2-1)] where V1 = sd1^2/n1 V2 = sd2^2/n2
+
+(proportion)
+proportion(z)=[(p̂1 - p̂2) - (p1 - p2)] / (p(1 - p)*(1 / terms1 + 1/terms2))
+
+(chi square)
+chi-square Expected value = [(total row) * (total column)] / sample size
+chi-square test = Σ(Observed value-Expected value)^2/Expected value
+degree of freedom = categories - 1
+degree of freedom (MULTIPLE ROWS AND COLS) = (ROWS -1) * (COLS -1)
+
+
+CORRELATION COEFFICIENT:
+y = a + b * x
+r = (1 / (terms-1)) * (Σ[(x - x̄) / sd(x) * (y - ȳ) / sd(y)])
+slope(b) = Σ[(x - x̄) * (y - ȳ)] / Σ(x - x̄)^2
+a = ȳ - b * x̄
