@@ -168,7 +168,7 @@ const void Cinterval::displayCI_Z() {
 	}
 	std::cout << "Finally, what is the sample size" << '\n';
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -212,7 +212,7 @@ const void Cinterval::displayCI_T() {
 	}
 	std::cout << "Finally, what is the sample size" << '\n';
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -243,7 +243,7 @@ const void Cinterval::displayCI_Proportion() {
 	}
 	std::cout << "Finally, what is the sample size?" << '\n';
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -281,7 +281,7 @@ const void Cinterval::displayCI_2Proportions() {
 	}
 	std::cout << "What is the  first sample size?" << '\n';
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -289,7 +289,7 @@ const void Cinterval::displayCI_2Proportions() {
 	}
 	std::cout << "Finally, what is the  second sample size?" << '\n';
 	std::cin >> sample_size2;
-	while (!std::cin) {
+	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -346,7 +346,7 @@ const void Cinterval::displayCI_2Z() {
 	}
 	std::cout << "What is the  first sample size?" << '\n';
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -354,7 +354,7 @@ const void Cinterval::displayCI_2Z() {
 	}
 	std::cout << "Finally, what is the  second sample size?" << '\n';
 	std::cin >> sample_size2;
-	while (!std::cin) {
+	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -418,7 +418,7 @@ const void Cinterval::displayCI_2T() {
 	}
 	std::cout << "What is the  first sample size?" << '\n';
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -426,7 +426,7 @@ const void Cinterval::displayCI_2T() {
 	}
 	std::cout << "Finally, what is the  second sample size?" << '\n';
 	std::cin >> sample_size2;
-	while (!std::cin) {
+	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();

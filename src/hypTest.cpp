@@ -204,14 +204,14 @@ void HypTest::printHypothesisReport_2Z() {
 	int sample_size;
 	int sample_size2;
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
 		std::cin >> sample_size;
 	}
 	std::cin >> sample_size2;
-	while (!std::cin) {
+	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -304,14 +304,14 @@ void HypTest::printHypothesisReport_2T() {
 	int sample_size;
 	int sample_size2;
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
 		std::cin >> sample_size;
 	}
 	std::cin >> sample_size2;
-	while (!std::cin) {
+	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -388,7 +388,7 @@ void HypTest::printHypothesisReport_pairedT() {
 	std::cout << "Now input your sample size" << '\n';
 	int sample_size;
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
@@ -460,14 +460,14 @@ void HypTest::printHypothesisReport_2P() {
 	int sample_size;
 	int sample_size2;
 	std::cin >> sample_size;
-	while (!std::cin) {
+	while (!std::cin || sample_size <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();
 		std::cin >> sample_size;
 	}
 	std::cin >> sample_size2;
-	while (!std::cin) {
+	while (!std::cin || sample_size2 <= 0) {
 		std::cout << "Invalid input! try again" << '\n';
 		std::cin.clear();
 		std::cin.ignore();

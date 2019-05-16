@@ -2,7 +2,7 @@
 ##### VARIABLES
 #######################################################
 CXX 		:= g++
-CXXFLAGS 	:= -std=c++14
+CXXFLAGS 	:= -std=c++14 -Wall
 SRCS		:= basics.cpp hypTest.cpp cInterval.cpp correlation.cpp # $(wildcard *.cpp)
 HDRS        	:= $(patsubst %.cpp,%.hpp, $(SRCS))
 OBJS		:= $(patsubst %.cpp,%.o, $(SRCS))

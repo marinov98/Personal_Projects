@@ -103,7 +103,7 @@ double calculateMode(const std::vector<double>& dataSet) {
 	double mode = dataSet.front();
 	int count = 1;
 	int maxCount = 0;
-	for (int i = 0; i < dataSet.size() - 1; i++) {
+	for (size_t i = 0; i < dataSet.size() - 1; i++) {
 		if (dataSet[i] == dataSet[i + 1]) {
 			count++;
 			if (count > maxCount) {
