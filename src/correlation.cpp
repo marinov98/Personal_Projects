@@ -86,7 +86,7 @@ void displayLSRL(const std::vector<double>& datasetX,
 	std::cout << "Correlation Coefficient report: " << '\n';
 	std::cout << "The Mean value of the x values is: " << x << '\n';
 	std::cout << "The Mean value of the y values is: " << y << '\n';
-	std::cout << "The slop of the LSRL is: " << b << '\n';
+	std::cout << "The slope of the LSRL is: " << b << '\n';
 	std::cout << "The y intercept is: " << a << '\n';
 	std::cout << '\n' << "Your equation is: " << '\n';
 	std::cout << "ŷ = " << a << " + " << b << "x" << '\n';

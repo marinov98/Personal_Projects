@@ -5,7 +5,7 @@ file: main.cpp
 purpose: shows all the calculations as well as the formulas to the user
 
 SPECIAL THANKS TO Ihor Kalnytskyi
-for creating termcolor
+termcolor project
 
 ######################## */
 
@@ -90,25 +90,27 @@ int main() {
 					sortDataset(dataset);
 					// showcases the dataset's mean, mode, and range
 					displayDataset(dataset);
-					std::cout << termcolor::bold << termcolor::red << "The MEAN of the data set is: " << calculateMean(dataset, terms)
-					          << '\n';
+					std::cout << termcolor::reset << '\n';
+					std::cout << termcolor::underline << termcolor::red << "Mean, Median, Mode, Range, Min/Max:" <<  termcolor::reset << '\n';
+					std::cout << termcolor::bold << termcolor::red << "The MEAN of the data set is: " << calculateMean(dataset, terms) << '\n';
 					std::cout << "The MODE of your data set is: " << calculateMode(dataset) << '\n';
-					std::cout << "The RANGE of the data set is: " << calculateRange(dataset)
-					          << '\n';
+					std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
 					displayMinMax(dataset);
+					std::cout << termcolor::reset;
 					std::cout << termcolor::bold << termcolor::yellow;
 					// prints the 25th,50th, and 75th percentile of the dataset
 					if (dataset.size() > 3) {
-						std::cout << '\n' << "Percentiles: " << '\n';
-						std::cout << "The INTERQUARTILE RANGE of the data set is: "
+						std::cout <<  termcolor::underline << termcolor::yellow << "\nPercentiles:" << termcolor::reset << '\n';
+						std::cout << termcolor::bold << termcolor::yellow << "The INTERQUARTILE RANGE of the data set is: "
 						          << calculateInterquartileRange(dataset) << '\n';
 						displayPercentiles(dataset);
 					}
 
 					findOutliers(dataset);
-					std::cout << '\n';
+					std::cout << termcolor::reset << '\n';
 					// prints standard deviation and variance
-					std::cout << termcolor::bold << termcolor::cyan << "Standard deviation and Variance: " << '\n';
+					std::cout << termcolor::underline << termcolor::cyan << "Standard deviation and Variance:" << termcolor::reset << '\n';
+					std::cout << termcolor::bold << termcolor::cyan;
 					displayStandardDeviation(dataset, terms);
 					std::cout << '\n';
 					// erase terms once finished showing numbers to user
@@ -280,7 +282,7 @@ int main() {
 			}
 		}
 		else if (response == "cc") {
-			std::cout << termcolor::bold << termcolor::magenta;
+			std::cout << termcolor::white;
 			repeat = true;
 			while (repeat) {
 				int terms;
@@ -322,8 +324,10 @@ int main() {
 						trials++;
 					}
 					sortDatasetXY(datasetX, datasetY);
+					std::cout << termcolor::reset << termcolor::bold << termcolor::cyan;
 					displayDatasetXY(datasetX, datasetY);
-					std::cout << '\n';
+					std::cout << termcolor::reset << '\n';
+					std::cout << termcolor::bold << termcolor::magenta;
 					displayLSRL(datasetX, datasetY, terms);
 				}
 				std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
