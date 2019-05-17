@@ -10,6 +10,10 @@
 ## Outside namespaces used
 - [termcolor](https://github.com/marinov98/termcolor)
 
+## Requirements 
+- **CMake 3.12 or newer**
+- **C++14**
+
 ## Table of Contents
   1. [Goals](#Goals)
   2. [Functionality](#Functionality)
