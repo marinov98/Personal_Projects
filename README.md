@@ -26,7 +26,7 @@
 
 ## Functionality 
 
-### Contains Its own Formula Sheet!
+### Contains Its own [Formula Sheet](https://github.com/marinov98/Statistical_Calculator/blob/master/src/formulas.txt)!
 
 ### Basics: 
 - mean, median, mode, range
