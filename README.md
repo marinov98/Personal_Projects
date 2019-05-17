@@ -11,8 +11,8 @@
 - [termcolor](https://github.com/marinov98/termcolor)
 
 ## Requirements 
-- **CMake 3.12 or newer**
-- **C++14**
+- **CMake 3.12** or newer
+- **C++14** or newer
 
 ## Table of Contents
   1. [Goals](#Goals)
