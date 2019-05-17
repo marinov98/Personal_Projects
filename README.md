@@ -28,7 +28,7 @@
 
 ### Contains Its own Formula Sheet!
 
-### Basics: takes the dataset and displays:
+### Basics: 
 - mean, median, mode, range
 - Sample/Population standard deviation & variance
 - Min and Max
@@ -36,7 +36,7 @@
 - Interquartile range
 - Outliers
 
-### Hypothesis Testing
+### Hypothesis Testing (Advanced)
 - calculate z-score and t-score
 - one/two sample **t** and **z** tests
   - proportions, pair, difference 
