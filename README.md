@@ -42,7 +42,7 @@
   - proportions, pair, difference 
 - Chi-square test
 
-### Confidence intervals 
+### Confidence intervals (Advanced)
 - Sampling Distribution
 - z/t confidence intervals
   - proportion, sample
