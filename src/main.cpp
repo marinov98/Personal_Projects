@@ -14,6 +14,7 @@ termcolor project
 #include "correlation.hpp"
 #include "hypTest.hpp"
 #include "termcolor.hpp" // courtesy of Ihor Kalnytskyi's project
+// #include <doctest/doctest.h>
 #include <fstream>
 #include <iomanip>
 #include <iostream>

@@ -5,7 +5,11 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
+# find_package(doctest CONFIG REQUIRED)
+
 file(GLOB SRCS "src/*.cpp")
 file(GLOB HDRS "src/*.hpp")
 
 add_executable(statistical_calculator ${SRCS} ${HDRS})
+
+# target_link_libraries(statistical_calculator PRIVATE doctest::doctest)
