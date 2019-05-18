@@ -1,7 +1,13 @@
+# REQUIREMENTS
 cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+	
+# PROJECT NAME
 project(statistical_calculator)
 
+# REQUIRES C++14
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(.)
 
