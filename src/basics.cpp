@@ -131,7 +131,8 @@ void calculateMode(const std::vector<double>& dataSet) {
 	for (const auto &num : dataSet) {
 		if (tracker.find(num) == tracker.end()) {
 			tracker.emplace(num, 1);
-		} else {
+		}
+		else {
 			tracker.find(num)->second++;
 			if (tracker.find(num)->second > maxCount) {
 				maxCount = tracker.find(num)->second;
