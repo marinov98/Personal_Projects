@@ -87,6 +87,6 @@ cleantests:
 	@echo 'Done!'
 
 clean: 
-	@echo 'Removing build directory and main executable...'
+	@echo 'Removing build directory and executable...'
 	@$(RM) -r $(BUILDIR) $(EXEC)
 	@echo 'Done!'

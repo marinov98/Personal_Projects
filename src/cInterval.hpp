@@ -38,20 +38,28 @@ struct Chi {
 // functionality for confidence intervals
 class Cinterval {
   private:
-	const double getZcritical(std::string percent);
-	Bound calculateCI_Z(std::string percent,
+	double getZcritical(const std::string& percent) const;
+
+	// Confidence interval with Z critical
+	Bound calculateCI_Z(const std::string& percent,
 	                    double point_estimate,
 	                    double sd,
 	                    int sample_size);
 
+	//Confidence interval with T critical
 	Bound calculateCI_T(double point_estimate, double sd, int sample_size, double tcrit);
-	Bound calculateCI_Proportion(std::string percent, double p_hat, int sample_size);
+
+	// Confidence interval of single sample size proportion
+	Bound calculateCI_Proportion(const std::string& percent, double p_hat, int sample_size);
+
 	// two sample proportion
-	Bound calculateCI_2Proportions(std::string percent,
+	Bound calculateCI_2Proportions(const std::string& percent,
 	                               double p_hat,
 	                               double p_hat2,
 	                               int sample_size,
 	                               int sample_size2);
+
+	// two sample T confidence interval
 	Bound calculateCI2Sample_T(double tcrit,
 	                           double mean1,
 	                           double mean2,
@@ -59,7 +67,9 @@ class Cinterval {
 	                           double sd2,
 	                           int sample_size,
 	                           int sample_size2);
-	Bound calculateCI2Sample_Z(std::string percent,
+
+	// two sample Z confidence interval
+	Bound calculateCI2Sample_Z(const std::string& percent,
 	                           double mean1,
 	                           double mean2,
 	                           double sd1,
@@ -82,6 +92,7 @@ class Cinterval {
 	void displayCI_Z();
 	void displayCI_T();
 	void displayCI_Proportion();
+
 	// calculation functions
 	double calculateSamplingDistributionSd(double sd, int sample_size);
 	void displayCI_2Proportions();

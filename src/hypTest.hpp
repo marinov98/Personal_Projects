@@ -14,6 +14,7 @@ purpose: hypothesis testing class performs 1/2 sample Z/T tests as well as Chi s
 // functionality for hypothesis testing
 class HypTest : private Cinterval {
   private:
+	// two-sample Z
 	double calculate2sampleZstat(double mean1,
 	                             double mean2,
 	                             double hvalue,
@@ -21,7 +22,11 @@ class HypTest : private Cinterval {
 	                             int sample_size2,
 	                             double sd1,
 	                             double sd2);
+
+	// 2 sample Difference
 	double calculate2T_DF(double sd, double sd2, int sample_size, int sample_size2);
+
+	// two sample T-score
 	double calculate2sampleTscore(double mean1,
 	                              double mean2,
 	                              double hvalue,
@@ -29,19 +34,27 @@ class HypTest : private Cinterval {
 	                              int sample_size2,
 	                              double sd1,
 	                              double sd2);
+
+	// two sample paired
 	double calculate2PairedsampleTscore(double mean_difference,
 	                                    double hvalue,
 	                                    double sd_d,
 	                                    int sample_size);
+
+	// two sample proportion
 	double calculate2zproportion(double p_hat,
 	                             double p_hat2,
 	                             double hvalue,
 	                             int sample_size,
 	                             int sample_size2);
+
+	// p-hat
 	double calculatePhatC(double p_hat,
 	                      double p_hat2,
 	                      int sample_size,
 	                      int sample_size2);
+
+	// Chi-square
 	double performChiSquare(const std::vector<Chi>& chitest);
 
 	double z_score = 0.0;
@@ -64,6 +77,7 @@ class HypTest : private Cinterval {
 	void printHypothesisReport_pairedT();
 	void printHypothesisReport_2P();
 	void printChiTest();
+
 	// calculations
 	double calculateZscore(double point_estimate, double mean, double sd);
 	double calculateZstat(double point_estimate, double mean, double sd, int sample_size);

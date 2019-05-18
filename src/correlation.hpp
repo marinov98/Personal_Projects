@@ -18,12 +18,17 @@ void displayLSRL(const std::vector<double>& datasetX,
 			     int terms);
 
 // calculation functions
+
+// Correlation Coefficient
 double calculateCorrelationCoefficient(const std::vector<double>& datasetX,
                                        const std::vector<double>& datasetY,
                                        int terms);
+// Slope
 double calculateSlope(const std::vector<double>& datasetX,
 		              const std::vector<double>& datasetY,
 		              int terms);
+
+// Y-intercept
 double calculateYintercept(const std::vector<double>& datasetX,
                            const std::vector<double>& datasetY,
                            int terms);

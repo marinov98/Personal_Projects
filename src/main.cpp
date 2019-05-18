@@ -75,6 +75,9 @@ int main() {
 					std::vector<double> dataset;
 					dataset.reserve(terms);
 					std::cout << "You may now type the numbers in your data set" << '\n';
+					std::cout << " i) You can either input the data one by one (pressing enter every time you enter a number)" << '\n';
+					std::cout << " ii) You can input the entire data with space in between each number. You can even input a chunk of the data" << '\n';
+					std::cout << "Regardless the program will ask for input until it is not equal to the terms you inputted" << '\n';
 					while (trials != terms) {
 						std::cin >> inputnumber;
 						if (!std::cin) {

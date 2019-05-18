@@ -13,7 +13,7 @@ purpose: implements the confidence interval class
 
 // Confidence interval section :
 // get the z critical score based on the percent inputed by the user
-const double Cinterval::getZcritical(std::string percent) {
+double Cinterval::getZcritical(const std::string& percent) const {
 	if (percent == ".99") {
 		return this->crit.z99;
 	}
@@ -42,7 +42,7 @@ double Cinterval::calculateSamplingDistributionSd(double sd, const int sample_si
 }
 
 // Z one sample confidence interval
-Bound Cinterval::calculateCI_Z(std::string percent,
+Bound Cinterval::calculateCI_Z(const std::string& percent,
                                double point_estimate,
                                double sd,
                                const int sample_size) {
@@ -50,7 +50,7 @@ Bound Cinterval::calculateCI_Z(std::string percent,
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
-	const double zcrit = getZcritical(std::move(percent));
+	const double zcrit = getZcritical(percent);
 	const double new_sd = calculateSamplingDistributionSd(sd, sample_size);
 	bound.lower = (point_estimate - zcrit * new_sd);
 	bound.upper = (point_estimate + zcrit * new_sd);
@@ -73,19 +73,19 @@ Bound Cinterval::calculateCI_T(double point_estimate,
 }
 
 // Z proportion confidence interval
-Bound Cinterval::calculateCI_Proportion(std::string percent, double p_hat, const int sample_size) {
+Bound Cinterval::calculateCI_Proportion(const std::string& percent, double p_hat, const int sample_size) {
 	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
 	double q = 1 - p_hat;
-	const double zcrit = getZcritical(std::move(percent));
+	const double zcrit = getZcritical(percent);
 	bound.lower = (p_hat - zcrit * std::sqrt((p_hat * q) / sample_size));
 	bound.upper = (p_hat + zcrit * std::sqrt((p_hat * q) / sample_size));
 	return bound;
 }
 
-Bound Cinterval::calculateCI_2Proportions(std::string percent,
+Bound Cinterval::calculateCI_2Proportions(const std::string& percent,
                                           double p_hat,
                                           double p_hat2,
                                           const int sample_size,
@@ -96,7 +96,7 @@ Bound Cinterval::calculateCI_2Proportions(std::string percent,
 	Bound bound;
 	double q = 1 - p_hat;
 	double q2 = 1 - p_hat2;
-	const double zcrit = getZcritical(std::move(percent));
+	const double zcrit = getZcritical(percent);
 	bound.lower = ((p_hat - p_hat2)
 	               - zcrit * std::sqrt((p_hat * q) / sample_size + ((p_hat2 * q2) / sample_size2)));
 	bound.upper = ((p_hat - p_hat2)
@@ -104,7 +104,7 @@ Bound Cinterval::calculateCI_2Proportions(std::string percent,
 	return bound;
 }
 // TWO sample Z,T confidence intervals
-Bound Cinterval::calculateCI2Sample_Z(std::string percent,
+Bound Cinterval::calculateCI2Sample_Z(const std::string& percent,
                                       double mean1,
                                       double mean2,
                                       double sd1,
@@ -115,7 +115,7 @@ Bound Cinterval::calculateCI2Sample_Z(std::string percent,
 		throw std::runtime_error("Invalid sample size");
 
 	Bound bound;
-	const double zcrit = getZcritical(std::move(percent));
+	const double zcrit = getZcritical(percent);
 	bound.lower =
 	    (mean1 - mean2) - zcrit * std::sqrt(sd1 * sd1 / sample_size + sd2 * sd2 / sample_size2);
 	bound.upper =
