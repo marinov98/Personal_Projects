@@ -156,7 +156,7 @@ void calculateMode(const std::vector<double>& dataSet) {
 // standard deviation and variance
 DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms) {
 	// Safety
-	if (terms <= 0 || dataSet.empty())
+	if (terms <= 1 || dataSet.empty())
 		throw std::runtime_error("Invalid number of terms or vector size");
 
 	double mean = calculateMean(dataSet, terms);
