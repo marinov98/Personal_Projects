@@ -2,9 +2,10 @@
 ###### VARIABLES
 #############################
 
-### FLAGS
+### FLAGS 
 CXX 		:= g++
-CXXFLAGS 	:= -std=c++14 -Wall
+STANDARD 	:= -std=c++14 $(CXXFLAGS)
+WARNINGS 	:= -Wall -Wextra -Wno-ignored-qualifiers 
 
 ### DIRECTORIES
 SRCDIR 		:= src
@@ -26,18 +27,18 @@ TESTEXEC        := test_calculator
 
 $(EXEC): $(OBJS)
 	@echo 'Linking and creating executable...'
-	@$(CXX) -o $@ $^
-	$(if $(findstring g,$(CXXFLAGS)),\
+	@$(CXX) $(STANDARD) $(WARNINGS) -o $@ $^
+	$(if $(findstring g,$(STANDARD)),\
 		@echo 'Calculator is ready to be debugged.',\
 		@echo 'Calculator is ready to launch.')
 	@echo 'Start using the calculator by typing "make run".'
 
 $(BUILDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(BUILDIR) 
-	$(if $(findstring g,$(CXXFLAGS)),\
+	$(if $(findstring g,$(STANDARD)),\
 		@echo 'Generating debugging information for $@',\
 		@echo 'Compiling object -> $@')
-	@$(CXX) $(CXXFLAGS) -c -o $@ $<
+	@$(CXX) $(STANDARD) $(WARNINGS) -c -o $@ $<
 	@echo 'Success!'
 
 run:
@@ -49,7 +50,7 @@ run:
 #############################
 ###### DEBUGGING
 #############################
-debug: CXXFLAGS := $(CXXFLAGS) -g # -fsanitize=address,undefined
+debug: STANDARD := $(STANDARD) -g -fsanitize=address,undefined
 
 debug: $(EXEC)
 
@@ -59,7 +60,7 @@ debug: $(EXEC)
 #############################
 test: $(TESTDIR)/tests.cpp $(TSRCS)
 	@echo 'Testing project...'
-	@$(CXX) $(CXXFLAGS) -o $(TESTEXEC) $^
+	@$(CXX) $(STANDARD) $(WARNINGS) -o $(TESTEXEC) $^
 	@echo 'Results can now be viewed by typing "make runtests".'
 
 runtests:

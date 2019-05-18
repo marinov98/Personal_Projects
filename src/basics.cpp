@@ -22,7 +22,7 @@ void sortDataset(std::vector<double>& dataSet) {
 }
 
 // displays all the elements in the vector
-const void displayDataset(const std::vector<double>& dataSet) {
+void displayDataset(const std::vector<double>& dataSet) {
 	std::cout << "The data set you inputted is: " << '\n';
 
 	for (const auto& number : dataSet) {
@@ -32,7 +32,7 @@ const void displayDataset(const std::vector<double>& dataSet) {
 }
 
 // displays the minimum and maximum value to the user
-const void displayMinMax(const std::vector<double>& dataSet) {
+void displayMinMax(const std::vector<double>& dataSet) {
 	if (dataSet.empty())
 		throw std::underflow_error("Empty dataset");
 
@@ -43,7 +43,7 @@ const void displayMinMax(const std::vector<double>& dataSet) {
 }
 
 // displays 25th,50th, and 75th percentile to the user
-const void displayPercentiles(const std::vector<double>& dataSet) {
+void displayPercentiles(const std::vector<double>& dataSet) {
 	const Percentile& percentile = calculatePercentiles(dataSet);
 	if (dataSet.size() <= 3) {
 		std::cout << "The 50th percentile(MEDIAN) of the data set is: " << percentile.q2 << '\n';
@@ -56,7 +56,7 @@ const void displayPercentiles(const std::vector<double>& dataSet) {
 }
 
 // displays standard deviation to the user
-const void displayStandardDeviation(const std::vector<double>& dataSet, const int terms) {
+void displayStandardDeviation(const std::vector<double>& dataSet, const int terms) {
 	const DataType& sd = calculateStandardDeviation(dataSet, terms);
 
 	std::cout << "The SAMPLE standard deviation (Sx) is: " << sd.sample << '\n';

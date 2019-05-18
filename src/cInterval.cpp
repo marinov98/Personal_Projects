@@ -141,7 +141,7 @@ Bound Cinterval::calculateCI2Sample_T(double tcrit,
 	return bound;
 }
 // void functions that display the intervals to the user
-const void Cinterval::displayCI_Z() {
+void Cinterval::displayCI_Z() {
 	std::string percent;
 	double point_estimate;
 	double sd;
@@ -180,7 +180,7 @@ const void Cinterval::displayCI_Z() {
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
 }
 
-const void Cinterval::displayCI_T() {
+void Cinterval::displayCI_T() {
 	double tcrit;
 	double point_estimate;
 	double sd;
@@ -225,7 +225,7 @@ const void Cinterval::displayCI_T() {
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
 }
 
-const void Cinterval::displayCI_Proportion() {
+void Cinterval::displayCI_Proportion() {
 	std::string percent;
 	double p_hat;
 	int sample_size;
@@ -253,7 +253,7 @@ const void Cinterval::displayCI_Proportion() {
 	std::cout << "Your Proportion Confidence interval is: "
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
 }
-const void Cinterval::displayCI_2Proportions() {
+void Cinterval::displayCI_2Proportions() {
 	std::string percent;
 	double p_hat;
 	double p_hat2;
@@ -300,7 +300,7 @@ const void Cinterval::displayCI_2Proportions() {
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
 }
 
-const void Cinterval::displayCI_2Z() {
+void Cinterval::displayCI_2Z() {
 	std::string percent;
 	double mean1;
 	double mean2;
@@ -367,7 +367,7 @@ const void Cinterval::displayCI_2Z() {
 	          << "(" << bound.lower << ", " << bound.upper << ")" << '\n';
 }
 
-const void Cinterval::displayCI_2T() {
+void Cinterval::displayCI_2T() {
 	double tcrit;
 	double mean1;
 	double mean2;

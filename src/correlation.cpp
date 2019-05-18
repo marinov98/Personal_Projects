@@ -15,7 +15,7 @@ void sortDatasetXY(std::vector<double>& datasetX, std::vector<double>& datasetY)
 	std::sort(datasetY.begin(), datasetY.end());
 }
 
-const void displayDatasetXY(const std::vector<double>& datasetX,
+void displayDatasetXY(const std::vector<double>& datasetX,
                             const std::vector<double>& datasetY) {
 	std::cout << "The x values of this dataset are: " << '\n';
 	for (const auto& numberX : datasetX) {

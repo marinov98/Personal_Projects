@@ -79,12 +79,12 @@ class Cinterval {
 	Cinterval& operator=(const Cinterval& other) = delete;
 
 	// display functions
-	const void displayCI_Z();
-	const void displayCI_T();
-	const void displayCI_Proportion();
+	void displayCI_Z();
+	void displayCI_T();
+	void displayCI_Proportion();
 	// calculation functions
 	double calculateSamplingDistributionSd(double sd, int sample_size);
-	const void displayCI_2Proportions();
-	const void displayCI_2Z();
-	const void displayCI_2T();
+	void displayCI_2Proportions();
+	void displayCI_2Z();
+	void displayCI_2T();
 };
