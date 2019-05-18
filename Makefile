@@ -66,6 +66,7 @@ test: $(TESTDIR)/tests.cpp $(TSRCS)
 runtests:
 	@echo 'Displaying test results...'
 	@./test_calculator
+	@echo 'clean with "make cleantests"'
 
 
 
