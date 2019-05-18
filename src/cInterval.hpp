@@ -21,12 +21,14 @@ struct Bound {
 };
 
 struct CriticalZ {
+  private:
 	double z99;
 	double z95;
 	double z90;
 	double z85;
 	double z80;
 
+  public:
 	CriticalZ() : z99(2.576), z95(1.960), z90(1.645), z85(1.440), z80(1.282) {}
 };
 
@@ -46,7 +48,7 @@ class Cinterval {
 	                    double sd,
 	                    int sample_size);
 
-	//Confidence interval with T critical
+	// Confidence interval with T critical
 	Bound calculateCI_T(double point_estimate, double sd, int sample_size, double tcrit);
 
 	// Confidence interval of single sample size proportion
