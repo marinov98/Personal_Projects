@@ -94,7 +94,8 @@ int main() {
 					std::cout << termcolor::reset << '\n';
 					std::cout << termcolor::underline << termcolor::red << "Mean, Median, Mode, Range, Min/Max:" <<  termcolor::reset << '\n';
 					std::cout << termcolor::bold << termcolor::red << "The MEAN of the data set is: " << calculateMean(dataset, terms) << '\n';
-					std::cout << "The MODE of your data set is: " << calculateMode(dataset) << '\n';
+					std::cout << "The MODE of your data set is(are): ";
+					calculateMode(dataset);
 					std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
 					displayMinMax(dataset);
 					std::cout << termcolor::reset;

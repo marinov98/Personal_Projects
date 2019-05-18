@@ -4,16 +4,17 @@
 Name: Marin Pavlinov Marinov
 file: basics.hpp
 purpose: all the functions that perform basic functions such as mean,median,mode, standard deviation
-	     and has methods that display them to the user
+         and has methods that display them to the user
 
 ######################## */
 
 #pragma once
-#include <vector>
 #include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <numeric>
+#include <unordered_map>
+#include <vector>
 
 struct DataType {
 	double population;
@@ -40,7 +41,7 @@ const void displayPercentiles(const std::vector<double>& dataSet);
 double calculateMean(const std::vector<double>& dataSet, int terms);
 double calculateRange(const std::vector<double>& dataset);
 Percentile calculatePercentiles(const std::vector<double>& dataSet);
-double calculateMode(const std::vector<double>& dataSet);
+void calculateMode(const std::vector<double>& dataSet);
 DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms);
 double calculateInterquartileRange(const std::vector<double>& dataSet);
 void findOutliers(const std::vector<double>& dataSet);

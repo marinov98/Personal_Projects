@@ -117,32 +117,39 @@ Percentile calculatePercentiles(const std::vector<double>& dataSet) {
 	return percentile;
 }
 
-double calculateMode(const std::vector<double>& dataSet) {
+void calculateMode(const std::vector<double>& dataSet) {
 	if (dataSet.empty())
 		throw std::underflow_error("Empty dataset");
 
-	double mode = dataSet.front();
-	int count = 1;
-	int maxCount = 0;
-	for (size_t i = 0; i < dataSet.size() - 1; i++) {
-		if (dataSet[i] == dataSet[i + 1]) {
-			count++;
-			if (count > maxCount) {
-				maxCount = count;
-				mode = dataSet[i];
+	// will keep track of each number and how many times it is repeated
+	std::unordered_map<double, int> tracker;
+
+	tracker.reserve(dataSet.size());
+
+	int maxCount = 1;
+
+	for (const auto &num : dataSet) {
+		if (tracker.find(num) == tracker.end()) {
+			tracker.emplace(num, 1);
+		} else {
+			tracker.find(num)->second++;
+			if (tracker.find(num)->second > maxCount) {
+				maxCount = tracker.find(num)->second;
 			}
 		}
-		else {
-			count = 1;
-		}
 	}
-	if (maxCount > 0) {
-		return mode;
-	}
+
+	if (maxCount == 1)
+		std::cout << "all numbers repeat once" << '\n';
 	else {
-		std::cout << "all numbers repeat equally, returning first term: ";
-		return mode;
+		for (const auto &item : tracker) {
+			if (item.second == maxCount)
+				std::cout << item.first << " ";
+		}
+		std::cout << "repeat(s) " << maxCount << " times";
+		std::cout << '\n';
 	}
+
 }
 
 // standard deviation and variance
