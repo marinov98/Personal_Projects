@@ -43,6 +43,7 @@ $(BUILDIR)/%.o: $(SRCDIR)/%.cpp
 run:
 	@echo 'Launching...'
 	@./$(EXEC)
+	@echo 'use "make clean" to clean build directory and executable'
 
 
 #############################
