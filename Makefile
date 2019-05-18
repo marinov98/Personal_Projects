@@ -18,7 +18,7 @@ EXEC 		:= statistical_calculator
 
 ### TESTING
 TSRCS 		:= src/basics.cpp src/correlation.cpp src/hypTest.cpp src/cInterval.cpp
-TESTEXEC    := test_calculator
+TESTEXEC        := test_calculator
 
 #############################
 ###### COMPILING
