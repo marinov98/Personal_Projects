@@ -7,15 +7,15 @@
 #include "../src/hypTest.hpp"
 
 // OPERATOR overloads
-bool operator ==(const Percentile& lhs, const Percentile& rhs) {
+bool operator==(const Percentile& lhs, const Percentile& rhs) {
 	return (lhs.q1 == rhs.q1 && lhs.q2 == rhs.q2 && lhs.q3 == rhs.q3);
 }
 
-bool operator ==(const DataType& lhs, const DataType& rhs) {
+bool operator==(const DataType& lhs, const DataType& rhs) {
 	return (lhs.sample == rhs.sample && rhs.population == rhs.population);
 }
 
-bool operator ==(const Bound& lhs, const Bound& rhs) {
+bool operator==(const Bound& lhs, const Bound& rhs) {
 	return (lhs.lower == rhs.lower && lhs.upper == rhs.upper);
 }
 
