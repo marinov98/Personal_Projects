@@ -194,7 +194,7 @@ void findOutliers(const std::vector<double>& dataSet) {
 		}
 	}
 	// if outliers found, print them to the user
-	if (!(outliers.empty())) {
+	if (!outliers.empty()) {
 		std::cout << "The OUTLIER(S) of this dataSet is(are): ";
 		for (const auto& outlier : outliers) {
 			std::cout << outlier << " ";
