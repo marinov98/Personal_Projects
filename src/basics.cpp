@@ -13,9 +13,11 @@ purpose: implements the functions defined in the basics.hpp file
 
 #include "basics.hpp"
 
-
 // sorts the vector
 void sortDataset(std::vector<double>& dataSet) {
+	if (dataSet.empty())
+		throw std::underflow_error("Empty dataset");
+
 	std::sort(dataSet.begin(), dataSet.end());
 }
 
@@ -31,6 +33,9 @@ const void displayDataset(const std::vector<double>& dataSet) {
 
 // displays the minimum and maximum value to the user
 const void displayMinMax(const std::vector<double>& dataSet) {
+	if (dataSet.empty())
+		throw std::underflow_error("Empty dataset");
+
 	std::cout << "The minimum value of the data set is: " << dataSet.front() << '\n';
 	std::cout << "The maximum value of the data set is: " << dataSet.back() << '\n';
 }
@@ -61,16 +66,27 @@ const void displayStandardDeviation(const std::vector<double>& dataSet, const in
 // Functions for finding MEAN, MEDIAN, RANGE, and
 
 double calculateMean(const std::vector<double>& dataSet, const int terms) {
+	// Safety
+	if (terms <= 0 || dataSet.empty())
+		throw std::runtime_error("Invalid number of terms or vector size");
+
 	return  (std::accumulate(dataSet.begin(), dataSet.end(), 0.0) / terms);
 }
 
 double calculateRange(const std::vector<double>& dataSet) {
+	if (dataSet.empty())
+		throw std::underflow_error("Empty dataset");
+
 	return dataSet.back() - dataSet.front();
 }
 
 // calculates 25th,50th, and 75th percentile of the data set
 Percentile calculatePercentiles(const std::vector<double>& dataSet) {
+	if (dataSet.empty())
+		throw std::underflow_error("Empty dataset");
+
 	Percentile percentile;
+
 	if (dataSet.size() % 2 != 0) {
 		if ((dataSet.size() / 2) % 2 == 1) {
 			percentile.q1 = dataSet[(dataSet.size() - 1) / 4];
@@ -100,6 +116,9 @@ Percentile calculatePercentiles(const std::vector<double>& dataSet) {
 }
 
 double calculateMode(const std::vector<double>& dataSet) {
+	if (dataSet.empty())
+		throw std::underflow_error("Empty dataset");
+
 	double mode = dataSet.front();
 	int count = 1;
 	int maxCount = 0;
@@ -126,6 +145,10 @@ double calculateMode(const std::vector<double>& dataSet) {
 
 // standard deviation and variance
 DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms) {
+	// Safety
+	if (terms <= 0 || dataSet.empty())
+		throw std::runtime_error("Invalid number of terms or vector size");
+
 	double mean = calculateMean(dataSet, terms);
 	DataType sd;
 
@@ -140,7 +163,7 @@ DataType calculateStandardDeviation(const std::vector<double>& dataSet, int term
 	return sd;
 }
 
-// interquartile range and outliers
+// Interquartile range and outliers
 
 double calculateInterquartileRange(const std::vector<double>& dataSet) {
 	const Percentile& percentile = calculatePercentiles(dataSet);
