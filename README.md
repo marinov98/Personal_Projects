@@ -8,7 +8,7 @@
 - use cmake to launch
 - Extensively test the calculator using the [doctest](https://github.com/onqtam/doctest) testing framework
 
-## Outside namespaces used
+## Third-Party 
 - [termcolor](https://github.com/marinov98/termcolor)
 
 ## Requirements 
