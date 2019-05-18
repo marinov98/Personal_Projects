@@ -36,6 +36,8 @@ const void displayMinMax(const std::vector<double>& dataSet) {
 	if (dataSet.empty())
 		throw std::underflow_error("Empty dataset");
 
+	// Assumes vector is in sorted ascending order
+	// sortDataset should be called before using this function
 	std::cout << "The minimum value of the data set is: " << dataSet.front() << '\n';
 	std::cout << "The maximum value of the data set is: " << dataSet.back() << '\n';
 }
