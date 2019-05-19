@@ -20,7 +20,7 @@ bool operator==(const Bound& lhs, const Bound& rhs) {
 }
 
 // MUCH MORE TESTING TO BE DONE IN THE FUTURE
-
+// vector below is just to ensure doctest is workking properly 
 
 std::vector<double> test_vector {1,2,3,4,5};
 

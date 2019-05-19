@@ -17,12 +17,12 @@ SRCS 		:= $(shell find $(SRCDIR) -type f -name *.cpp)
 OBJS 		:= $(patsubst $(SRCDIR)/%,$(BUILDIR)/%,$(SRCS:.cpp=.o))
 EXEC 		:= statistical_calculator
 
-### TESTING
+### UNIT TESTING
 TSRCS 		:= src/basics.cpp src/correlation.cpp src/hypTest.cpp src/cInterval.cpp
 TESTEXEC        := test_calculator
 
 #############################
-###### COMPILING
+###### COMPILING & RUNNING
 #############################
 
 $(EXEC): $(OBJS)
@@ -50,6 +50,7 @@ run:
 #############################
 ###### DEBUGGING
 #############################
+
 debug: STANDARD := $(STANDARD) -g -fsanitize=address,undefined
 
 debug: $(EXEC)
@@ -58,6 +59,7 @@ debug: $(EXEC)
 #############################
 ###### TESTING
 #############################
+
 test: $(TESTDIR)/tests.cpp $(TSRCS)
 	@echo 'Testing project...'
 	@$(CXX) $(STANDARD) $(WARNINGS) -o $(TESTEXEC) $^
