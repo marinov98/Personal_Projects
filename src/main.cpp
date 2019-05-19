@@ -38,7 +38,6 @@ void readFormulaSheet(const std::string& text) {
 }
 
 int main(int argc, char* argv[]) {
-
 	// READING FILES SECTION
 	// TODO: add Makefile commands for extra args
 	if (argc == 2) {
@@ -54,8 +53,8 @@ int main(int argc, char* argv[]) {
 		// TODO: Have a function to read in data from txt file and stop at ; or '\n'
 	} // function expects first arg as file and second arg as function
 	else if (argc == 3) {
-
-		// TODO: Lambda expression to convert second argc to uppercase in case user doesnt want to use Makefile command
+		// TODO: Lambda expression to convert second argc to uppercase in case user doesnt want to
+		// use Makefile command
 		// TODO: Based on second argument print desired function for user
 
 		std::ifstream inputfile;
@@ -67,18 +66,26 @@ int main(int argc, char* argv[]) {
 			std::cerr << "Unable to open" << argv[1] << "for reading";
 			exit(1);
 		}
-
 	}
 	// DEFAULT INTERFACE
 	else {
 		bool backtrack = true;
 		while (backtrack) {
-			std::cout << termcolor::blue << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << termcolor::reset<< '\n';
+			std::cout << termcolor::blue
+			          << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~"
+			          << termcolor::reset << '\n';
 			std::cout << termcolor::blue << "What would you like the calculator to do?" << '\n';
-			std::cout << termcolor::yellow << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}" << termcolor::reset << '\n';
+			std::cout << termcolor::yellow
+			          << "type \"basics\" for {min,max,mean,median,mode,range,standard "
+			             "deviation,percentiles}"
+			          << termcolor::reset << '\n';
 			std::cout << termcolor::green << "type \"formulas\" view the formula sheet" << '\n';
-			std::cout << termcolor::magenta << "type \"cc\" for finding correlation coefficients and LSRL" << termcolor::reset << '\n';
-			std::cout << termcolor::cyan << "type \"advanced\" for confidence intervals and hypothesis testings" << termcolor::reset << '\n';
+			std::cout << termcolor::magenta
+			          << "type \"cc\" for finding correlation coefficients and LSRL"
+			          << termcolor::reset << '\n';
+			std::cout << termcolor::cyan
+			          << "type \"advanced\" for confidence intervals and hypothesis testings"
+			          << termcolor::reset << '\n';
 			std::cout << termcolor::white << "type \"exit\" to quit the calculator" << '\n';
 			std::string response;
 			std::cin >> response;
@@ -99,18 +106,24 @@ int main(int argc, char* argv[]) {
 						std::cout << "Invalid input! try again" << '\n';
 						std::cout << "Expected one input that is greater than 1" << '\n';
 						std::cin.clear();
-						std::cin.ignore(1000,'\n');
+						std::cin.ignore(1000, '\n');
 						std::cin >> terms;
 					}
-					std::cin.ignore(100000,'\n');
+					std::cin.ignore(100000, '\n');
 					// Perform calculations only when # of terms is valid
 					if (terms > 1) {
 						std::vector<double> dataset;
 						dataset.reserve(terms);
 						std::cout << "You may now type the numbers in your data set" << '\n';
-						std::cout << " i) You can either input the data one by one (pressing enter every time you enter a number)" << '\n';
-						std::cout << " ii) You can input the entire data with space in between each number. You can even input a chunk of the data" << '\n';
-						std::cout << "Regardless the program will ask for input until it is not equal to the terms you inputted" << '\n';
+						std::cout << " i) You can either input the data one by one (pressing enter "
+						             "every time you enter a number)"
+						          << '\n';
+						std::cout << " ii) You can input the entire data with space in between "
+						             "each number. You can even input a chunk of the data"
+						          << '\n';
+						std::cout << "Regardless the program will ask for input until it is not "
+						             "equal to the terms you inputted"
+						          << '\n';
 						while (trials != terms) {
 							std::cin >> inputnumber;
 							if (!std::cin) {
@@ -128,18 +141,25 @@ int main(int argc, char* argv[]) {
 						// showcases the dataset's mean, mode, and range
 						displayDataset(dataset);
 						std::cout << termcolor::reset << '\n';
-						std::cout << termcolor::underline << termcolor::red << "Mean, Median, Mode, Range, Min/Max:" <<  termcolor::reset << '\n';
-						std::cout << termcolor::bold << termcolor::red << "The MEAN of the data set is: " << calculateMean(dataset, terms) << '\n';
+						std::cout << termcolor::underline << termcolor::red
+						          << "Mean, Median, Mode, Range, Min/Max:" << termcolor::reset
+						          << '\n';
+						std::cout << termcolor::bold << termcolor::red
+						          << "The MEAN of the data set is: "
+						          << calculateMean(dataset, terms) << '\n';
 						std::cout << "The MODE of your data set is(are): ";
 						calculateMode(dataset);
-						std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
+						std::cout << "The RANGE of the data set is: " << calculateRange(dataset)
+						          << '\n';
 						displayMinMax(dataset);
 						std::cout << termcolor::reset;
 						std::cout << termcolor::bold << termcolor::yellow;
 						// prints the 25th,50th, and 75th percentile of the dataset
 						if (dataset.size() > 3) {
-							std::cout <<  termcolor::underline << termcolor::yellow << "\nPercentiles:" << termcolor::reset << '\n';
-							std::cout << termcolor::bold << termcolor::yellow << "The INTERQUARTILE RANGE of the data set is: "
+							std::cout << termcolor::underline << termcolor::yellow
+							          << "\nPercentiles:" << termcolor::reset << '\n';
+							std::cout << termcolor::bold << termcolor::yellow
+							          << "The INTERQUARTILE RANGE of the data set is: "
 							          << calculateInterquartileRange(dataset) << '\n';
 							displayPercentiles(dataset);
 						}
@@ -147,7 +167,8 @@ int main(int argc, char* argv[]) {
 						findOutliers(dataset);
 						std::cout << termcolor::reset << '\n';
 						// prints standard deviation and variance
-						std::cout << termcolor::underline << termcolor::cyan << "Standard deviation and Variance:" << termcolor::reset << '\n';
+						std::cout << termcolor::underline << termcolor::cyan
+						          << "Standard deviation and Variance:" << termcolor::reset << '\n';
 						std::cout << termcolor::bold << termcolor::cyan;
 						displayStandardDeviation(dataset, terms);
 						std::cout << '\n';
@@ -155,8 +176,9 @@ int main(int argc, char* argv[]) {
 						dataset.clear();
 					}
 					// clear excessive inputs
-					std::cin.ignore(100000,'\n');
-					std::cout << termcolor::white << "Would like to use this function again? Type 'y' or 'n' " << '\n';
+					std::cin.ignore(100000, '\n');
+					std::cout << termcolor::white
+					          << "Would like to use this function again? Type 'y' or 'n' " << '\n';
 					std::cin >> answer;
 					if (answer == 'y') {
 						repeat = true;
@@ -179,10 +201,14 @@ int main(int argc, char* argv[]) {
 				repeat = true;
 				std::string answer_2;
 				std::cout << termcolor::bold << termcolor::cyan
-				          << "This function will allow you calculate confidence intervals and t,z and chi "
-				             "test statistics!" << '\n';
+				          << "This function will allow you calculate confidence intervals and t,z "
+				             "and chi "
+				             "test statistics!"
+				          << '\n';
 				while (repeat) {
-					std::cout << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )" << '\n';
+					std::cout
+					    << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )"
+					    << '\n';
 					Cinterval ci;
 					std::string choice;
 					std::cin >> choice;
@@ -191,7 +217,8 @@ int main(int argc, char* argv[]) {
 						std::cout << "type \"2zinterval\" for  2 z confidence interval" << '\n';
 						std::cout << "type \"tinterval\" for t confidence interval" << '\n';
 						std::cout << "type \"2tinterval\" for 2 t confidence interval" << '\n';
-						std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
+						std::cout << "type \"pinterval\" for Proportion confidence interval"
+						          << '\n';
 						std::cout << "type \"2pinterval\" for 2 Proportions confidence interval"
 						          << '\n';
 						std::cin >> answer_2;
@@ -216,12 +243,16 @@ int main(int argc, char* argv[]) {
 					}
 					else if (choice == "ht") {
 						HypTest ht;
-						std::cout << "type \"zscore\" for z-score (formula without sample size)" << '\n';
-						std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
+						std::cout << "type \"zscore\" for z-score (formula without sample size)"
+						          << '\n';
+						std::cout << "type \"zstat\" for z test statistic(with sample size)"
+						          << '\n';
 						std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
 						std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
-						std::cout << "type \"2tstat\" for two sample t-score/test-statistic" << '\n';
-						std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic" << '\n';
+						std::cout << "type \"2tstat\" for two sample t-score/test-statistic"
+						          << '\n';
+						std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic"
+						          << '\n';
 						std::cout << "type \"p\" for single proportion test" << '\n';
 						std::cout << "type \"twop\" for 2 proportion test" << '\n';
 						std::cout << "type \"chi\" for chi-square test" << '\n';
@@ -238,7 +269,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> point_estimate;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "What is the population mean?" << '\n';
 							std::cin >> mean;
 							while (!std::cin) {
@@ -247,7 +278,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> mean;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "Finally, what is the standard deviation" << '\n';
 							std::cin >> sd;
 							while (!std::cin) {
@@ -256,7 +287,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> sd;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							ht.calculateZscore(point_estimate, mean, sd);
 						}
 						else if (answer_2 == "zstat") {
@@ -272,7 +303,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> point_estimate;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "What is the population mean?" << '\n';
 							std::cin >> mean;
 							while (!std::cin) {
@@ -281,7 +312,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> mean;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "What is the sample size?" << '\n';
 							std::cin >> sample_size;
 							while (!std::cin || sample_size <= 0) {
@@ -290,7 +321,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> sample_size;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "Finally, what is the standard deviation" << '\n';
 							std::cin >> sd;
 							while (!std::cin) {
@@ -299,7 +330,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> sd;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							ht.calculateZstat(point_estimate, mean, sd, sample_size);
 						}
 						else if (answer_2 == "tscore") {
@@ -315,7 +346,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> point_estimate;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "What is the hypothesized value?" << '\n';
 							std::cin >> mean;
 							while (!std::cin) {
@@ -324,7 +355,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> mean;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "What is the sample size?" << '\n';
 							std::cin >> sample_size;
 							while (!std::cin || sample_size <= 0) {
@@ -333,7 +364,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> sample_size;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "Finally, what is the standard deviation" << '\n';
 							std::cin >> sd;
 							while (!std::cin) {
@@ -342,7 +373,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> sd;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							ht.calculateTscore(point_estimate, mean, sd, sample_size);
 						}
 						else if (answer_2 == "p") {
@@ -357,7 +388,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> p_hat;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "What is p?" << '\n';
 							std::cin >> p;
 							while (!std::cin) {
@@ -366,7 +397,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> p;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							std::cout << "Finally, what is the sample size?" << '\n';
 							std::cin >> sample_size;
 							while (!std::cin || sample_size <= 0) {
@@ -375,7 +406,7 @@ int main(int argc, char* argv[]) {
 								std::cin.ignore();
 								std::cin >> sample_size;
 							}
-							std::cin.ignore(100000,'\n');
+							std::cin.ignore(100000, '\n');
 							ht.calculateProportion(p_hat, p, sample_size);
 						}
 						else if (answer_2 == "2zstat") {
@@ -397,12 +428,14 @@ int main(int argc, char* argv[]) {
 							ht.printChiTest();
 						}
 						else {
-							std::cout << "Invalid answer, type y when prompted to try again" << '\n';
+							std::cout << "Invalid answer, type y when prompted to try again"
+							          << '\n';
 						}
 					}
 					// clear excessive inputs
-					std::cin.ignore(100000,'\n');
-					std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
+					std::cin.ignore(100000, '\n');
+					std::cout << "Would you like to keep using this function? type 'y' or 'n'"
+					          << '\n';
 					std::cin >> answer;
 					if (answer == 'y') {
 						repeat = true;
@@ -433,10 +466,10 @@ int main(int argc, char* argv[]) {
 						std::cout << "Invalid input! try again" << '\n';
 						std::cout << "Expected one input that is greater than 1" << '\n';
 						std::cin.clear();
-						std::cin.ignore(1000,'\n');
+						std::cin.ignore(1000, '\n');
 						std::cin >> terms;
 					}
-					std::cin.ignore(100000,'\n');
+					std::cin.ignore(100000, '\n');
 					if (terms > 1) {
 						std::vector<double> datasetX;
 						datasetX.reserve(terms);
@@ -454,7 +487,7 @@ int main(int argc, char* argv[]) {
 							}
 						}
 						trials = 0;
-						std::cin.ignore(100000,'\n');
+						std::cin.ignore(100000, '\n');
 						std::vector<double> datasetY;
 						datasetY.reserve(terms);
 						std::cout << "You may now type the numbers in your Y data set" << '\n';
@@ -478,8 +511,9 @@ int main(int argc, char* argv[]) {
 						displayLSRL(datasetX, datasetY, terms);
 					}
 					// clear excessive inputs
-					std::cin.ignore(100000,'\n');
-					std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
+					std::cin.ignore(100000, '\n');
+					std::cout << "Would you like to keep using this function? type 'y' or 'n'"
+					          << '\n';
 					char decision;
 					std::cin >> decision;
 					if (decision == 'y') {
@@ -507,10 +541,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
-
-
-
-
 
 	return 0;
 }
