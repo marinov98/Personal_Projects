@@ -50,6 +50,7 @@
   - multple z-critical values
   
 ### Correlation Coefficient
+- correlation coefficient
 - slope, y-intercept
 - line of best fit 
 
