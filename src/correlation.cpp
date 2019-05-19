@@ -15,8 +15,7 @@ void sortDatasetXY(std::vector<double>& datasetX, std::vector<double>& datasetY)
 	std::sort(datasetY.begin(), datasetY.end());
 }
 
-void displayDatasetXY(const std::vector<double>& datasetX,
-                            const std::vector<double>& datasetY) {
+void displayDatasetXY(const std::vector<double>& datasetX, const std::vector<double>& datasetY) {
 	std::cout << "The x values of this dataset are: " << '\n';
 	for (const auto& numberX : datasetX) {
 		std::cout << " " << numberX;
@@ -48,8 +47,8 @@ double calculateCorrelationCoefficient(const std::vector<double>& datasetX,
 }
 
 double calculateSlope(const std::vector<double>& datasetX,
-		              const std::vector<double>& datasetY,
-		              const int terms) {
+                      const std::vector<double>& datasetY,
+                      const int terms) {
 	double top = 0.0;
 	double bottom = 0.0;
 	double x = calculateMean(datasetX, terms);
@@ -78,8 +77,8 @@ double calculateYintercept(const std::vector<double>& datasetX,
 }
 
 void displayLSRL(const std::vector<double>& datasetX,
-		         const std::vector<double>& datasetY,
-		         const int terms) {
+                 const std::vector<double>& datasetY,
+                 const int terms) {
 	double x = calculateMean(datasetX, terms);
 	double y = calculateMean(datasetY, terms);
 	double b = calculateSlope(datasetX, datasetY, terms);

@@ -17,13 +17,12 @@ purpose: implements the functions defined in the basics.hpp file
 void sortDataset(std::vector<double>& dataSet) {
 	if (dataSet.empty())
 		throw std::underflow_error("Empty dataset");
-
 	std::sort(dataSet.begin(), dataSet.end());
 }
 
 // displays all the elements in the vector
 void displayDataset(const std::vector<double>& dataSet) {
-	std::cout << "The data set you inputted is: " << '\n';
+	std::cout << "The data set you inputted (in sorted order) is: " << '\n';
 
 	for (const auto& number : dataSet) {
 		std::cout << " " << number;
@@ -72,7 +71,7 @@ double calculateMean(const std::vector<double>& dataSet, const int terms) {
 	if (terms <= 0 || dataSet.empty())
 		throw std::runtime_error("Invalid number of terms or vector size");
 
-	return  (std::accumulate(dataSet.begin(), dataSet.end(), 0.0) / terms);
+	return (std::accumulate(dataSet.begin(), dataSet.end(), 0.0) / terms);
 }
 
 double calculateRange(const std::vector<double>& dataSet) {
@@ -128,7 +127,7 @@ void calculateMode(const std::vector<double>& dataSet) {
 
 	int maxCount = 1;
 
-	for (const auto &num : dataSet) {
+	for (const auto& num : dataSet) {
 		if (tracker.find(num) == tracker.end()) {
 			tracker.emplace(num, 1);
 		}
@@ -143,14 +142,13 @@ void calculateMode(const std::vector<double>& dataSet) {
 	if (maxCount == 1)
 		std::cout << "all numbers repeat once" << '\n';
 	else {
-		for (const auto &item : tracker) {
+		for (const auto& item : tracker) {
 			if (item.second == maxCount)
 				std::cout << item.first << " ";
 		}
 		std::cout << "repeat(s) " << maxCount << " times";
 		std::cout << '\n';
 	}
-
 }
 
 // standard deviation and variance

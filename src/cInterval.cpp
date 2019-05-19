@@ -73,7 +73,9 @@ Bound Cinterval::calculateCI_T(double point_estimate,
 }
 
 // Z proportion confidence interval
-Bound Cinterval::calculateCI_Proportion(const std::string& percent, double p_hat, const int sample_size) {
+Bound Cinterval::calculateCI_Proportion(const std::string& percent,
+                                        double p_hat,
+                                        const int sample_size) {
 	if (sample_size <= 0)
 		throw std::runtime_error("Invalid sample size");
 
@@ -432,7 +434,6 @@ void Cinterval::displayCI_2T() {
 		std::cin.ignore();
 		std::cin >> sample_size2;
 	}
-
 
 	const Bound bound =
 	    calculateCI2Sample_T(tcrit, mean1, mean2, sd1, sd2, sample_size, sample_size2);

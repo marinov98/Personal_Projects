@@ -37,442 +37,480 @@ void readFormulaSheet(const std::string& text) {
 	}
 }
 
-int main() {
-	bool backtrack = true;
-	while (backtrack) {
-		std::cout << termcolor::blue << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << termcolor::reset<< '\n';
-		std::cout << termcolor::blue << "What would you like the calculator to do?" << '\n';
-		std::cout << termcolor::yellow << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}" << termcolor::reset << '\n';
-		std::cout << termcolor::green << "type \"formulas\" view the formula sheet" << '\n';
-		std::cout << termcolor::magenta << "type \"cc\" for finding correlation coefficients and LSRL" << termcolor::reset << '\n';
-		std::cout << termcolor::cyan << "type \"advanced\" for confidence intervals and hypothesis testings" << termcolor::reset << '\n';
-		std::cout << termcolor::white << "type \"exit\" to quit the calculator" << '\n';
-		std::string response;
-		std::cin >> response;
-		bool repeat = true;
-		// for whether the user wants to repeat using a functions
-		char answer;
-		if (response == "basics") {
-			while (repeat) {
-				int terms;
-				int trials = 0;
-				double inputnumber;
-				// gets the number of terms in the date set and fills the vector with them
-				std::cout << "How many terms are there?" << '\n';
-				std::cin >> terms;
-				// Ensure # of terms is correct
-				while (!std::cin || terms <= 1) {
-					// notify user input is incorrect
-					std::cout << "Invalid input! try again" << '\n';
-					std::cout << "Expected one input that is greater than 1" << '\n';
-					std::cin.clear();
-					std::cin.ignore(1000,'\n');
-					std::cin >> terms;
-				}
-				std::cin.ignore(100000,'\n');
-				// Perform calculations only when # of terms is valid
-				if (terms > 1) {
-					std::vector<double> dataset;
-					dataset.reserve(terms);
-					std::cout << "You may now type the numbers in your data set" << '\n';
-					std::cout << " i) You can either input the data one by one (pressing enter every time you enter a number)" << '\n';
-					std::cout << " ii) You can input the entire data with space in between each number. You can even input a chunk of the data" << '\n';
-					std::cout << "Regardless the program will ask for input until it is not equal to the terms you inputted" << '\n';
-					while (trials != terms) {
-						std::cin >> inputnumber;
-						if (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-						}
-						else {
-							dataset.emplace_back(inputnumber);
-							trials++;
-						}
-					}
-					// Ensure dataset is sorted so all functions work as intended
-					sortDataset(dataset);
-					// showcases the dataset's mean, mode, and range
-					displayDataset(dataset);
-					std::cout << termcolor::reset << '\n';
-					std::cout << termcolor::underline << termcolor::red << "Mean, Median, Mode, Range, Min/Max:" <<  termcolor::reset << '\n';
-					std::cout << termcolor::bold << termcolor::red << "The MEAN of the data set is: " << calculateMean(dataset, terms) << '\n';
-					std::cout << "The MODE of your data set is(are): ";
-					calculateMode(dataset);
-					std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
-					displayMinMax(dataset);
-					std::cout << termcolor::reset;
-					std::cout << termcolor::bold << termcolor::yellow;
-					// prints the 25th,50th, and 75th percentile of the dataset
-					if (dataset.size() > 3) {
-						std::cout <<  termcolor::underline << termcolor::yellow << "\nPercentiles:" << termcolor::reset << '\n';
-						std::cout << termcolor::bold << termcolor::yellow << "The INTERQUARTILE RANGE of the data set is: "
-						          << calculateInterquartileRange(dataset) << '\n';
-						displayPercentiles(dataset);
-					}
+int main(int argc, char* argv[]) {
 
-					findOutliers(dataset);
-					std::cout << termcolor::reset << '\n';
-					// prints standard deviation and variance
-					std::cout << termcolor::underline << termcolor::cyan << "Standard deviation and Variance:" << termcolor::reset << '\n';
-					std::cout << termcolor::bold << termcolor::cyan;
-					displayStandardDeviation(dataset, terms);
-					std::cout << '\n';
-					// erase terms once finished showing numbers to user
-					dataset.clear();
-				}
-				// clear excessive inputs
-				std::cin.ignore(100000,'\n');
-				std::cout << termcolor::white << "Would like to use this function again? Type 'y' or 'n' " << '\n';
-				std::cin >> answer;
-				if (answer == 'y') {
-					repeat = true;
-				}
-				else if (answer == 'n') {
-					repeat = false;
-					std::cout << termcolor::reset;
-				}
-				else {
-					std::cout << "Invalid input, going back to main page..." << '\n';
-					repeat = false;
-					std::cout << termcolor::reset;
-				}
-			}
+	// READING FILES SECTION
+	// TODO: add Makefile commands for extra args
+	if (argc == 2) {
+		std::ifstream inputfile;
+		std::string str;
+
+		inputfile.open(argv[1]);
+
+		if (inputfile.fail()) {
+			std::cerr << "Unable to open" << argv[1] << "for reading";
+			exit(1);
 		}
-		else if (response == "formulas") {
-			readFormulaSheet("formulas.txt");
+		// TODO: Have a function to read in data from txt file and stop at ; or '\n'
+	} // function expects first arg as file and second arg as function
+	else if (argc == 3) {
+
+		// TODO: Lambda expression to convert second argc to uppercase in case user doesnt want to use Makefile command
+		// TODO: Based on second argument print desired function for user
+
+		std::ifstream inputfile;
+		std::string str;
+
+		inputfile.open(argv[1]);
+
+		if (inputfile.fail()) {
+			std::cerr << "Unable to open" << argv[1] << "for reading";
+			exit(1);
 		}
-		else if (response == "advanced") {
-			repeat = true;
-			std::string answer_2;
-			std::cout << termcolor::bold << termcolor::cyan
-				<< "This function will allow you calculate confidence intervals and t,z and chi "
-			       "test statistics!" << '\n';
-			while (repeat) {
-				std::cout << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )" << '\n';
-				Cinterval ci;
-				std::string choice;
-				std::cin >> choice;
-				if (choice == "ci") {
-					std::cout << "type \"zinterval\" for z confidence interval" << '\n';
-					std::cout << "type \"2zinterval\" for  2 z confidence interval" << '\n';
-					std::cout << "type \"tinterval\" for t confidence interval" << '\n';
-					std::cout << "type \"2tinterval\" for 2 t confidence interval" << '\n';
-					std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
-					std::cout << "type \"2pinterval\" for 2 Proportions confidence interval"
-					          << '\n';
-					std::cin >> answer_2;
-					if (answer_2 == "zinterval") {
-						ci.displayCI_Z();
+
+	}
+	// DEFAULT INTERFACE
+	else {
+		bool backtrack = true;
+		while (backtrack) {
+			std::cout << termcolor::blue << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~" << termcolor::reset<< '\n';
+			std::cout << termcolor::blue << "What would you like the calculator to do?" << '\n';
+			std::cout << termcolor::yellow << "type \"basics\" for {min,max,mean,median,mode,range,standard deviation,percentiles}" << termcolor::reset << '\n';
+			std::cout << termcolor::green << "type \"formulas\" view the formula sheet" << '\n';
+			std::cout << termcolor::magenta << "type \"cc\" for finding correlation coefficients and LSRL" << termcolor::reset << '\n';
+			std::cout << termcolor::cyan << "type \"advanced\" for confidence intervals and hypothesis testings" << termcolor::reset << '\n';
+			std::cout << termcolor::white << "type \"exit\" to quit the calculator" << '\n';
+			std::string response;
+			std::cin >> response;
+			bool repeat = true;
+			// for whether the user wants to repeat using a functions
+			char answer;
+			if (response == "basics") {
+				while (repeat) {
+					int terms;
+					int trials = 0;
+					double inputnumber;
+					// gets the number of terms in the date set and fills the vector with them
+					std::cout << "How many terms are there?" << '\n';
+					std::cin >> terms;
+					// Ensure # of terms is correct
+					while (!std::cin || terms <= 1) {
+						// notify user input is incorrect
+						std::cout << "Invalid input! try again" << '\n';
+						std::cout << "Expected one input that is greater than 1" << '\n';
+						std::cin.clear();
+						std::cin.ignore(1000,'\n');
+						std::cin >> terms;
 					}
-					else if (answer_2 == "tinterval") {
-						ci.displayCI_T();
-					}
-					else if (answer_2 == "pinterval") {
-						ci.displayCI_Proportion();
-					}
-					else if (answer_2 == "2zinterval") {
-						ci.displayCI_2Z();
-					}
-					else if (answer_2 == "2tinterval") {
-						ci.displayCI_2T();
-					}
-					else if (answer_2 == "2pinterval") {
-						ci.displayCI_2Proportions();
-					}
-				}
-				else if (choice == "ht") {
-					HypTest ht;
-					std::cout << "type \"zscore\" for z-score (formula without sample size)" << '\n';
-					std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
-					std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
-					std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
-					std::cout << "type \"2tstat\" for two sample t-score/test-statistic" << '\n';
-					std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic" << '\n';
-					std::cout << "type \"p\" for single proportion test" << '\n';
-					std::cout << "type \"twop\" for 2 proportion test" << '\n';
-					std::cout << "type \"chi\" for chi-square test" << '\n';
-					std::cin >> answer_2;
-					if (answer_2 == "zscore") {
-						double point_estimate;
-						double mean;
-						double sd;
-						std::cout << "What is x̄?" << '\n';
-						std::cin >> point_estimate;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> point_estimate;
+					std::cin.ignore(100000,'\n');
+					// Perform calculations only when # of terms is valid
+					if (terms > 1) {
+						std::vector<double> dataset;
+						dataset.reserve(terms);
+						std::cout << "You may now type the numbers in your data set" << '\n';
+						std::cout << " i) You can either input the data one by one (pressing enter every time you enter a number)" << '\n';
+						std::cout << " ii) You can input the entire data with space in between each number. You can even input a chunk of the data" << '\n';
+						std::cout << "Regardless the program will ask for input until it is not equal to the terms you inputted" << '\n';
+						while (trials != terms) {
+							std::cin >> inputnumber;
+							if (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+							}
+							else {
+								dataset.emplace_back(inputnumber);
+								trials++;
+							}
 						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "What is the population mean?" << '\n';
-						std::cin >> mean;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> mean;
+						// Ensure dataset is sorted so all functions work as intended
+						sortDataset(dataset);
+						// showcases the dataset's mean, mode, and range
+						displayDataset(dataset);
+						std::cout << termcolor::reset << '\n';
+						std::cout << termcolor::underline << termcolor::red << "Mean, Median, Mode, Range, Min/Max:" <<  termcolor::reset << '\n';
+						std::cout << termcolor::bold << termcolor::red << "The MEAN of the data set is: " << calculateMean(dataset, terms) << '\n';
+						std::cout << "The MODE of your data set is(are): ";
+						calculateMode(dataset);
+						std::cout << "The RANGE of the data set is: " << calculateRange(dataset) << '\n';
+						displayMinMax(dataset);
+						std::cout << termcolor::reset;
+						std::cout << termcolor::bold << termcolor::yellow;
+						// prints the 25th,50th, and 75th percentile of the dataset
+						if (dataset.size() > 3) {
+							std::cout <<  termcolor::underline << termcolor::yellow << "\nPercentiles:" << termcolor::reset << '\n';
+							std::cout << termcolor::bold << termcolor::yellow << "The INTERQUARTILE RANGE of the data set is: "
+							          << calculateInterquartileRange(dataset) << '\n';
+							displayPercentiles(dataset);
 						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "Finally, what is the standard deviation" << '\n';
-						std::cin >> sd;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> sd;
-						}
-						std::cin.ignore(100000,'\n');
-						ht.calculateZscore(point_estimate, mean, sd);
+
+						findOutliers(dataset);
+						std::cout << termcolor::reset << '\n';
+						// prints standard deviation and variance
+						std::cout << termcolor::underline << termcolor::cyan << "Standard deviation and Variance:" << termcolor::reset << '\n';
+						std::cout << termcolor::bold << termcolor::cyan;
+						displayStandardDeviation(dataset, terms);
+						std::cout << '\n';
+						// erase terms once finished showing numbers to user
+						dataset.clear();
 					}
-					else if (answer_2 == "zstat") {
-						double point_estimate;
-						double mean;
-						double sd;
-						int sample_size;
-						std::cout << "What is x̄?" << '\n';
-						std::cin >> point_estimate;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> point_estimate;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "What is the population mean?" << '\n';
-						std::cin >> mean;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> mean;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "What is the sample size?" << '\n';
-						std::cin >> sample_size;
-						while (!std::cin || sample_size <= 0) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> sample_size;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "Finally, what is the standard deviation" << '\n';
-						std::cin >> sd;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> sd;
-						}
-						std::cin.ignore(100000,'\n');
-						ht.calculateZstat(point_estimate, mean, sd, sample_size);
+					// clear excessive inputs
+					std::cin.ignore(100000,'\n');
+					std::cout << termcolor::white << "Would like to use this function again? Type 'y' or 'n' " << '\n';
+					std::cin >> answer;
+					if (answer == 'y') {
+						repeat = true;
 					}
-					else if (answer_2 == "tscore") {
-						double point_estimate;
-						double mean;
-						double sd;
-						int sample_size;
-						std::cout << "What is x̄?" << '\n';
-						std::cin >> point_estimate;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> point_estimate;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "What is the hypothesized value?" << '\n';
-						std::cin >> mean;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> mean;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "What is the sample size?" << '\n';
-						std::cin >> sample_size;
-						while (!std::cin || sample_size <= 0) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> sample_size;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "Finally, what is the standard deviation" << '\n';
-						std::cin >> sd;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> sd;
-						}
-						std::cin.ignore(100000,'\n');
-						ht.calculateTscore(point_estimate, mean, sd, sample_size);
-					}
-					else if (answer_2 == "p") {
-						double p_hat;
-						double p;
-						int sample_size;
-						std::cout << "What is p̂?" << '\n';
-						std::cin >> p_hat;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> p_hat;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "What is p?" << '\n';
-						std::cin >> p;
-						while (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> p;
-						}
-						std::cin.ignore(100000,'\n');
-						std::cout << "Finally, what is the sample size?" << '\n';
-						std::cin >> sample_size;
-						while (!std::cin || sample_size <= 0) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-							std::cin >> sample_size;
-						}
-						std::cin.ignore(100000,'\n');
-						ht.calculateProportion(p_hat, p, sample_size);
-					}
-					else if (answer_2 == "2zstat") {
-						ht.printHypothesisReport_2Z();
-					}
-					else if (answer_2 == "2tstat") {
-						ht.printHypothesisReport_2T();
-					}
-					else if (answer_2 == "2tstat") {
-						ht.printHypothesisReport_2T();
-					}
-					else if (answer_2 == "2tpair") {
-						ht.printHypothesisReport_pairedT();
-					}
-					else if (answer_2 == "twop") {
-						ht.printHypothesisReport_2P();
-					}
-					else if (answer_2 == "chi") {
-						ht.printChiTest();
+					else if (answer == 'n') {
+						repeat = false;
+						std::cout << termcolor::reset;
 					}
 					else {
-						std::cout << "Invalid answer, type y when prompted to try again" << '\n';
+						std::cout << "Invalid input, going back to main page..." << '\n';
+						repeat = false;
+						std::cout << termcolor::reset;
 					}
-				}
-				// clear excessive inputs
-				std::cin.ignore(100000,'\n');
-				std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
-				std::cin >> answer;
-				if (answer == 'y') {
-					repeat = true;
-				}
-				else if (answer == 'n') {
-					repeat = false;
-					std::cout << termcolor::reset;
-				}
-				else {
-					std::cout << "Invalid input, going back to main page..." << '\n';
-					repeat = false;
-					std::cout << termcolor::reset;
 				}
 			}
-		}
-		else if (response == "cc") {
-			std::cout << termcolor::white;
-			repeat = true;
-			while (repeat) {
-				int terms;
-				int trials = 0;
-				double inputnumbers;
-				// gets the number of terms in the date set and fills the vector with them
-				std::cout << "How many terms are there?" << '\n';
-				std::cin >> terms;
-				while (!std::cin || terms <= 1) {
-					// notify user input is incorrect
-					std::cout << "Invalid input! try again" << '\n';
-					std::cout << "Expected one input that is greater than 1" << '\n';
-					std::cin.clear();
-					std::cin.ignore(1000,'\n');
-					std::cin >> terms;
-				}
-				std::cin.ignore(100000,'\n');
-				if (terms > 1) {
-					std::vector<double> datasetX;
-					datasetX.reserve(terms);
-					std::cout << "You may now type the numbers in your X data set" << '\n';
-					while (trials != terms) {
-						std::cin >> inputnumbers;
-						if (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
+			else if (response == "formulas") {
+				readFormulaSheet("formulas.txt");
+			}
+			else if (response == "advanced") {
+				repeat = true;
+				std::string answer_2;
+				std::cout << termcolor::bold << termcolor::cyan
+				          << "This function will allow you calculate confidence intervals and t,z and chi "
+				             "test statistics!" << '\n';
+				while (repeat) {
+					std::cout << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )" << '\n';
+					Cinterval ci;
+					std::string choice;
+					std::cin >> choice;
+					if (choice == "ci") {
+						std::cout << "type \"zinterval\" for z confidence interval" << '\n';
+						std::cout << "type \"2zinterval\" for  2 z confidence interval" << '\n';
+						std::cout << "type \"tinterval\" for t confidence interval" << '\n';
+						std::cout << "type \"2tinterval\" for 2 t confidence interval" << '\n';
+						std::cout << "type \"pinterval\" for Proportion confidence interval" << '\n';
+						std::cout << "type \"2pinterval\" for 2 Proportions confidence interval"
+						          << '\n';
+						std::cin >> answer_2;
+						if (answer_2 == "zinterval") {
+							ci.displayCI_Z();
 						}
-						else {
-							datasetX.emplace_back(inputnumbers);
-							trials++;
+						else if (answer_2 == "tinterval") {
+							ci.displayCI_T();
+						}
+						else if (answer_2 == "pinterval") {
+							ci.displayCI_Proportion();
+						}
+						else if (answer_2 == "2zinterval") {
+							ci.displayCI_2Z();
+						}
+						else if (answer_2 == "2tinterval") {
+							ci.displayCI_2T();
+						}
+						else if (answer_2 == "2pinterval") {
+							ci.displayCI_2Proportions();
 						}
 					}
-					trials = 0;
+					else if (choice == "ht") {
+						HypTest ht;
+						std::cout << "type \"zscore\" for z-score (formula without sample size)" << '\n';
+						std::cout << "type \"zstat\" for z test statistic(with sample size)" << '\n';
+						std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
+						std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
+						std::cout << "type \"2tstat\" for two sample t-score/test-statistic" << '\n';
+						std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic" << '\n';
+						std::cout << "type \"p\" for single proportion test" << '\n';
+						std::cout << "type \"twop\" for 2 proportion test" << '\n';
+						std::cout << "type \"chi\" for chi-square test" << '\n';
+						std::cin >> answer_2;
+						if (answer_2 == "zscore") {
+							double point_estimate;
+							double mean;
+							double sd;
+							std::cout << "What is x̄?" << '\n';
+							std::cin >> point_estimate;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> point_estimate;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "What is the population mean?" << '\n';
+							std::cin >> mean;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> mean;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "Finally, what is the standard deviation" << '\n';
+							std::cin >> sd;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> sd;
+							}
+							std::cin.ignore(100000,'\n');
+							ht.calculateZscore(point_estimate, mean, sd);
+						}
+						else if (answer_2 == "zstat") {
+							double point_estimate;
+							double mean;
+							double sd;
+							int sample_size;
+							std::cout << "What is x̄?" << '\n';
+							std::cin >> point_estimate;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> point_estimate;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "What is the population mean?" << '\n';
+							std::cin >> mean;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> mean;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "What is the sample size?" << '\n';
+							std::cin >> sample_size;
+							while (!std::cin || sample_size <= 0) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> sample_size;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "Finally, what is the standard deviation" << '\n';
+							std::cin >> sd;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> sd;
+							}
+							std::cin.ignore(100000,'\n');
+							ht.calculateZstat(point_estimate, mean, sd, sample_size);
+						}
+						else if (answer_2 == "tscore") {
+							double point_estimate;
+							double mean;
+							double sd;
+							int sample_size;
+							std::cout << "What is x̄?" << '\n';
+							std::cin >> point_estimate;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> point_estimate;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "What is the hypothesized value?" << '\n';
+							std::cin >> mean;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> mean;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "What is the sample size?" << '\n';
+							std::cin >> sample_size;
+							while (!std::cin || sample_size <= 0) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> sample_size;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "Finally, what is the standard deviation" << '\n';
+							std::cin >> sd;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> sd;
+							}
+							std::cin.ignore(100000,'\n');
+							ht.calculateTscore(point_estimate, mean, sd, sample_size);
+						}
+						else if (answer_2 == "p") {
+							double p_hat;
+							double p;
+							int sample_size;
+							std::cout << "What is p̂?" << '\n';
+							std::cin >> p_hat;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> p_hat;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "What is p?" << '\n';
+							std::cin >> p;
+							while (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> p;
+							}
+							std::cin.ignore(100000,'\n');
+							std::cout << "Finally, what is the sample size?" << '\n';
+							std::cin >> sample_size;
+							while (!std::cin || sample_size <= 0) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+								std::cin >> sample_size;
+							}
+							std::cin.ignore(100000,'\n');
+							ht.calculateProportion(p_hat, p, sample_size);
+						}
+						else if (answer_2 == "2zstat") {
+							ht.printHypothesisReport_2Z();
+						}
+						else if (answer_2 == "2tstat") {
+							ht.printHypothesisReport_2T();
+						}
+						else if (answer_2 == "2tstat") {
+							ht.printHypothesisReport_2T();
+						}
+						else if (answer_2 == "2tpair") {
+							ht.printHypothesisReport_pairedT();
+						}
+						else if (answer_2 == "twop") {
+							ht.printHypothesisReport_2P();
+						}
+						else if (answer_2 == "chi") {
+							ht.printChiTest();
+						}
+						else {
+							std::cout << "Invalid answer, type y when prompted to try again" << '\n';
+						}
+					}
+					// clear excessive inputs
 					std::cin.ignore(100000,'\n');
-					std::vector<double> datasetY;
-					datasetY.reserve(terms);
-					std::cout << "You may now type the numbers in your Y data set" << '\n';
-					while (trials != terms) {
-						std::cin >> inputnumbers;
-						if (!std::cin) {
-							std::cout << "Invalid input! try again" << '\n';
-							std::cin.clear();
-							std::cin.ignore();
-						}
-						else {
-							datasetY.emplace_back(inputnumbers);
-							trials++;
-						}
+					std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
+					std::cin >> answer;
+					if (answer == 'y') {
+						repeat = true;
 					}
-					sortDatasetXY(datasetX, datasetY);
-					std::cout << termcolor::reset << termcolor::bold << termcolor::blue;
-					displayDatasetXY(datasetX, datasetY);
-					std::cout << termcolor::reset << '\n';
-					std::cout << termcolor::bold << termcolor::cyan;
-					displayLSRL(datasetX, datasetY, terms);
-				}
-				// clear excessive inputs
-				std::cin.ignore(100000,'\n');
-				std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
-				char decision;
-				std::cin >> decision;
-				if (decision == 'y') {
-					repeat = true;
-				}
-				else if (decision == 'n') {
-					repeat = false;
-					std::cout << termcolor::reset;
-				}
-				else {
-					std::cout << "Invalid input, going back to main page..." << '\n';
-					repeat = false;
-					std::cout << termcolor::reset;
+					else if (answer == 'n') {
+						repeat = false;
+						std::cout << termcolor::reset;
+					}
+					else {
+						std::cout << "Invalid input, going back to main page..." << '\n';
+						repeat = false;
+						std::cout << termcolor::reset;
+					}
 				}
 			}
-		}
-		else if (response == "exit") {
-			std::cout << termcolor::bold << termcolor::white;
-			std::cout << "Thank you for using this calculator. Come again soon!" << '\n';
-			backtrack = false;
-		}
-		else {
-			std::cout << "You have typed something incorrectly, please try again" << '\n';
-			std::cout << termcolor::reset;
+			else if (response == "cc") {
+				std::cout << termcolor::white;
+				repeat = true;
+				while (repeat) {
+					int terms;
+					int trials = 0;
+					double inputnumbers;
+					// gets the number of terms in the date set and fills the vector with them
+					std::cout << "How many terms are there?" << '\n';
+					std::cin >> terms;
+					while (!std::cin || terms <= 1) {
+						// notify user input is incorrect
+						std::cout << "Invalid input! try again" << '\n';
+						std::cout << "Expected one input that is greater than 1" << '\n';
+						std::cin.clear();
+						std::cin.ignore(1000,'\n');
+						std::cin >> terms;
+					}
+					std::cin.ignore(100000,'\n');
+					if (terms > 1) {
+						std::vector<double> datasetX;
+						datasetX.reserve(terms);
+						std::cout << "You may now type the numbers in your X data set" << '\n';
+						while (trials != terms) {
+							std::cin >> inputnumbers;
+							if (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+							}
+							else {
+								datasetX.emplace_back(inputnumbers);
+								trials++;
+							}
+						}
+						trials = 0;
+						std::cin.ignore(100000,'\n');
+						std::vector<double> datasetY;
+						datasetY.reserve(terms);
+						std::cout << "You may now type the numbers in your Y data set" << '\n';
+						while (trials != terms) {
+							std::cin >> inputnumbers;
+							if (!std::cin) {
+								std::cout << "Invalid input! try again" << '\n';
+								std::cin.clear();
+								std::cin.ignore();
+							}
+							else {
+								datasetY.emplace_back(inputnumbers);
+								trials++;
+							}
+						}
+						sortDatasetXY(datasetX, datasetY);
+						std::cout << termcolor::reset << termcolor::bold << termcolor::blue;
+						displayDatasetXY(datasetX, datasetY);
+						std::cout << termcolor::reset << '\n';
+						std::cout << termcolor::bold << termcolor::cyan;
+						displayLSRL(datasetX, datasetY, terms);
+					}
+					// clear excessive inputs
+					std::cin.ignore(100000,'\n');
+					std::cout << "Would you like to keep using this function? type 'y' or 'n'" << '\n';
+					char decision;
+					std::cin >> decision;
+					if (decision == 'y') {
+						repeat = true;
+					}
+					else if (decision == 'n') {
+						repeat = false;
+						std::cout << termcolor::reset;
+					}
+					else {
+						std::cout << "Invalid input, going back to main page..." << '\n';
+						repeat = false;
+						std::cout << termcolor::reset;
+					}
+				}
+			}
+			else if (response == "exit") {
+				std::cout << termcolor::bold << termcolor::white;
+				std::cout << "Thank you for using this calculator. Come again soon!" << '\n';
+				backtrack = false;
+			}
+			else {
+				std::cout << "You have typed something incorrectly, please try again" << '\n';
+				std::cout << termcolor::reset;
+			}
 		}
 	}
+
+
+
+
 
 	return 0;
 }
