@@ -21,14 +21,12 @@ struct Bound {
 };
 
 struct CriticalZ {
-  private:
-	double z99;
-	double z95;
-	double z90;
-	double z85;
-	double z80;
+	const double z99;
+	const double z95;
+	const double z90;
+	const double z85;
+	const double z80;
 
-  public:
 	CriticalZ() : z99(2.576), z95(1.960), z90(1.645), z85(1.440), z80(1.282) {}
 };
 

@@ -37,6 +37,9 @@ double calculateCorrelationCoefficient(const std::vector<double>& datasetX,
 	double sdX = calculateStandardDeviation(datasetX, terms).sample;
 	double sdY = calculateStandardDeviation(datasetY, terms).sample;
 
+	if (sdX == 0 || sdY == 0)
+		throw std::runtime_error("Attempted to divide by 0\n");
+
 	for (int i = 0; i < terms; i++) {
 		sum += (((datasetX[i] - x) / sdX) * ((datasetY[i] - y) / sdY));
 	}
@@ -59,7 +62,7 @@ double calculateSlope(const std::vector<double>& datasetX,
 	}
 
 	if (bottom == 0)
-		throw std::runtime_error("Attempted to divide by Zero\n");
+		throw std::runtime_error("Attempted to divide by 0\n");
 
 	return (top / bottom);
 }
