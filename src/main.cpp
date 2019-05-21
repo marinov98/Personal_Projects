@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 					std::cout << data << " ";
 				});
 
-				std::cout << "\nMEAN: " << calculateMean(dataset, dataset.size()) << '\n';
+				std::cout << "\nMEAN: " << calculateMean(dataset) << '\n';
 				if (dataset.size() > 3) {
 					std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset)
 					          << '\n';
@@ -76,7 +76,7 @@ int main(int argc, char* argv[]) {
 				std::cout << "RANGE: " << calculateRange(dataset) << '\n';
 				displayMinMax(dataset);
 				findOutliers(dataset);
-				displayStandardDeviation(dataset, dataset.size());
+				displayStandardDeviation(dataset);
 				std::cout << '\n';
 				// erase terms once finished showing numbers to user
 				dataset.clear();
@@ -186,10 +186,10 @@ int main(int argc, char* argv[]) {
 						          << "Mean, Median, Mode, Range, Min/Max:" << termcolor::reset
 						          << '\n';
 						std::cout << termcolor::bold << termcolor::red
-						          << "MEAN: " << calculateMean(dataset, terms) << '\n';
+						          << "MEAN: " << calculateMean(dataset) << '\n';
 						std::cout << "MODE: ";
 						calculateMode(dataset);
-						std::cout << "RANGE " << calculateRange(dataset) << '\n';
+						std::cout << "RANGE: " << calculateRange(dataset) << '\n';
 						displayMinMax(dataset);
 						std::cout << termcolor::reset;
 						std::cout << termcolor::bold << termcolor::yellow;
@@ -207,7 +207,7 @@ int main(int argc, char* argv[]) {
 						std::cout << termcolor::underline << termcolor::cyan
 						          << "Standard deviation and Variance:" << termcolor::reset << '\n';
 						std::cout << termcolor::bold << termcolor::cyan;
-						displayStandardDeviation(dataset, terms);
+						displayStandardDeviation(dataset);
 						std::cout << '\n';
 						// erase terms once finished showing numbers to user
 						dataset.clear();
@@ -546,7 +546,7 @@ int main(int argc, char* argv[]) {
 						displayDatasetXY(datasetX, datasetY);
 						std::cout << termcolor::reset << '\n';
 						std::cout << termcolor::bold << termcolor::cyan;
-						displayLSRL(datasetX, datasetY, terms);
+						displayLSRL(datasetX, datasetY);
 					}
 					// clear excessive inputs
 					std::cin.ignore(100000, '\n');

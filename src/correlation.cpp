@@ -28,33 +28,38 @@ void displayDatasetXY(const std::vector<double>& datasetX, const std::vector<dou
 }
 
 double calculateCorrelationCoefficient(const std::vector<double>& datasetX,
-                                       const std::vector<double>& datasetY,
-                                       const int terms) {
+                                       const std::vector<double>& datasetY) {
+	if (datasetX.size() != datasetY.size())
+		throw std::runtime_error("dataset sizes do not match!");
+
 	double sum = 0.0;
-	double x = calculateMean(datasetX, terms);
-	double y = calculateMean(datasetY, terms);
-	double sdX = calculateStandardDeviation(datasetX, terms).sample;
-	double sdY = calculateStandardDeviation(datasetY, terms).sample;
+	double x = calculateMean(datasetX);
+	double y = calculateMean(datasetY);
+	double sdX = calculateStandardDeviation(datasetX).sample;
+	double sdY = calculateStandardDeviation(datasetY).sample;
 
 	if (sdX == 0 || sdY == 0)
 		throw std::runtime_error("Attempted to divide by 0\n");
 
-	for (int i = 0; i < terms; i++) {
+	for (size_t i = 0; i < datasetX.size(); i++) {
 		sum += (((datasetX[i] - x) / sdX) * ((datasetY[i] - y) / sdY));
 	}
 
-	return (sum / (terms - 1));
+	return (sum / (datasetX.size() - 1));
 }
 
 double calculateSlope(const std::vector<double>& datasetX,
-                      const std::vector<double>& datasetY,
-                      const int terms) {
+                      const std::vector<double>& datasetY) {
+
+	if (datasetX.size() != datasetY.size())
+		throw std::runtime_error("dataset sizes do not match!");
+
 	double top = 0.0;
 	double bottom = 0.0;
-	double x = calculateMean(datasetX, terms);
-	double y = calculateMean(datasetY, terms);
+	double x = calculateMean(datasetX);
+	double y = calculateMean(datasetY);
 
-	for (int i = 0; i < terms; i++) {
+	for (size_t i = 0; i < datasetX.size(); i++) {
 		double temp = (datasetX[i] - x);
 		bottom += (temp * temp);
 		top += ((datasetX[i] - x) * (datasetY[i] - y));
@@ -67,32 +72,29 @@ double calculateSlope(const std::vector<double>& datasetX,
 }
 
 double calculateYintercept(const std::vector<double>& datasetX,
-                           const std::vector<double>& datasetY,
-                           const int terms) {
-	double x = calculateMean(datasetX, terms);
-	double y = calculateMean(datasetY, terms);
-	double b = calculateSlope(datasetX, datasetY, terms);
+                           const std::vector<double>& datasetY) {
+	double x = calculateMean(datasetX);
+	double y = calculateMean(datasetY);
+	double b = calculateSlope(datasetX, datasetY);
 
 	return (y - b * x);
 }
 
 void displayLSRL(const std::vector<double>& datasetX,
-                 const std::vector<double>& datasetY,
-                 const int terms) {
-	double x = calculateMean(datasetX, terms);
-	double y = calculateMean(datasetY, terms);
-	double b = calculateSlope(datasetX, datasetY, terms);
-	double a = calculateYintercept(datasetX, datasetY, terms);
-	double r = calculateCorrelationCoefficient(datasetX, datasetY, terms);
+                 const std::vector<double>& datasetY) {
+
+	double b = calculateSlope(datasetX, datasetY);
+	double a = calculateYintercept(datasetX, datasetY);
+	double r = calculateCorrelationCoefficient(datasetX, datasetY);
 
 	std::cout << "Correlation Coefficient report: " << '\n';
-	std::cout << "The Mean value of the x values is: " << x << '\n';
-	std::cout << "The Mean value of the y values is: " << y << '\n';
-	std::cout << "The slope of the LSRL is: " << b << '\n';
-	std::cout << "The y intercept is: " << a << '\n';
+	std::cout << "MEAN (x values): " << calculateMean(datasetX) << '\n';
+	std::cout << "MEAN (y values): " << calculateMean(datasetY) << '\n';
+	std::cout << "SLOPE of LSRL: " << b << '\n';
+	std::cout << "Y-INTERCEPT: " << a << '\n';
 	std::cout << '\n' << "Your equation is: " << '\n';
 	std::cout << "ŷ = " << a << " + " << b << "x" << '\n';
-	std::cout << "The Correlation Coefficient is: " << r << '\n';
+	std::cout << "CORRELATION COEFFICIENT: " << r << '\n';
 	if (r >= -0.5 && r <= 0.5) {
 		std::cout << "Weak correlation" << '\n';
 	}

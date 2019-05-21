@@ -5,7 +5,7 @@
 ### FLAGS 
 CXX 		:= g++
 STANDARD 	:= -std=c++14 $(CXXFLAGS)
-WARNINGS 	:= -fdiagnostics-color=always -Wall -Wextra -Wconversion
+WARNINGS 	:= -fdiagnostics-color=always -Wall -Wextra #-Wconversion
 
 ### DIRECTORIES
 SRCDIR 		:= src

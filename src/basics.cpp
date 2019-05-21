@@ -55,8 +55,8 @@ void displayPercentiles(const std::vector<double>& dataSet) {
 }
 
 // displays standard deviation to the user
-void displayStandardDeviation(const std::vector<double>& dataSet, const int terms) {
-	const DataType& sd = calculateStandardDeviation(dataSet, terms);
+void displayStandardDeviation(const std::vector<double>& dataSet) {
+	const DataType& sd = calculateStandardDeviation(dataSet);
 
 	std::cout << "SAMPLE standard deviation (Sx): " << sd.sample << '\n';
 	std::cout << "SAMPLE variance (Sx^2): " << (sd.sample * sd.sample) << '\n';
@@ -66,12 +66,12 @@ void displayStandardDeviation(const std::vector<double>& dataSet, const int term
 
 // Functions for finding MEAN, MEDIAN, RANGE, and
 
-double calculateMean(const std::vector<double>& dataSet, const int terms) {
+double calculateMean(const std::vector<double>& dataSet) {
 	// Safety
-	if (terms <= 0 || dataSet.empty())
-		throw std::runtime_error("Invalid number of terms or vector size");
+	if (dataSet.empty())
+		throw std::runtime_error("Empty Dataset");
 
-	return (std::accumulate(dataSet.begin(), dataSet.end(), 0.0) / terms);
+	return (std::accumulate(dataSet.begin(), dataSet.end(), 0.0) / dataSet.size());
 }
 
 double calculateRange(const std::vector<double>& dataSet) {
@@ -152,12 +152,12 @@ void calculateMode(const std::vector<double>& dataSet) {
 }
 
 // standard deviation and variance
-DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms) {
+DataType calculateStandardDeviation(const std::vector<double>& dataSet) {
 	// Safety
-	if (terms <= 1 || dataSet.empty())
+	if (dataSet.empty())
 		throw std::runtime_error("Invalid number of terms or vector size");
 
-	double mean = calculateMean(dataSet, terms);
+	double mean = calculateMean(dataSet);
 	DataType sd;
 
 	for (const auto& number : dataSet) {
@@ -166,8 +166,8 @@ DataType calculateStandardDeviation(const std::vector<double>& dataSet, int term
 		sd.population += (temp * temp);
 	}
 
-	sd.sample = std::sqrt(sd.sample / (terms - 1));
-	sd.population = std::sqrt(sd.population / (terms));
+	sd.sample = std::sqrt(sd.sample / (dataSet.size() - 1));
+	sd.population = std::sqrt(sd.population / (dataSet.size()));
 	return sd;
 }
 

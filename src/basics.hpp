@@ -34,15 +34,15 @@ struct Percentile {
 // sorting and printing functions
 void sortDataset(std::vector<double>& dataSet);
 void displayDataset(const std::vector<double>& dataSet);
-void displayStandardDeviation(const std::vector<double>& dataSet, int terms);
+void displayStandardDeviation(const std::vector<double>& dataSet);
 void displayMinMax(const std::vector<double>& dataSet);
 void displayPercentiles(const std::vector<double>& dataSet);
 
 // calculation and functionality functions
-double calculateMean(const std::vector<double>& dataSet, int terms);
+double calculateMean(const std::vector<double>& dataSet);
 double calculateRange(const std::vector<double>& dataset);
 Percentile calculatePercentiles(const std::vector<double>& dataSet);
 void calculateMode(const std::vector<double>& dataSet);
-DataType calculateStandardDeviation(const std::vector<double>& dataSet, int terms);
+DataType calculateStandardDeviation(const std::vector<double>& dataSet);
 double calculateInterquartileRange(const std::vector<double>& dataSet);
 void findOutliers(const std::vector<double>& dataSet);

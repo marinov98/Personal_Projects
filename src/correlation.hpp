@@ -14,21 +14,17 @@ purpose: correlation header file. Calculates slope, y-intercept, LSRL line and C
 void sortDatasetXY(std::vector<double>& datasetX, std::vector<double>& datasetY);
 void displayDatasetXY(const std::vector<double>& datasetX, const std::vector<double>& datasetY);
 void displayLSRL(const std::vector<double>& datasetX,
-			     const std::vector<double>& datasetY,
-			     int terms);
+			     const std::vector<double>& datasetY);
 
 // calculation functions
 
 // Correlation Coefficient
 double calculateCorrelationCoefficient(const std::vector<double>& datasetX,
-                                       const std::vector<double>& datasetY,
-                                       int terms);
+                                       const std::vector<double>& datasetY);
 // Slope
 double calculateSlope(const std::vector<double>& datasetX,
-		              const std::vector<double>& datasetY,
-		              int terms);
+		              const std::vector<double>& datasetY);
 
 // Y-intercept
 double calculateYintercept(const std::vector<double>& datasetX,
-                           const std::vector<double>& datasetY,
-                           int terms);
+                           const std::vector<double>& datasetY);
