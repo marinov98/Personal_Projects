@@ -36,13 +36,16 @@ void readFormulaSheet(const std::string& text) {
 		std::cerr << "Reason: " << e.what() << '\n';
 	}
 }
-
+// TODO: MAKE CUSTOM LOGO!
 int main(int argc, char* argv[]) {
 	// READING FILES SECTION
 	// TODO: add Makefile commands for extra args
 	if (argc == 2) {
 		std::ifstream inputfile;
 		std::string str;
+		char symbols;
+		int num;
+		unsigned int sets = 0;
 
 		inputfile.open(argv[1]);
 
@@ -50,6 +53,36 @@ int main(int argc, char* argv[]) {
 			std::cerr << "Unable to open" << argv[1] << "for reading";
 			exit(1);
 		}
+
+		std::vector<double> dataset;
+		// cin the rest
+		while (inputfile >> num >> symbols) {
+			dataset.emplace_back(num);
+			if (symbols == ';') {
+				sortDataset(dataset);
+				std::cout << "Dataset " << ++sets << '\n';
+				std::for_each(dataset.begin(), dataset.end(), [&](int data) {
+					std::cout << data << " ";
+				});
+
+				std::cout << "\nMEAN: " << calculateMean(dataset, dataset.size()) << '\n';
+				if (dataset.size() > 3) {
+					std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset)
+					          << '\n';
+					displayPercentiles(dataset);
+				}
+				std::cout << "MODE: ";
+				calculateMode(dataset);
+				std::cout << "RANGE: " << calculateRange(dataset) << '\n';
+				displayMinMax(dataset);
+				findOutliers(dataset);
+				displayStandardDeviation(dataset, dataset.size());
+				std::cout << '\n';
+				// erase terms once finished showing numbers to user
+				dataset.clear();
+			}
+		}
+
 		// TODO: Have a function to read in data from txt file and stop at ; or '\n'
 	} // function expects first arg as file and second arg as function
 	else if (argc == 3) {
@@ -58,7 +91,7 @@ int main(int argc, char* argv[]) {
 		// TODO: Based on second argument print desired function for user
 
 		std::ifstream inputfile;
-		std::string str;
+		std::string s;
 
 		inputfile.open(argv[1]);
 
@@ -66,6 +99,13 @@ int main(int argc, char* argv[]) {
 			std::cerr << "Unable to open" << argv[1] << "for reading";
 			exit(1);
 		}
+
+		// Should be either Mean Median,Mode,Range,Sd(standard deviation),Min, or Max
+		std::string command(argv[3]);
+
+		// ensure 3 argument is uppercase
+		// this creates ease for users who do not want to use the makefile
+		std::for_each(command.begin(), command.end(), [&](char& c) { c = toupper(c); });
 	}
 	// DEFAULT INTERFACE
 	else {
@@ -136,6 +176,7 @@ int main(int argc, char* argv[]) {
 								trials++;
 							}
 						}
+
 						// Ensure dataset is sorted so all functions work as intended
 						sortDataset(dataset);
 						// showcases the dataset's mean, mode, and range
@@ -145,24 +186,20 @@ int main(int argc, char* argv[]) {
 						          << "Mean, Median, Mode, Range, Min/Max:" << termcolor::reset
 						          << '\n';
 						std::cout << termcolor::bold << termcolor::red
-						          << "The MEAN of the data set is: "
-						          << calculateMean(dataset, terms) << '\n';
-						std::cout << "The MODE of your data set is(are): ";
+						          << "MEAN: " << calculateMean(dataset, terms) << '\n';
+						std::cout << "MODE: ";
 						calculateMode(dataset);
-						std::cout << "The RANGE of the data set is: " << calculateRange(dataset)
-						          << '\n';
+						std::cout << "RANGE " << calculateRange(dataset) << '\n';
 						displayMinMax(dataset);
 						std::cout << termcolor::reset;
 						std::cout << termcolor::bold << termcolor::yellow;
 						// prints the 25th,50th, and 75th percentile of the dataset
-						if (dataset.size() > 3) {
-							std::cout << termcolor::underline << termcolor::yellow
-							          << "\nPercentiles:" << termcolor::reset << '\n';
-							std::cout << termcolor::bold << termcolor::yellow
-							          << "The INTERQUARTILE RANGE of the data set is: "
-							          << calculateInterquartileRange(dataset) << '\n';
-							displayPercentiles(dataset);
-						}
+						std::cout << termcolor::underline << termcolor::yellow
+						          << "\nPercentiles:" << termcolor::reset << '\n';
+						std::cout << termcolor::bold << termcolor::yellow
+						          << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset)
+						          << '\n';
+						displayPercentiles(dataset);
 
 						findOutliers(dataset);
 						std::cout << termcolor::reset << '\n';
@@ -434,6 +471,7 @@ int main(int argc, char* argv[]) {
 					}
 					// clear excessive inputs
 					std::cin.ignore(100000, '\n');
+					std::cout << '\n';
 					std::cout << "Would you like to keep using this function? type 'y' or 'n'"
 					          << '\n';
 					std::cin >> answer;
@@ -512,7 +550,7 @@ int main(int argc, char* argv[]) {
 					}
 					// clear excessive inputs
 					std::cin.ignore(100000, '\n');
-					std::cout << "Would you like to keep using this function? type 'y' or 'n'"
+					std::cout << "\n Would you like to keep using this function? type 'y' or 'n'"
 					          << '\n';
 					char decision;
 					std::cin >> decision;

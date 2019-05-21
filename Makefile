@@ -22,7 +22,7 @@ TSRCS 		:= src/basics.cpp src/correlation.cpp src/hypTest.cpp src/cInterval.cpp
 TESTEXEC        := test_calculator
 
 #############################
-###### COMPILING & RUNNING
+###### COMPILING  
 #############################
 
 $(EXEC): $(OBJS)
@@ -31,7 +31,6 @@ $(EXEC): $(OBJS)
 	$(if $(findstring g,$(STANDARD)),\
 		@echo 'Calculator is ready to be debugged.',\
 		@echo 'Calculator is ready to launch.')
-	@echo 'Start using the calculator by typing "make run".'
 
 $(BUILDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(BUILDIR) 
@@ -41,10 +40,26 @@ $(BUILDIR)/%.o: $(SRCDIR)/%.cpp
 	@$(CXX) $(STANDARD) $(WARNINGS) -c -o $@ $<
 	@echo 'Success!'
 
+
+#############################
+###### RUNNING
+#############################
+
+### 1 argument
+
 run:
 	@echo 'Launching...'
 	@./$(EXEC)
 	@echo 'use "make clean" to clean build directory and executable'
+
+### 2 argument
+
+parse:
+	@echo 'reading data.txt...'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt
+
+### 3 argument
 
 
 #############################

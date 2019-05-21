@@ -37,20 +37,20 @@ void displayMinMax(const std::vector<double>& dataSet) {
 
 	// Assumes vector is in sorted ascending order
 	// sortDataset should be called before using this function
-	std::cout << "The minimum value of the data set is: " << dataSet.front() << '\n';
-	std::cout << "The maximum value of the data set is: " << dataSet.back() << '\n';
+	std::cout << "MIN value: " << dataSet.front() << '\n';
+	std::cout << "MAX value: " << dataSet.back() << '\n';
 }
 
 // displays 25th,50th, and 75th percentile to the user
 void displayPercentiles(const std::vector<double>& dataSet) {
 	const Percentile& percentile = calculatePercentiles(dataSet);
 	if (dataSet.size() <= 3) {
-		std::cout << "The 50th percentile(MEDIAN) of the data set is: " << percentile.q2 << '\n';
+		std::cout << "MEDIAN: " << percentile.q2 << '\n';
 	}
 	else if (dataSet.size() >= 4) {
-		std::cout << "The 25th percentile of the data set is: " << percentile.q1 << '\n';
-		std::cout << "The 50th percentile(MEDIAN) of the data set is: " << percentile.q2 << '\n';
-		std::cout << "The 75th percentile of the data set is: " << percentile.q3 << '\n';
+		std::cout << "25th PERCENTILE: " << percentile.q1 << '\n';
+		std::cout << "50th PERCENTILE(MEDIAN): " << percentile.q2 << '\n';
+		std::cout << "75th PERCENTILE: " << percentile.q3 << '\n';
 	}
 }
 
@@ -58,10 +58,10 @@ void displayPercentiles(const std::vector<double>& dataSet) {
 void displayStandardDeviation(const std::vector<double>& dataSet, const int terms) {
 	const DataType& sd = calculateStandardDeviation(dataSet, terms);
 
-	std::cout << "The SAMPLE standard deviation (Sx) is: " << sd.sample << '\n';
-	std::cout << "The SAMPLE variance (Sx^2) is: " << (sd.sample * sd.sample) << '\n';
-	std::cout << "The POPULATION standard deviation (σ) is: " << sd.population << '\n';
-	std::cout << "The POPULATION variance (σ^2) is: " << (sd.population * sd.population) << '\n';
+	std::cout << "SAMPLE standard deviation (Sx): " << sd.sample << '\n';
+	std::cout << "SAMPLE variance (Sx^2): " << (sd.sample * sd.sample) << '\n';
+	std::cout << "POPULATION standard deviation (σ): " << sd.population << '\n';
+	std::cout << "POPULATION variance (σ^2): " << (sd.population * sd.population) << '\n';
 }
 
 // Functions for finding MEAN, MEDIAN, RANGE, and
