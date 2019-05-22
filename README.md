@@ -36,7 +36,8 @@
 - Outliers
 
 #### Showcase:
-![basics](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
+![basics](https://user-images.githubusercontent.com/33673401/58147734-f9534c80-7c29-11e9-8a05-96f84acfeffa.png)
+
 
 ### Hypothesis Testing (Advanced)
 - calculate z-score and t-score
