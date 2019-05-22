@@ -62,8 +62,41 @@
 ## How-To-Use
 - clone this repository
 - cd into  Statistical_Calculator
-- run ```make``` then ```make run```
+- type ```make```
 
+### 3-ways to use the calculator
+##### defeault option:
+- This option is if you want to use the calculator's default interface where the calculator asks you for what you want and you answer
+- type ```make run``` to execute this option
+
+##### About data.txt
+- You will notice the project comes with the txt file [data.txt](https://github.com/marinov98/Statistical_Calculator/blob/master/data.txt)
+- You can type any dataset in. However, you **must** make sure the numbers are **separated by a comma** and when you are finished **you end with a ;** (data.txt already has an example provided if you are still confused about the format);
+
+##### Special option #1
+- type ```make parse```
+- if the file contains an imvalid input, the command will not do anything 
+- this command will parse through the data file and every time it finds a ; it will print out every function described in [basics](#Basics).
+- You can have multiple datasets typed as long as they each end in ; the command will then print each dataset that it finds
+
+##### Special option #2
+- There are multiple commands here but they all work the same
+- Here instead of printing all the fucntions described in [basics](#Basics), you pick the specific one 
+- Again the command will do this for every dataset it finds in the data.txt file 
+- Commands include ```make```:
+  - ```mean```
+  - ```median```
+  - ```percentile```
+  - ```mode```
+  - ```range```
+  - ```min```
+  - ```max```
+  - ```outliers```
+  - ```sd```
+  
+##### Example wth outliers and range
+![Screenshot from 2019-05-22 00-24-17](https://user-images.githubusercontent.com/33673401/58149637-bd23ea00-7c31-11e9-88ec-a9b32a3b21ae.png)
+ 
 ## Regarding CMake
 - right now it is best to compile with the Makefile I made for the project
 - The Cmake works just as well
