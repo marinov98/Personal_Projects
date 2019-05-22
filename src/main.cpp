@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	if (argc == 2) {
 		std::ifstream inputfile;
 		char symbols;
-		int num;
+		double num;
 		unsigned int sets = 0;
 
 		inputfile.open(argv[1]);
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 			if (symbols == ';') {
 				sortDataset(dataset);
 				std::cout << "Dataset " << ++sets << '\n';
-				std::for_each(dataset.begin(), dataset.end(), [&](int data) {
+				std::for_each(dataset.begin(), dataset.end(), [&](double data) {
 					std::cout << data << " ";
 				});
 
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
 
 		std::ifstream inputfile;
 		char symbols;
-		int num;
+		double num;
 		unsigned int sets = 0;
 
 		inputfile.open(argv[1]);
@@ -118,7 +118,7 @@ int main(int argc, char* argv[]) {
 			if (symbols == ';') {
 				sortDataset(dataset);
 				std::cout << "Dataset " << ++sets << '\n';
-				std::for_each(dataset.begin(), dataset.end(), [&](int data) {
+				std::for_each(dataset.begin(), dataset.end(), [&](double data) {
 					std::cout << data << " ";
 				});
 
