@@ -93,6 +93,9 @@
   - ```max```
   - ```outliers```
   - ```sd```
+  
+##### Example wth outliers and range
+![Screenshot from 2019-05-22 00-24-17](https://user-images.githubusercontent.com/33673401/58149637-bd23ea00-7c31-11e9-88ec-a9b32a3b21ae.png)
  
 ## Regarding CMake
 - right now it is best to compile with the Makefile I made for the project
