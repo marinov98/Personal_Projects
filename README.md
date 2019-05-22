@@ -1,6 +1,8 @@
 
 # Welcome to my Statistics Calculator! :octocat:
 
+![stat-logo](https://user-images.githubusercontent.com/33673401/58150031-530c4480-7c33-11e9-9597-46fd9f3f5e5d.jpeg)
+
 ## To Do's
 - make a website for the calculator
 - use cmake to launch
