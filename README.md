@@ -57,7 +57,7 @@
 - line of best fit
 
 #### Showcase:
-![cc](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
+![cc](https://user-images.githubusercontent.com/33673401/58147914-a332d900-7c2a-11e9-823a-b9d7ef65ee91.png)
 
 ## How-To-Use
 - clone this repository
