@@ -2,8 +2,6 @@
 # Welcome to my Statistics Calculator! :octocat:
 
 ## To Do's
-- make the program able to accept csv's (and maybe other file types in the future)
-- restructure the program to a CLI
 - make a website for the calculator
 - use cmake to launch
 - Extensively test the calculator using the [doctest](https://github.com/onqtam/doctest) testing framework
@@ -37,6 +35,9 @@
 - Interquartile range
 - Outliers
 
+#### Showcase:
+[basics](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
+
 ### Hypothesis Testing (Advanced)
 - calculate z-score and t-score
 - one/two sample **t** and **z** tests
@@ -52,11 +53,14 @@
 ### Correlation Coefficient
 - correlation coefficient
 - slope, y-intercept
-- line of best fit 
+- line of best fit
+
+#### Showcase:
+[cc](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
 
 ## How-To-Use
 - clone this repository
-- cd into it (being in either root directory or src/ works)
+- cd into  Statistical_Calculator
 - run ```make``` then ```make run```
 
 ## Regarding CMake
