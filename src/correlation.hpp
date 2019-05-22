@@ -10,8 +10,7 @@ purpose: correlation header file. Calculates slope, y-intercept, LSRL line and C
 #include <iostream>
 #include <vector>
 
-// printing/sorting functions
-void sortDatasetXY(std::vector<double>& datasetX, std::vector<double>& datasetY);
+// printing functions
 void displayDatasetXY(const std::vector<double>& datasetX, const std::vector<double>& datasetY);
 void displayLSRL(const std::vector<double>& datasetX,
 			     const std::vector<double>& datasetY);

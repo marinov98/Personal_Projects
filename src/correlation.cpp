@@ -10,10 +10,6 @@ purpose: implements the correlation class
 #include <iostream>
 #include <vector>
 
-void sortDatasetXY(std::vector<double>& datasetX, std::vector<double>& datasetY) {
-	std::sort(datasetX.begin(), datasetX.end());
-	std::sort(datasetY.begin(), datasetY.end());
-}
 
 void displayDatasetXY(const std::vector<double>& datasetX, const std::vector<double>& datasetY) {
 	std::cout << "The x values of this dataset are: " << '\n';

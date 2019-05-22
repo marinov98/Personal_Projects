@@ -61,6 +61,50 @@ parse:
 
 ### 3 argument
 
+mean:
+	@echo 'Command "MEAN" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt MEAN
+
+median:
+	@echo 'Command "MEDIAN" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt MEDIAN
+
+percentile:
+	@echo 'Command "PERCENTILE" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt PERCENTILE
+
+mode:
+	@echo 'Command "MODE" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt MODE
+	
+range:
+	@echo 'Command "RANGE" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt RANGE
+
+min:
+	@echo 'Command "MIN" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt MIN
+
+max:
+	@echo 'Command "MAX" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt MAX
+
+outliers:
+	@echo 'Command "OUTLIERS" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt OUTLIERS
+
+sd:
+	@echo 'Command "SD(standard deviation)" detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt SD
 
 #############################
 ###### DEBUGGING

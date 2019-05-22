@@ -25,6 +25,7 @@ void readFormulaSheet(const std::string& text) {
 	try {
 		std::string s;
 		std::ifstream formulas(text);
+
 		while (getline(formulas, s)) {
 			std::cout << s << '\n';
 		}
@@ -38,11 +39,14 @@ void readFormulaSheet(const std::string& text) {
 }
 // TODO: MAKE CUSTOM LOGO!
 int main(int argc, char* argv[]) {
-	// READING FILES SECTION
+	/*
+	 *
+	 * READING FILES SECTION
+	 *
+	*/
 	// TODO: add Makefile commands for extra args
 	if (argc == 2) {
 		std::ifstream inputfile;
-		std::string str;
 		char symbols;
 		int num;
 		unsigned int sets = 0;
@@ -55,7 +59,7 @@ int main(int argc, char* argv[]) {
 		}
 
 		std::vector<double> dataset;
-		// cin the rest
+		// read through file and create a dataset
 		while (inputfile >> num >> symbols) {
 			dataset.emplace_back(num);
 			if (symbols == ';') {
@@ -78,20 +82,20 @@ int main(int argc, char* argv[]) {
 				findOutliers(dataset);
 				displayStandardDeviation(dataset);
 				std::cout << '\n';
-				// erase terms once finished showing numbers to user
+				// erase terms once finished showing numbers of the current dataset to the user
 				dataset.clear();
 			}
 		}
 
-		// TODO: Have a function to read in data from txt file and stop at ; or '\n'
 	} // function expects first arg as file and second arg as function
 	else if (argc == 3) {
-		// TODO: Lambda expression to convert second argc to uppercase in case user doesnt want to
 		// use Makefile command
 		// TODO: Based on second argument print desired function for user
 
 		std::ifstream inputfile;
-		std::string s;
+		char symbols;
+		int num;
+		unsigned int sets = 0;
 
 		inputfile.open(argv[1]);
 
@@ -101,13 +105,69 @@ int main(int argc, char* argv[]) {
 		}
 
 		// Should be either Mean Median,Mode,Range,Sd(standard deviation),Min, or Max
-		std::string command(argv[3]);
+		std::string command(argv[2]);
 
 		// ensure 3 argument is uppercase
 		// this creates ease for users who do not want to use the makefile
 		std::for_each(command.begin(), command.end(), [&](char& c) { c = toupper(c); });
+
+		std::vector<double> dataset;
+		// read through file and create a dataset
+		while (inputfile >> num >> symbols) {
+			dataset.emplace_back(num);
+			if (symbols == ';') {
+				sortDataset(dataset);
+				std::cout << "Dataset " << ++sets << '\n';
+				std::for_each(dataset.begin(), dataset.end(), [&](int data) {
+					std::cout << data << " ";
+				});
+
+				if (command == "MEAN")
+					std::cout << "\nMEAN: " << calculateMean(dataset) << '\n';
+
+				if (command == "MEDIAN")
+					std::cout << "MEDIAN: " << calculatePercentiles(dataset).q2 << '\n';
+
+				if (command == "PERCENTILE") {
+					std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset) << '\n';
+					displayPercentiles(dataset);
+				}
+
+				if (command == "MODE") {
+					std::cout << "\nMODE: ";
+					calculateMode(dataset);
+				}
+
+				if (command == "RANGE")
+					std::cout << "RANGE: " << calculateRange(dataset) << '\n';
+
+				if (command == "MIN")
+					std::cout << "MIN: " << dataset.front() << '\n';
+
+				if (command == "MAX")
+					std::cout << "MAX: " << dataset.back() << '\n';
+
+				if (command == "OUTLIERS") {
+					std::cout << '\n';
+					findOutliers(dataset);
+				}
+
+				if (command == "SD") {
+					std::cout << '\n';
+					displayStandardDeviation(dataset);
+				}
+
+				std::cout << '\n';
+				// erase terms once finished showing numbers of the current dataset to the user
+				dataset.clear();
+			}
+		}
 	}
-	// DEFAULT INTERFACE
+	/*
+	 *
+	 * DEFAULT INTERFACE SECTION
+	 *
+	*/
 	else {
 		bool backtrack = true;
 		while (backtrack) {
@@ -541,7 +601,6 @@ int main(int argc, char* argv[]) {
 								trials++;
 							}
 						}
-						sortDatasetXY(datasetX, datasetY);
 						std::cout << termcolor::reset << termcolor::bold << termcolor::blue;
 						displayDatasetXY(datasetX, datasetY);
 						std::cout << termcolor::reset << '\n';
