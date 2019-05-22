@@ -82,6 +82,17 @@
 ##### Special option #2
 - There are multiple commands here but they all work the same
 - Here instead of printing all the fucntions described in [basics](#Basics), you pick the specific one 
+- Again the command will do this for every dataset it finds in the data.txt file 
+- Commands include ``make```:
+  - ```mean```
+  - ```median```
+  - ```percentile```
+  - ```mode```
+  - ```range```
+  -```min```
+  -```max```
+  -```outliers```
+  -```sd```
  
 ## Regarding CMake
 - right now it is best to compile with the Makefile I made for the project
