@@ -37,7 +37,8 @@ void readFormulaSheet(const std::string& text) {
 		std::cerr << "Reason: " << e.what() << '\n';
 	}
 }
-// TODO: MAKE CUSTOM LOGO!
+
+
 int main(int argc, char* argv[]) {
 	/*
 	 *
