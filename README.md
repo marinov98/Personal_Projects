@@ -89,10 +89,10 @@
   - ```percentile```
   - ```mode```
   - ```range```
-  -```min```
-  -```max```
-  -```outliers```
-  -```sd```
+  - ```min```
+  - ```max```
+  - ```outliers```
+  - ```sd```
  
 ## Regarding CMake
 - right now it is best to compile with the Makefile I made for the project
