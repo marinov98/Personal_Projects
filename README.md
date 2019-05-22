@@ -53,7 +53,7 @@
   - proportion, sample
   - multple z-critical values
   
-### Correlation Coefficient
+### CC
 - correlation coefficient
 - slope, y-intercept
 - least squares regression line
