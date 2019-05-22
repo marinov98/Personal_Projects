@@ -74,6 +74,7 @@
 ##### About data.txt
 - You will notice the project comes with the txt file [data.txt](https://github.com/marinov98/Statistical_Calculator/blob/master/data.txt)
 - You can type any dataset in. However, you **must** make sure the numbers are **separated by a comma** and when you are finished **you end with a ;** (data.txt already has an example provided if you are still confused about the format);
+- Keep in mind if the format is wrong the program will not do anything.
 
 ##### Special option #1
 - type ```make parse```
