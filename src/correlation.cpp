@@ -83,14 +83,14 @@ void displayLSRL(const std::vector<double>& datasetX,
 	double a = calculateYintercept(datasetX, datasetY);
 	double r = calculateCorrelationCoefficient(datasetX, datasetY);
 
-	std::cout << "Correlation Coefficient report: " << '\n';
+	std::cout << "\n   Summary:  " << '\n';
 	std::cout << "MEAN (x values): " << calculateMean(datasetX) << '\n';
 	std::cout << "MEAN (y values): " << calculateMean(datasetY) << '\n';
 	std::cout << "SLOPE of LSRL: " << b << '\n';
 	std::cout << "Y-INTERCEPT: " << a << '\n';
 	std::cout << '\n' << "Your equation is: " << '\n';
 	std::cout << "ŷ = " << a << " + " << b << "x" << '\n';
-	std::cout << "CORRELATION COEFFICIENT: " << r << '\n';
+	std::cout << "\nCORRELATION COEFFICIENT: " << r << '\n';
 	if (r >= -0.5 && r <= 0.5) {
 		std::cout << "Weak correlation" << '\n';
 	}
