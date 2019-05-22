@@ -36,7 +36,7 @@
 - Outliers
 
 #### Showcase:
-[basics](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
+![basics](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
 
 ### Hypothesis Testing (Advanced)
 - calculate z-score and t-score
@@ -56,7 +56,7 @@
 - line of best fit
 
 #### Showcase:
-[cc](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
+![cc](https://github.com/marinov98/Statistical_Calculator/edit/master/basics.png)
 
 ## How-To-Use
 - clone this repository
