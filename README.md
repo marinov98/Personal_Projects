@@ -1,7 +1,7 @@
 
 # Welcome to my Statistics Calculator! :octocat:
 
-<p align="center"><img src="stat-logo.jpeg" alt="Statistical Calculator" style="width:800px;"/></p>
+<p align="center"><img src="stat-logo.jpeg" alt="Statistical Calculator" width="200" height="200"/></p>
 
 ## To Do's
 - make a website for the calculator
