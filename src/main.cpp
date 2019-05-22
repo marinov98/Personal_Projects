@@ -109,55 +109,96 @@ int main(int argc, char* argv[]) {
 		std::for_each(command.begin(), command.end(), [&](char& c) { c = toupper(c); });
 
 		std::vector<double> dataset;
-		// read through file and create a dataset
-		while (inputfile >> num >> symbols) {
-			dataset.emplace_back(num);
-			if (symbols == ';') {
-				sortDataset(dataset);
-				std::cout << "Dataset " << ++sets << '\n';
-				std::for_each(dataset.begin(), dataset.end(), [&](double data) {
-					std::cout << data << " ";
-				});
 
-				if (command == "MEAN")
-					std::cout << "\nMEAN: " << calculateMean(dataset) << '\n';
+		if (command == "LSRL" || command == "CC") {
+			std::vector<double> datasetY;
+			bool storeInY = false;
 
-				if (command == "MEDIAN")
-					std::cout << "\nMEDIAN: " << calculatePercentiles(dataset).q2 << '\n';
+			while(inputfile >> num >> symbols) {
+				if (!storeInY)
+					dataset.emplace_back(num);
+				else
+					datasetY.emplace_back(num);
 
-				if (command == "PERCENTILE") {
-					std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset) << '\n';
-					displayPercentiles(dataset);
-				}
-
-				if (command == "MODE") {
-					std::cout << "\nMODE: ";
-					calculateMode(dataset);
-				}
-
-				if (command == "RANGE")
-					std::cout << "\nRANGE: " << calculateRange(dataset) << '\n';
-
-				if (command == "MIN")
-					std::cout << "\nMIN: " << dataset.front() << '\n';
-
-				if (command == "MAX")
-					std::cout << "\nMAX: " << dataset.back() << '\n';
-
-				if (command == "OUTLIERS") {
+				// only one dataset has been filled
+				if (symbols == ';' && !storeInY)
+					storeInY = true;
+				// both datasets have been filled
+				else if (symbols == ';' && storeInY) {
+					storeInY = false;
+					displayDatasetXY(dataset,datasetY);
 					std::cout << '\n';
-					findOutliers(dataset);
-				}
 
-				if (command == "SD") {
-					std::cout << '\n';
-					displayStandardDeviation(dataset);
-				}
+					if (command == "LSRL") {
+						std::cout << "\nEquation of LSRL line: ";
+						std::cout << "ŷ = " << calculateYintercept(dataset, datasetY) << " + " << calculateSlope(dataset, datasetY) << "x" << '\n';
+						std::cout << '\n';
+					}
 
-				std::cout << '\n';
-				// erase terms once finished showing numbers of the current dataset to the user
-				dataset.clear();
+					if (command == "CC") {
+						std::cout << "\nCORRELATION COEFFICIENT: " << calculateCorrelationCoefficient(dataset,datasetY) << '\n';
+						std::cout << '\n';
+					}
+
+					dataset.clear();
+					datasetY.clear();
+				}
 			}
+
+
+		}
+		else {
+			// read through file and create a dataset
+			while (inputfile >> num >> symbols) {
+				dataset.emplace_back(num);
+				if (symbols == ';') {
+					sortDataset(dataset);
+					std::cout << "Dataset " << ++sets << '\n';
+					std::for_each(dataset.begin(), dataset.end(), [&](double data) {
+						std::cout << data << " ";
+					});
+
+					if (command == "MEAN")
+						std::cout << "\nMEAN: " << calculateMean(dataset) << '\n';
+
+					if (command == "MEDIAN")
+						std::cout << "\nMEDIAN: " << calculatePercentiles(dataset).q2 << '\n';
+
+					if (command == "PERCENTILE") {
+						std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset) << '\n';
+						displayPercentiles(dataset);
+					}
+
+					if (command == "MODE") {
+						std::cout << "\nMODE: ";
+						calculateMode(dataset);
+					}
+
+					if (command == "RANGE")
+						std::cout << "\nRANGE: " << calculateRange(dataset) << '\n';
+
+					if (command == "MIN")
+						std::cout << "\nMIN: " << dataset.front() << '\n';
+
+					if (command == "MAX")
+						std::cout << "\nMAX: " << dataset.back() << '\n';
+
+					if (command == "OUTLIERS") {
+						std::cout << '\n';
+						findOutliers(dataset);
+					}
+
+					if (command == "SD") {
+						std::cout << '\n';
+						displayStandardDeviation(dataset);
+					}
+
+					std::cout << '\n';
+					// erase terms once finished showing numbers of the current dataset to the user
+					dataset.clear();
+				}
+			}
+
 		}
 	}
 	/*

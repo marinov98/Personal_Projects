@@ -102,9 +102,19 @@ outliers:
 	@./$(EXEC) data.txt OUTLIERS
 
 sd:
-	@echo 'Command "SD(standard deviation)" detected.'
+	@echo 'Command "SD(Standard Deviation)" detected.'
 	@echo 'calculating...'
 	@./$(EXEC) data.txt SD
+
+lsrl:
+	@echo 'Command LSRL(Least Squares Regression Line) detected'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt LSRL
+
+cc:
+	@echo 'Command CC(Correlation Coefficient) detected.'
+	@echo 'calculating...'
+	@./$(EXEC) data.txt CC
 
 #############################
 ###### DEBUGGING

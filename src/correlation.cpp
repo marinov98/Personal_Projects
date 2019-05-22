@@ -12,12 +12,12 @@ purpose: implements the correlation class
 
 
 void displayDatasetXY(const std::vector<double>& datasetX, const std::vector<double>& datasetY) {
-	std::cout << "The x values of this dataset are: " << '\n';
+	std::cout << "X dataset: " << '\n';
 	for (const auto& numberX : datasetX) {
 		std::cout << " " << numberX;
 	}
 	std::cout << '\n';
-	std::cout << "The y values of this dataset are: " << '\n';
+	std::cout << "Y dataset: " << '\n';
 	for (const auto& numberY : datasetY) {
 		std::cout << " " << numberY;
 	}
