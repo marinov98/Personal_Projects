@@ -123,7 +123,7 @@ int main(int argc, char* argv[]) {
 					std::cout << "\nMEAN: " << calculateMean(dataset) << '\n';
 
 				if (command == "MEDIAN")
-					std::cout << "MEDIAN: " << calculatePercentiles(dataset).q2 << '\n';
+					std::cout << "\nMEDIAN: " << calculatePercentiles(dataset).q2 << '\n';
 
 				if (command == "PERCENTILE") {
 					std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset) << '\n';
@@ -136,13 +136,13 @@ int main(int argc, char* argv[]) {
 				}
 
 				if (command == "RANGE")
-					std::cout << "RANGE: " << calculateRange(dataset) << '\n';
+					std::cout << "\nRANGE: " << calculateRange(dataset) << '\n';
 
 				if (command == "MIN")
-					std::cout << "MIN: " << dataset.front() << '\n';
+					std::cout << "\nMIN: " << dataset.front() << '\n';
 
 				if (command == "MAX")
-					std::cout << "MAX: " << dataset.back() << '\n';
+					std::cout << "\nMAX: " << dataset.back() << '\n';
 
 				if (command == "OUTLIERS") {
 					std::cout << '\n';
@@ -598,7 +598,7 @@ int main(int argc, char* argv[]) {
 								trials++;
 							}
 						}
-						std::cout << termcolor::reset << termcolor::bold << termcolor::blue;
+						std::cout << termcolor::reset << termcolor::bold << termcolor::blue << '\n';
 						displayDatasetXY(datasetX, datasetY);
 						std::cout << termcolor::reset << '\n';
 						std::cout << termcolor::bold << termcolor::cyan;
