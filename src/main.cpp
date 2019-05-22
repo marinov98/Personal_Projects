@@ -44,7 +44,6 @@ int main(int argc, char* argv[]) {
 	 * READING FILES SECTION
 	 *
 	*/
-	// TODO: add Makefile commands for extra args
 	if (argc == 2) {
 		std::ifstream inputfile;
 		char symbols;
@@ -89,9 +88,6 @@ int main(int argc, char* argv[]) {
 
 	} // function expects first arg as file and second arg as function
 	else if (argc == 3) {
-		// use Makefile command
-		// TODO: Based on second argument print desired function for user
-
 		std::ifstream inputfile;
 		char symbols;
 		double num;
