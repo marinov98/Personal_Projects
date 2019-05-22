@@ -3,7 +3,6 @@
 
 <p align="center"><img src="stat-logo.jpeg" alt="Statistical Calculator"/></p>
 
-[test](https://user-images.githubusercontent.com/33673401/58150031-530c4480-7c33-11e9-9597-46fd9f3f5e5d.jpeg)
 ## To Do's
 - make a website for the calculator
 - use cmake to launch
