@@ -28,7 +28,7 @@ TEST_CASE("TESTING CALCULATOR") {
 
 	SUBCASE("Basics") {
 		// MEAN
-		CHECK(calculateMean(test_vector,test_vector.size()) == 3);
+		CHECK(calculateMean(test_vector) == 3);
 		// MEDIAN
 		CHECK(calculatePercentiles(test_vector).q2 == 3);
 		// RANGE
