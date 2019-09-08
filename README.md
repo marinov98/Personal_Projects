@@ -78,7 +78,7 @@
 
 ##### Special option #1
 - type ```make parse```
-- if the file contains an imvalid input, the command will not do anything 
+- if the file contains an invalid input, the command will not do anything 
 - this command will parse through the data file and every time it finds a ; it will print out every function described in [basics](#Basics).
 - You can have multiple datasets typed as long as they each end in ; the command will then print each dataset that it finds
 
