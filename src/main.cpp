@@ -15,667 +15,198 @@ termcolor project
 #include "hypTest.hpp"
 #include "termcolor.hpp" // courtesy of Ihor Kalnytskyi's project
 // #include <doctest/doctest.h>
+#include <algorithm>
 #include <fstream>
+#include <future>
 #include <iomanip>
 #include <iostream>
+#include <thread>
 #include <vector>
 
-// function that displays formula sheet to the user
-void readFormulaSheet(const std::string& text) {
-	try {
-		std::string s;
-		std::ifstream formulas(text);
+// Testing Multithreading vs SingleThreading
+using namespace std::chrono;
 
-		while (getline(formulas, s)) {
-			std::cout << s << '\n';
-		}
+int main() {
+	std::vector<double> small = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-		formulas.close();
-	}
-	catch (std::fstream::failure const& e) {
-		std::cerr << "Error reading: " << text << '\n';
-		std::cerr << "Reason: " << e.what() << '\n';
-	}
-}
+	std::vector<double> dataset =
+	    {1,     2,     3,     4,     5,     5,     6,     6,     7,     7,     4.3,   7.52,  8.8,
+	     9,     2,     2,     4,     5,     6,     2,     4,     55,    6,     2,     128,   199,
+	     300,   320,   999,   123,   4,     5,     6,     7,     8,     5,     4,     2,     11,
+	     3,     0.1,   55,    27,    55,    3,     4,     5,     6,     4,     1,     2,     3,
+	     4,     5,     6,     7,     7,     8,     9,     10,    1,     2,     3,     4,     5,
+	     6,     7,     9,     10,    111,   222,   333,   345,   1,     2,     3,     4,     5,
+	     6,     7,     8,     9,     10,    15,    13,    14,    16,    17,    18,    19,    20,
+	     21,    22,    23,    24,    25,    26,    28,    29,    50,    51,    33,    45,    66,
+	     57,    11112, 2222,  345,   38,    999,   10000, 1001,  1002,  1003,  21.23, 44.44, 33,
+	     33,    11.11, 21,    34,    88,    1,     2,     3,     4,     5,     5,     6,     6,
+	     7,     7,     4.3,   7.52,  8.8,   9,     2,     2,     4,     5,     6,     2,     4,
+	     55,    6,     2,     128,   199,   300,   320,   999,   123,   4,     5,     6,     7,
+	     8,     5,     4,     2,     11,    3,     0.1,   55,    27,    55,    3,     4,     5,
+	     6,     4,     1,     2,     3,     4,     5,     6,     7,     7,     8,     9,     10,
+	     1,     2,     3,     4,     5,     6,     7,     9,     10,    111,   222,   333,   345,
+	     1,     2,     3,     4,     5,     6,     7,     8,     9,     10,    15,    13,    14,
+	     16,    17,    18,    19,    20,    21,    22,    23,    24,    25,    26,    28,    29,
+	     50,    51,    33,    45,    66,    57,    11112, 2222,  345,   38,    999,   10000, 1001,
+	     1002,  1003,  21.23, 44.44, 33,    33,    11.11, 21,    34,    88,    1,     2,     3,
+	     4,     5,     5,     6,     6,     7,     7,     4.3,   7.52,  8.8,   9,     2,     2,
+	     4,     5,     6,     2,     4,     55,    6,     2,     128,   199,   300,   320,   999,
+	     123,   4,     5,     6,     7,     8,     5,     4,     2,     11,    3,     0.1,   55,
+	     27,    55,    3,     4,     5,     6,     4,     1,     2,     3,     4,     5,     6,
+	     7,     7,     8,     9,     10,    1,     2,     3,     4,     5,     6,     7,     9,
+	     10,    111,   222,   333,   345,   1,     2,     3,     4,     5,     6,     7,     8,
+	     9,     10,    15,    13,    14,    16,    17,    18,    19,    20,    21,    22,    23,
+	     24,    25,    26,    28,    29,    50,    51,    33,    45,    66,    57,    11112, 2222,
+	     345,   38,    999,   10000, 1001,  1002,  1003,  21.23, 44.44, 33,    33,    11.11, 21,
+	     34,    88,    1,     2,     3,     4,     5,     5,     6,     6,     7,     7,     4.3,
+	     7.52,  8.8,   9,     2,     2,     4,     5,     6,     2,     4,     55,    6,     2,
+	     128,   199,   300,   320,   999,   123,   4,     5,     6,     7,     8,     5,     4,
+	     2,     11,    3,     0.1,   55,    27,    55,    3,     4,     5,     6,     4,     1,
+	     2,     3,     4,     5,     6,     7,     7,     8,     9,     10,    1,     2,     3,
+	     4,     5,     6,     7,     9,     10,    111,   222,   333,   345,   1,     2,     3,
+	     4,     5,     6,     7,     8,     9,     10,    15,    13,    14,    16,    17,    18,
+	     19,    20,    21,    22,    23,    24,    25,    26,    28,    29,    50,    51,    33,
+	     45,    66,    57,    11112, 2222,  345,   38,    999,   10000, 1001,  1002,  1003,  21.23,
+	     44.44, 33,    33,    11.11, 21,    34,    88,    1,     2,     3,     4,     5,     5,
+	     6,     6,     7,     7,     4.3,   7.52,  8.8,   9,     2,     2,     4,     5,     6,
+	     2,     4,     55,    6,     2,     128,   199,   300,   320,   999,   123,   4,     5,
+	     6,     7,     8,     5,     4,     2,     11,    3,     0.1,   55,    27,    55,    3,
+	     4,     5,     6,     4,     1,     2,     3,     4,     5,     6,     7,     7,     8,
+	     9,     10,    1,     2,     3,     4,     5,     6,     7,     9,     10,    111,   222,
+	     333,   345,   1,     2,     3,     4,     5,     6,     7,     8,     9,     10,    15,
+	     13,    14,    16,    17,    18,    19,    20,    21,    22,    23,    24,    25,    26,
+	     28,    29,    50,    51,    33,    45,    66,    57,    11112, 2222,  345,   38,    999,
+	     10000, 1001,  1002,  1003,  21.23, 44.44, 33,    33,    11.11, 21,    34,    88,    1,
+	     2,     3,     4,     5,     5,     6,     6,     7,     7,     4.3,   7.52,  8.8,   9,
+	     2,     2,     4,     5,     6,     2,     4,     55,    6,     2,     128,   199,   300,
+	     320,   999,   123,   4,     5,     6,     7,     8,     5,     4,     2,     11,    3,
+	     0.1,   55,    27,    55,    3,     4,     5,     6,     4,     1,     2,     3,     4,
+	     5,     6,     7,     7,     8,     9,     10,    1,     2,     3,     4,     5,     6,
+	     7,     9,     10,    111,   222,   333,   345,   1,     2,     3,     4,     5,     6,
+	     7,     8,     9,     10,    15,    13,    14,    16,    17,    18,    19,    20,    21,
+	     22,    23,    24,    25,    26,    28,    29,    50,    51,    33,    45,    66,    57,
+	     11112, 2222,  345,   38,    999,   10000, 1001,  1002,  1003,  21.23, 44.44, 33,    33,
+	     11.11, 21,    34,    88,    1,     2,     3,     4,     5,     5,     6,     6,     7,
+	     7,     4.3,   7.52,  8.8,   9,     2,     2,     4,     5,     6,     2,     4,     55,
+	     6,     2,     128,   199,   300,   320,   999,   123,   4,     5,     6,     7,     8,
+	     5,     4,     2,     11,    3,     0.1,   55,    27,    55,    3,     4,     5,     6,
+	     4,     1,     2,     3,     4,     5,     6,     7,     7,     8,     9,     10,    1,
+	     2,     3,     4,     5,     6,     7,     9,     10,    111,   222,   333,   345,   1,
+	     2,     3,     4,     5,     6,     7,     8,     9,     10,    15,    13,    14,    16,
+	     17,    18,    19,    20,    21,    22,    23,    24,    25,    26,    28,    29,    50,
+	     51,    33,    45,    66,    57,    11112, 2222,  345,   38,    999,   10000, 1001,  1002,
+	     1003,  21.23, 44.44, 33,    33,    11.11, 21,    34,    88,    1,     2,     3,     4,
+	     5,     5,     6,     6,     7,     7,     4.3,   7.52,  8.8,   9,     2,     2,     4,
+	     5,     6,     2,     4,     55,    6,     2,     128,   199,   300,   320,   999,   123,
+	     4,     5,     6,     7,     8,     5,     4,     2,     11,    3,     0.1,   55,    27,
+	     55,    3,     4,     5,     6,     4,     1,     2,     3,     4,     5,     6,     7,
+	     7,     8,     9,     10,    1,     2,     3,     4,     5,     6,     7,     9,     10,
+	     111,   222,   333,   345,   1,     2,     3,     4,     5,     6,     7,     8,     9,
+	     10,    15,    13,    14,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+	     25,    26,    28,    29,    50,    51,    33,    45,    66,    57,    11112, 2222,  345,
+	     38,    999,   10000, 1001,  1002,  1003,  21.23, 44.44, 33,    33,    11.11, 21,    34,
+	     88,    1,     2,     3,     4,     5,     5,     6,     6,     7,     7,     4.3,   7.52,
+	     8.8,   9,     2,     2,     4,     5,     6,     2,     4,     55,    6,     2,     128,
+	     199,   300,   320,   999,   123,   4,     5,     6,     7,     8,     5,     4,     2,
+	     11,    3,     0.1,   55,    27,    55,    3,     4,     5,     6,     4,     1,     2,
+	     3,     4,     5,     6,     7,     7,     8,     9,     10,    1,     2,     3,     4,
+	     5,     6,     7,     9,     10,    111,   222,   333,   345,   1,     2,     3,     4,
+	     5,     6,     7,     8,     9,     10,    15,    13,    14,    16,    17,    18,    19,
+	     20,    21,    22,    23,    24,    25,    26,    28,    29,    50,    51,    33,    45,
+	     66,    57,    11112, 2222,  345,   38,    999,   10000, 1001,  1002,  1003,  21.23, 44.44,
+	     33,    33,    11.11, 21,    34,    88,    1,     2,     3,     4,     5,     5,     6,
+	     6,     7,     7,     4.3,   7.52,  8.8,   9,     2,     2,     4,     5,     6,     2,
+	     4,     55,    6,     2,     128,   199,   300,   320,   999,   123,   4,     5,     6,
+	     7,     8,     5,     4,     2,     11,    3,     0.1,   55,    27,    55,    3,     4,
+	     5,     6,     4,     1,     2,     3,     4,     5,     6,     7,     7,     8,     9,
+	     10,    1,     2,     3,     4,     5,     6,     7,     9,     10,    111,   222,   333,
+	     345,   1,     2,     3,     4,     5,     6,     7,     8,     9,     10,    15,    13,
+	     14,    16,    17,    18,    19,    20,    21,    22,    23,    24,    25,    26,    28,
+	     29,    50,    51,    33,    45,    66,    57,    11112, 2222,  345,   38,    999,   10000,
+	     1001,  1002,  1003,  21.23, 44.44, 33,    33,    11.11, 21,    34,    88,    1,     2,
+	     3,     4,     5,     5,     6,     6,     7,     7,     4.3,   7.52,  8.8,   9,     2,
+	     2,     4,     5,     6,     2,     4,     55,    6,     2,     128,   199,   300,   320,
+	     999,   123,   4,     5,     6,     7,     8,     5,     4,     2,     11,    3,     0.1,
+	     55,    27,    55,    3,     4,     5,     6,     4,     1,     2,     3,     4,     5,
+	     6,     7,     7,     8,     9,     10,    1,     2,     3,     4,     5,     6,     7,
+	     9,     10,    111,   222,   333,   345,   1,     2,     3,     4,     5,     6,     7,
+	     8,     9,     10,    15,    13,    14,    16,    17,    18,    19,    20,    21,    22,
+	     23,    24,    25,    26,    28,    29,    50,    51,    33,    45,    66,    57,    11112,
+	     2222,  345,   38,    999,   10000, 1001,  1002,  1003,  21.23, 44.44, 33,    33,    11.11,
+	     21,    34,    88,    1,     2,     3,     4,     5,     5,     6,     6,     7,     7,
+	     4.3,   7.52,  8.8,   9,     2,     2,     4,     5,     6,     2,     4,     55,    6,
+	     2,     128,   199,   300,   320,   999,   123,   4,     5,     6,     7,     8,     5,
+	     4,     2,     11,    3,     0.1,   55,    27,    55,    3,     4,     5,     6,     4,
+	     1,     2,     3,     4,     5,     6,     7,     7,     8,     9,     10,    1,     2,
+	     3,     4,     5,     6,     7,     9,     10,    111,   222,   333,   345,   1,     2,
+	     3,     4,     5,     6,     7,     8,     9,     10,    15,    13,    14,    16,    17,
+	     18,    19,    20,    21,    22,    23,    24,    25,    26,    28,    29,    50,    51,
+	     33,    45,    66,    57,    11112, 2222,  345,   38,    999,   10000, 1001,  1002,  1003,
+	     21.23, 44.44, 33,    33,    11.11, 21,    34,    88};
 
+	std::sort(dataset.begin(), dataset.end());
 
-int main(int argc, char* argv[]) {
-	/*
-	 *
-	 * READING FILES SECTION
-	 *
-	*/
-	if (argc == 2) {
-		std::ifstream inputfile;
-		char symbols;
-		double num;
-		unsigned int sets = 0;
+	// Multithreaded
+	system_clock::time_point start = system_clock::now();
 
-		inputfile.open(argv[1]);
+	std::thread meanz(&calculateMean, std::ref(dataset));
 
-		if (inputfile.fail()) {
-			std::cerr << "Unable to open" << argv[1] << "for reading";
-			exit(1);
-		}
+	std::thread rangez(&calculateRange, std::ref(dataset));
 
-		std::vector<double> dataset;
-		// read through file and create a dataset
-		while (inputfile >> num >> symbols) {
-			dataset.emplace_back(num);
-			if (symbols == ';') {
-				sortDataset(dataset);
-				std::cout << "Dataset " << ++sets << '\n';
-				std::for_each(dataset.begin(), dataset.end(), [&](double data) {
-					std::cout << data << " ";
-				});
+	std::thread sdz(&calculateStandardDeviation, std::ref(dataset));
 
-				std::cout << "\nMEAN: " << calculateMean(dataset) << '\n';
-				if (dataset.size() > 3) {
-					std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset)
-					          << '\n';
-					displayPercentiles(dataset);
-				}
-				std::cout << "MODE: ";
-				calculateMode(dataset);
-				std::cout << "RANGE: " << calculateRange(dataset) << '\n';
-				displayMinMax(dataset);
-				findOutliers(dataset);
-				displayStandardDeviation(dataset);
-				std::cout << '\n';
-				// erase terms once finished showing numbers of the current dataset to the user
-				dataset.clear();
-			}
-		}
+	std::thread percentilesz(&calculatePercentiles, std::ref(dataset));
 
-	} // function expects first arg as file and second arg as function
-	else if (argc == 3) {
-		std::ifstream inputfile;
-		char symbols;
-		double num;
-		unsigned int sets = 0;
+	meanz.join();
+	rangez.join();
+	sdz.join();
+	percentilesz.join();
 
-		inputfile.open(argv[1]);
+	system_clock::time_point end = system_clock::now();
 
-		if (inputfile.fail()) {
-			std::cerr << "Unable to open" << argv[1] << "for reading";
-			exit(1);
-		}
+	auto diff = duration_cast<std::chrono::microseconds>(end - start).count();
 
-		// Should be either Mean Median,Mode,Range,Sd(standard deviation),Min, or Max
-		std::string command(argv[2]);
+	std::cout << "Total Time Taken for MultiThreaded (std::thread) = " << diff << " Mircroseconds"
+	          << '\n';
+	// async
+	start = system_clock::now();
 
-		// ensure 3 argument is uppercase
-		// this creates ease for users who do not want to use the makefile
-		std::for_each(command.begin(), command.end(), [&](char& c) { c = toupper(c); });
+	std::future<double> mean = std::async(std::launch::async, calculateMean, dataset);
+	std::future<double> range = std::async(std::launch::async, calculateRange, dataset);
+	std::future<Percentile> percentiles =
+	    std::async(std::launch::async, calculatePercentiles, dataset);
 
-		std::vector<double> dataset;
+	std::future<DataType> sd = std::async(std::launch::async, calculateStandardDeviation, dataset);
 
-		if (command == "LSRL" || command == "CC") {
-			std::vector<double> datasetY;
-			bool storeInY = false;
+	mean.get();
+	range.get();
+	percentiles.get();
+	sd.get();
 
-			while(inputfile >> num >> symbols) {
-				if (!storeInY)
-					dataset.emplace_back(num);
-				else
-					datasetY.emplace_back(num);
+	end = system_clock::now();
 
-				// only one dataset has been filled
-				if (symbols == ';' && !storeInY)
-					storeInY = true;
-				// both datasets have been filled
-				else if (symbols == ';' && storeInY) {
-					storeInY = false;
-					displayDatasetXY(dataset,datasetY);
-					std::cout << '\n';
+	diff = duration_cast<std::chrono::microseconds>(end - start).count();
 
-					if (command == "LSRL") {
-						std::cout << "\nEquation of LSRL line: ";
-						std::cout << "ŷ = " << calculateYintercept(dataset, datasetY) << " + " << calculateSlope(dataset, datasetY) << "x" << '\n';
-						std::cout << '\n';
-					}
+	std::cout << "Total Time Taken for MultiThreaded (async and future) = " << diff
+	          << " Mircroseconds" << '\n';
 
-					if (command == "CC") {
-						std::cout << "\nCORRELATION COEFFICIENT: " << calculateCorrelationCoefficient(dataset,datasetY) << '\n';
-						std::cout << '\n';
-					}
+	// Single-Threaded
 
-					dataset.clear();
-					datasetY.clear();
-				}
-			}
+	start = system_clock::now();
 
+	calculateMean(dataset);
 
-		}
-		else {
-			// read through file and create a dataset
-			while (inputfile >> num >> symbols) {
-				dataset.emplace_back(num);
-				if (symbols == ';') {
-					sortDataset(dataset);
-					std::cout << "Dataset " << ++sets << '\n';
-					std::for_each(dataset.begin(), dataset.end(), [&](double data) {
-						std::cout << data << " ";
-					});
+	calculateRange(dataset);
 
-					if (command == "MEAN")
-						std::cout << "\nMEAN: " << calculateMean(dataset) << '\n';
+	// calculateMode(dataset);
 
-					if (command == "MEDIAN")
-						std::cout << "\nMEDIAN: " << calculatePercentiles(dataset).q2 << '\n';
+	calculatePercentiles(dataset);
 
-					if (command == "PERCENTILE") {
-						std::cout << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset) << '\n';
-						displayPercentiles(dataset);
-					}
+	calculateStandardDeviation(dataset);
 
-					if (command == "MODE") {
-						std::cout << "\nMODE: ";
-						calculateMode(dataset);
-					}
+	end = system_clock::now();
 
-					if (command == "RANGE")
-						std::cout << "\nRANGE: " << calculateRange(dataset) << '\n';
+	diff = duration_cast<std::chrono::microseconds>(end - start).count();
 
-					if (command == "MIN")
-						std::cout << "\nMIN: " << dataset.front() << '\n';
-
-					if (command == "MAX")
-						std::cout << "\nMAX: " << dataset.back() << '\n';
-
-					if (command == "OUTLIERS") {
-						std::cout << '\n';
-						findOutliers(dataset);
-					}
-
-					if (command == "SD") {
-						std::cout << '\n';
-						displayStandardDeviation(dataset);
-					}
-
-					std::cout << '\n';
-					// erase terms once finished showing numbers of the current dataset to the user
-					dataset.clear();
-				}
-			}
-
-		}
-	}
-	/*
-	 *
-	 * DEFAULT INTERFACE SECTION
-	 *
-	*/
-	else {
-		bool backtrack = true;
-		while (backtrack) {
-			std::cout << termcolor::blue
-			          << "~~~**Welcome to the statisical calculator MPM(beta stage)!**~~~"
-			          << termcolor::reset << '\n';
-			std::cout << termcolor::blue << "What would you like the calculator to do?" << '\n';
-			std::cout << termcolor::yellow
-			          << "type \"basics\" for {min,max,mean,median,mode,range,standard "
-			             "deviation,percentiles}"
-			          << termcolor::reset << '\n';
-			std::cout << termcolor::green << "type \"formulas\" view the formula sheet" << '\n';
-			std::cout << termcolor::magenta
-			          << "type \"cc\" for finding correlation coefficients and LSRL"
-			          << termcolor::reset << '\n';
-			std::cout << termcolor::cyan
-			          << "type \"advanced\" for confidence intervals and hypothesis testings"
-			          << termcolor::reset << '\n';
-			std::cout << termcolor::white << "type \"exit\" to quit the calculator" << '\n';
-			std::string response;
-			std::cin >> response;
-			bool repeat = true;
-			// for whether the user wants to repeat using a functions
-			char answer;
-			if (response == "basics") {
-				while (repeat) {
-					int terms;
-					int trials = 0;
-					double inputnumber;
-					// gets the number of terms in the date set and fills the vector with them
-					std::cout << "How many terms are there?" << '\n';
-					std::cin >> terms;
-					// Ensure # of terms is correct
-					while (!std::cin || terms <= 1) {
-						// notify user input is incorrect
-						std::cout << "Invalid input! try again" << '\n';
-						std::cout << "Expected one input that is greater than 1" << '\n';
-						std::cin.clear();
-						std::cin.ignore(1000, '\n');
-						std::cin >> terms;
-					}
-					std::cin.ignore(100000, '\n');
-					// Perform calculations only when # of terms is valid
-					if (terms > 1) {
-						std::vector<double> dataset;
-						dataset.reserve(terms);
-						std::cout << "You may now type the numbers in your data set" << '\n';
-						std::cout << " i) You can either input the data one by one (pressing enter "
-						             "every time you enter a number)"
-						          << '\n';
-						std::cout << " ii) You can input the entire data with space in between "
-						             "each number. You can even input a chunk of the data"
-						          << '\n';
-						std::cout << "Regardless the program will ask for input until it is not "
-						             "equal to the terms you inputted"
-						          << '\n';
-						while (trials != terms) {
-							std::cin >> inputnumber;
-							if (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-							}
-							else {
-								dataset.emplace_back(inputnumber);
-								trials++;
-							}
-						}
-
-						// Ensure dataset is sorted so all functions work as intended
-						sortDataset(dataset);
-						// showcases the dataset's mean, mode, and range
-						displayDataset(dataset);
-						std::cout << termcolor::reset << '\n';
-						std::cout << termcolor::underline << termcolor::red
-						          << "Mean, Median, Mode, Range, Min/Max:" << termcolor::reset
-						          << '\n';
-						std::cout << termcolor::bold << termcolor::red
-						          << "MEAN: " << calculateMean(dataset) << '\n';
-						std::cout << "MODE: ";
-						calculateMode(dataset);
-						std::cout << "RANGE: " << calculateRange(dataset) << '\n';
-						displayMinMax(dataset);
-						std::cout << termcolor::reset;
-						std::cout << termcolor::bold << termcolor::yellow;
-						// prints the 25th,50th, and 75th percentile of the dataset
-						std::cout << termcolor::underline << termcolor::yellow
-						          << "\nPercentiles:" << termcolor::reset << '\n';
-						std::cout << termcolor::bold << termcolor::yellow
-						          << "INTERQUARTILE RANGE: " << calculateInterquartileRange(dataset)
-						          << '\n';
-						displayPercentiles(dataset);
-
-						findOutliers(dataset);
-						std::cout << termcolor::reset << '\n';
-						// prints standard deviation and variance
-						std::cout << termcolor::underline << termcolor::cyan
-						          << "Standard deviation and Variance:" << termcolor::reset << '\n';
-						std::cout << termcolor::bold << termcolor::cyan;
-						displayStandardDeviation(dataset);
-						std::cout << '\n';
-						// erase terms once finished showing numbers to user
-						dataset.clear();
-					}
-					// clear excessive inputs
-					std::cin.ignore(100000, '\n');
-					std::cout << termcolor::white
-					          << "Would like to use this function again? Type 'y' or 'n' " << '\n';
-					std::cin >> answer;
-					if (answer == 'y') {
-						repeat = true;
-					}
-					else if (answer == 'n') {
-						repeat = false;
-						std::cout << termcolor::reset;
-					}
-					else {
-						std::cout << "Invalid input, going back to main page..." << '\n';
-						repeat = false;
-						std::cout << termcolor::reset;
-					}
-				}
-			}
-			else if (response == "formulas") {
-				readFormulaSheet("formulas.txt");
-			}
-			else if (response == "advanced") {
-				repeat = true;
-				std::string answer_2;
-				std::cout << termcolor::bold << termcolor::cyan
-				          << "This function will allow you calculate confidence intervals and t,z "
-				             "and chi "
-				             "test statistics!"
-				          << '\n';
-				while (repeat) {
-					std::cout
-					    << R"(type "ci" for confidence interval or "ht" for hypothesis testing? )"
-					    << '\n';
-					Cinterval ci;
-					std::string choice;
-					std::cin >> choice;
-					if (choice == "ci") {
-						std::cout << "type \"zinterval\" for z confidence interval" << '\n';
-						std::cout << "type \"2zinterval\" for  2 z confidence interval" << '\n';
-						std::cout << "type \"tinterval\" for t confidence interval" << '\n';
-						std::cout << "type \"2tinterval\" for 2 t confidence interval" << '\n';
-						std::cout << "type \"pinterval\" for Proportion confidence interval"
-						          << '\n';
-						std::cout << "type \"2pinterval\" for 2 Proportions confidence interval"
-						          << '\n';
-						std::cin >> answer_2;
-						if (answer_2 == "zinterval") {
-							ci.displayCI_Z();
-						}
-						else if (answer_2 == "tinterval") {
-							ci.displayCI_T();
-						}
-						else if (answer_2 == "pinterval") {
-							ci.displayCI_Proportion();
-						}
-						else if (answer_2 == "2zinterval") {
-							ci.displayCI_2Z();
-						}
-						else if (answer_2 == "2tinterval") {
-							ci.displayCI_2T();
-						}
-						else if (answer_2 == "2pinterval") {
-							ci.displayCI_2Proportions();
-						}
-					}
-					else if (choice == "ht") {
-						HypTest ht;
-						std::cout << "type \"zscore\" for z-score (formula without sample size)"
-						          << '\n';
-						std::cout << "type \"zstat\" for z test statistic(with sample size)"
-						          << '\n';
-						std::cout << "type \"tscore\" for t-score/test-statistic" << '\n';
-						std::cout << "type \"2zstat\" for two sample z test statistic" << '\n';
-						std::cout << "type \"2tstat\" for two sample t-score/test-statistic"
-						          << '\n';
-						std::cout << "type \"2tpair\" for paired two sample t-score/test-statistic"
-						          << '\n';
-						std::cout << "type \"p\" for single proportion test" << '\n';
-						std::cout << "type \"twop\" for 2 proportion test" << '\n';
-						std::cout << "type \"chi\" for chi-square test" << '\n';
-						std::cin >> answer_2;
-						if (answer_2 == "zscore") {
-							double point_estimate;
-							double mean;
-							double sd;
-							std::cout << "What is x̄?" << '\n';
-							std::cin >> point_estimate;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> point_estimate;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "What is the population mean?" << '\n';
-							std::cin >> mean;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> mean;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "Finally, what is the standard deviation" << '\n';
-							std::cin >> sd;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> sd;
-							}
-							std::cin.ignore(100000, '\n');
-							ht.calculateZscore(point_estimate, mean, sd);
-						}
-						else if (answer_2 == "zstat") {
-							double point_estimate;
-							double mean;
-							double sd;
-							int sample_size;
-							std::cout << "What is x̄?" << '\n';
-							std::cin >> point_estimate;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> point_estimate;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "What is the population mean?" << '\n';
-							std::cin >> mean;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> mean;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "What is the sample size?" << '\n';
-							std::cin >> sample_size;
-							while (!std::cin || sample_size <= 0) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> sample_size;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "Finally, what is the standard deviation" << '\n';
-							std::cin >> sd;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> sd;
-							}
-							std::cin.ignore(100000, '\n');
-							ht.calculateZstat(point_estimate, mean, sd, sample_size);
-						}
-						else if (answer_2 == "tscore") {
-							double point_estimate;
-							double mean;
-							double sd;
-							int sample_size;
-							std::cout << "What is x̄?" << '\n';
-							std::cin >> point_estimate;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> point_estimate;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "What is the hypothesized value?" << '\n';
-							std::cin >> mean;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> mean;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "What is the sample size?" << '\n';
-							std::cin >> sample_size;
-							while (!std::cin || sample_size <= 0) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> sample_size;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "Finally, what is the standard deviation" << '\n';
-							std::cin >> sd;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> sd;
-							}
-							std::cin.ignore(100000, '\n');
-							ht.calculateTscore(point_estimate, mean, sd, sample_size);
-						}
-						else if (answer_2 == "p") {
-							double p_hat;
-							double p;
-							int sample_size;
-							std::cout << "What is p̂?" << '\n';
-							std::cin >> p_hat;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> p_hat;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "What is p?" << '\n';
-							std::cin >> p;
-							while (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> p;
-							}
-							std::cin.ignore(100000, '\n');
-							std::cout << "Finally, what is the sample size?" << '\n';
-							std::cin >> sample_size;
-							while (!std::cin || sample_size <= 0) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-								std::cin >> sample_size;
-							}
-							std::cin.ignore(100000, '\n');
-							ht.calculateProportion(p_hat, p, sample_size);
-						}
-						else if (answer_2 == "2zstat") {
-							ht.printHypothesisReport_2Z();
-						}
-						else if (answer_2 == "2tstat") {
-							ht.printHypothesisReport_2T();
-						}
-						else if (answer_2 == "2tstat") {
-							ht.printHypothesisReport_2T();
-						}
-						else if (answer_2 == "2tpair") {
-							ht.printHypothesisReport_pairedT();
-						}
-						else if (answer_2 == "twop") {
-							ht.printHypothesisReport_2P();
-						}
-						else if (answer_2 == "chi") {
-							ht.printChiTest();
-						}
-						else {
-							std::cout << "Invalid answer, type y when prompted to try again"
-							          << '\n';
-						}
-					}
-					// clear excessive inputs
-					std::cin.ignore(100000, '\n');
-					std::cout << '\n';
-					std::cout << "Would you like to keep using this function? type 'y' or 'n'"
-					          << '\n';
-					std::cin >> answer;
-					if (answer == 'y') {
-						repeat = true;
-					}
-					else if (answer == 'n') {
-						repeat = false;
-						std::cout << termcolor::reset;
-					}
-					else {
-						std::cout << "Invalid input, going back to main page..." << '\n';
-						repeat = false;
-						std::cout << termcolor::reset;
-					}
-				}
-			}
-			else if (response == "cc") {
-				std::cout << termcolor::white;
-				repeat = true;
-				while (repeat) {
-					int terms;
-					int trials = 0;
-					double inputnumbers;
-					// gets the number of terms in the date set and fills the vector with them
-					std::cout << "How many terms are there?" << '\n';
-					std::cin >> terms;
-					while (!std::cin || terms <= 1) {
-						// notify user input is incorrect
-						std::cout << "Invalid input! try again" << '\n';
-						std::cout << "Expected one input that is greater than 1" << '\n';
-						std::cin.clear();
-						std::cin.ignore(1000, '\n');
-						std::cin >> terms;
-					}
-					std::cin.ignore(100000, '\n');
-					if (terms > 1) {
-						std::vector<double> datasetX;
-						datasetX.reserve(terms);
-						std::cout << "You may now type the numbers in your X data set" << '\n';
-						while (trials != terms) {
-							std::cin >> inputnumbers;
-							if (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-							}
-							else {
-								datasetX.emplace_back(inputnumbers);
-								trials++;
-							}
-						}
-						trials = 0;
-						std::cin.ignore(100000, '\n');
-						std::vector<double> datasetY;
-						datasetY.reserve(terms);
-						std::cout << "You may now type the numbers in your Y data set" << '\n';
-						while (trials != terms) {
-							std::cin >> inputnumbers;
-							if (!std::cin) {
-								std::cout << "Invalid input! try again" << '\n';
-								std::cin.clear();
-								std::cin.ignore();
-							}
-							else {
-								datasetY.emplace_back(inputnumbers);
-								trials++;
-							}
-						}
-						std::cout << termcolor::reset << termcolor::bold << termcolor::blue << '\n';
-						displayDatasetXY(datasetX, datasetY);
-						std::cout << termcolor::reset << '\n';
-						std::cout << termcolor::bold << termcolor::cyan;
-						displayLSRL(datasetX, datasetY);
-					}
-					// clear excessive inputs
-					std::cin.ignore(100000, '\n');
-					std::cout << "\n Would you like to keep using this function? type 'y' or 'n'"
-					          << '\n';
-					char decision;
-					std::cin >> decision;
-					if (decision == 'y') {
-						repeat = true;
-					}
-					else if (decision == 'n') {
-						repeat = false;
-						std::cout << termcolor::reset;
-					}
-					else {
-						std::cout << "Invalid input, going back to main page..." << '\n';
-						repeat = false;
-						std::cout << termcolor::reset;
-					}
-				}
-			}
-			else if (response == "exit") {
-				std::cout << termcolor::bold << termcolor::white;
-				std::cout << "Thank you for using this calculator. Come again soon!" << '\n';
-				backtrack = false;
-			}
-			else {
-				std::cout << "You have typed something incorrectly, please try again" << '\n';
-				std::cout << termcolor::reset;
-			}
-		}
-	}
-
-	return 0;
+	std::cout << "Total Time Taken for SingleThreaded = " << diff << " Microseconds" << '\n';
 }

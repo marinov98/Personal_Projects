@@ -19,7 +19,7 @@ EXEC 		:= statistical_calculator
 
 ### UNIT TESTING
 TSRCS 		:= src/basics.cpp src/correlation.cpp src/hypTest.cpp src/cInterval.cpp
-TESTEXEC        := test_calculator
+TESTEXEC    := test_calculator
 
 #############################
 ###### COMPILING  
@@ -27,7 +27,7 @@ TESTEXEC        := test_calculator
 
 $(EXEC): $(OBJS)
 	@echo 'Linking and creating executable...'
-	@$(CXX) $(STANDARD) $(WARNINGS) -o $@ $^
+	@$(CXX) -pthread $(STANDARD) $(WARNINGS) -o $@ $^
 	$(if $(findstring g,$(STANDARD)),\
 		@echo 'Calculator is ready to be debugged.',\
 		@echo 'Calculator is ready to launch.')
